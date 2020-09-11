@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-app.use(express.static(__dirname + '/dist/energizer'));
+app.use(express.static(__dirname + '/dist/Energizer'));
 app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname+
-    '/dist/energizer/index.html'));});
+    '/dist/Energizer/index.html'));});
 app.listen(process.env.PORT || 8080);
