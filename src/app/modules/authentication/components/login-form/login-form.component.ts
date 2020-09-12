@@ -49,8 +49,7 @@ export class LoginFormComponent extends BaseDestroyableDirective implements OnIn
       .subscribe(
         (result) => {
           if (result.status === 'SUCCESS'){
-            this.toastr.success('Hello world! ', 'Login success');
-            console.log('success');
+            this.toastr.success('Đăng nhập thành công', 'Thông báo');
           }
           else{
             this.loginForm.setErrors({ incorrect: true, message : result.message });

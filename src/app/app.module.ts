@@ -25,7 +25,7 @@ import {
   declarations: [
     AppComponent,
     DefaultLayoutComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     RouterModule,

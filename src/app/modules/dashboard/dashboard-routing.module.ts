@@ -5,11 +5,19 @@ import { AuthGuard } from 'src/app/common/guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: DashBoardComponent,
     data: {
-      title: 'Dashboard'
+      title: 'Home',
     },
-    canActivate: [AuthGuard]
+    children: [
+      {
+        path: '',
+        component: DashBoardComponent,
+        data: {
+          title: 'Dashboard'
+        },
+        canActivate: [AuthGuard]
+      }
+    ]
   }
 ];
 

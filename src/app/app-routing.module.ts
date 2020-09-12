@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultLayoutComponent } from './common/layout/default-layout/default-layout.component';
 import { NotFoundComponent } from './common/pages/not-found/not-found.component';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -13,20 +12,34 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Home'
-    },
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
       },
-    ]
+      {
+        path: 'mining-industry',
+        loadChildren: () =>
+          import(
+            './modules/declare-mining-industry/declare-mining-industry.module'
+          ).then((m) => m.DeclareMiningIndustryModule),
+      },
+      {
+        path: 'manufacturing-industry',
+        loadChildren: () =>
+          import(
+            './modules/declare-mining-industry/declare-mining-industry.module'
+          ).then((m) => m.DeclareMiningIndustryModule),
+      },
+    ],
   },
   {
     path: '',
     data: {
-      title: 'Authentication'
+      title: 'Authentication',
     },
     children: [
       {
@@ -35,19 +48,21 @@ export const routes: Routes = [
       },
       {
         path: 'auth',
-        loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
+        loadChildren: () =>
+          import('./modules/authentication/authentication.module').then(
+            (m) => m.AuthenticationModule
+          ),
       },
-    ]
+    ],
   },
   {
     path: '**',
-    redirectTo: 'not-found'
-  }
+    redirectTo: 'not-found',
+  },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

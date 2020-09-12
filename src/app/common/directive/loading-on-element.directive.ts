@@ -17,7 +17,7 @@ export class LoadingOnElementDirective {
   ) { }
 
 
-  public showLoadingCenter(sizeIcon: string = '40px', minHeightElement: string = '300px' ): void {
+  public showLoadingCenter(sizeIcon: string = '40px', minHeightElement: string = '100px' ): void {
 
     this.elBackground = this.render.createElement('div');
     this.setStyleMulti(this.elBackground, this.listStyleElBackground);
