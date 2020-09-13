@@ -37,7 +37,7 @@ export class AuthService {
     this.router.navigate(['auth/login']);
   }
 
-  private handleLoginLogout(user: UserModel): void {
+  private handleLoginLogout(user?: UserModel): void {
     if (user) {
       this.user = user;
       localStorage.setItem('user', JSON.stringify(this.user));

@@ -14,6 +14,7 @@ export const usersData = [
       accessToken: 'TEST-TOKEN',
     },
   ];
+
 export let listMiningIndustry = [
     {
         id: 1,
@@ -76,3 +77,66 @@ export let listMiningIndustry = [
         employees: 13462,
     }
 ];
+
+export let listFields = [
+    {
+        id: 1,
+        name: 'Khai khoáng',
+        listBranches: [
+            {
+                id: 1,
+                displayName: 'Sản phẩm khai thác và chế biến',
+                name: 'exploitingAndProcessingProducts',
+                listProduct: [
+                    {
+                        displayName: 'Than khai thác hầm lò',
+                        name: 'coalMiningPit',
+                        unit: 'Nghìn tấn'
+                    },
+                    {
+                        displayName: 'Than khai thác hầm lò',
+                        name: 'openPitCoalMining',
+                        unit: 'Nghìn tấn'
+                    },
+                    {
+                        displayName: 'Khác (nếu có)',
+                        name: 'other',
+                        unit: 'Nghìn tấn'
+                    },
+                ]
+            },
+            {
+                id: 2,
+                displayName: 'Sản phẩm khai thác và chế biến',
+                name: 'declareTheOutputOfOilOndGasExploitedAndProcessedProducts',
+                listProduct: [
+                    {
+                        displayName: 'Dầu thô',
+                        name: 'crudeOil',
+                        unit: 'Nghìn tấn'
+                    },
+                    {
+                        displayName: 'Khí đồng hành',
+                        name: 'companionGas',
+                        unit: 'Nghìn tấn'
+                    },
+                    {
+                        displayName: 'Khí không đồng hành',
+                        name: 'gasDoesNotAccompany',
+                        unit: 'Tr.m3'
+                    },
+                    {
+                        displayName: 'Khí không thành phẩm',
+                        name: 'finishedGas',
+                        unit: 'Tr.m3'
+                    },
+                ]
+            }
+        ]
+    },
+    {
+        id: 2,
+        name: 'Chế biến, chế tạo',
+    }
+];
+

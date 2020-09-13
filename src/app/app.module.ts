@@ -20,6 +20,7 @@ import {
   AppFooterModule,
   AppSidebarModule,
 } from '@coreui/angular';
+import { LayoutService } from './common/services/layout.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {
     HttpClientModule,
   ],
   providers: [
+    LayoutService,
     httpInterceptorProviders,
     {
       provide: LocationStrategy,

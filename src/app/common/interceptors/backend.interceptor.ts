@@ -3,7 +3,7 @@ import { of, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import {
   usersData,
-  listMiningIndustry,
+  listMiningIndustry, listFields
 } from 'src/app/common/data/fake-back-end';
 import {
   HttpInterceptor,
@@ -17,8 +17,9 @@ import {
 export class BackendInterceptor implements HttpInterceptor {
   private usersData = usersData;
   private listMiningIndustry = listMiningIndustry;
+  private listFields = listFields;
 
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) { }
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -34,6 +35,9 @@ export class BackendInterceptor implements HttpInterceptor {
       case method === 'POST' && url === 'http://localhost:4200:/login':
         newHttpResponse = this.login(request);
         break;
+      case method === 'GET' && url === 'http://localhost:4200:/get-list-fields':
+        newHttpResponse = this.geListFields(request);
+        break;
       case method === 'GET' &&
         url === 'http://localhost:4200:/get-list-mining-industry':
         newHttpResponse = this.getListMiningIndustry(request);
@@ -45,6 +49,10 @@ export class BackendInterceptor implements HttpInterceptor {
       case method === 'GET' &&
         url.match(/\/detail-mining-industry\/\d+$/) != null:
         newHttpResponse = this.getMiningIndustry(request);
+        break;
+      case method === 'GET' &&
+        url.match(/\/get-list-branches-production-of-fields\/\d+$/) != null:
+        newHttpResponse = this.getListBranchesIndustryProductionOfFields(request);
         break;
       default:
         newHttpResponse = null;
@@ -80,17 +88,13 @@ export class BackendInterceptor implements HttpInterceptor {
     }
   }
 
-  private getListMiningIndustry(
-    request: HttpRequest<any>
-  ): Observable<HttpResponse<any>> {
+  private getListMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     return of(
       new HttpResponse({ status: 200, body: this.listMiningIndustry })
     ).pipe(delay(2000));
   }
 
-  private addMiningIndustry(
-    request: HttpRequest<any>
-  ): Observable<HttpResponse<any>> {
+  private addMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     // const miningIndustry = request.body.email;
     const miningIndustry = {
       id: new Date().getTime(),
@@ -115,9 +119,7 @@ export class BackendInterceptor implements HttpInterceptor {
     ).pipe(delay(2000));
   }
 
-  private getMiningIndustry(
-    request: HttpRequest<any>
-  ): Observable<HttpResponse<any>> {
+  private getMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     const idMiningIndustry = Number(this.getIdParameterFromURL(request.url));
 
     const user = this.listMiningIndustry.find((resultMiningIndustry) => {
@@ -127,8 +129,38 @@ export class BackendInterceptor implements HttpInterceptor {
     return of(new HttpResponse({ status: 200, body: user })).pipe(delay(2000));
   }
 
-  private getIdParameterFromURL(url: string): string{
+  private geListFields(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const resultListFields = this.listFields.map((itemField) => {
+      return {
+        id: itemField.id,
+        name: itemField.name
+      };
+    });
+    return of(new HttpResponse({ status: 200, body: resultListFields })).pipe(delay(2000));
+  }
+
+
+  private getListBranchesIndustryProductionOfFields(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const idFields = Number(this.getIdParameterFromURL(request.url));
+
+    const itemFields = this.listFields.find((resultListFields) => {
+      return resultListFields.id === idFields;
+    });
+
+    const listBranch = itemFields.listBranches.map((itemField) => {
+      return {
+        id: itemField.id,
+        name: itemField.name,
+        listProduct: itemField.listProduct
+      };
+    });
+
+    return of(new HttpResponse({ status: 200, body: listBranch })).pipe(delay(2000));
+  }
+
+  private getIdParameterFromURL(url: string): string {
     const urlParts = url.split('/');
     return urlParts[urlParts.length - 1];
-}
+  }
+
 }

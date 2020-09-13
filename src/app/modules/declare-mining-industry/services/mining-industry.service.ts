@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { IResultAddMiningIndustry, IMiningIndustry } from '../abstract/mining-industry.interface';
+import { IResultAddMiningIndustry, IMiningIndustry, IBranches } from '../abstract/mining-industry.interface';
 
 @Injectable({ providedIn: 'root' })
 export class MiningIndustryService {
@@ -33,6 +33,14 @@ export class MiningIndustryService {
   public getMiningIndustryById(id: number): Observable<IMiningIndustry> {
     return this.httpClient.get(this.baseUrl + 'detail-mining-industry/' + id).pipe(
       map((result: IMiningIndustry) => {
+        return result;
+      })
+    );
+  }
+
+  public getListBranchesIndustryProductionOfFields(id: number): Observable<IBranches[]> {
+    return this.httpClient.get(this.baseUrl + 'get-list-branches-production-of-fields/' + id).pipe(
+      map((result: IBranches[]) => {
         return result;
       })
     );
