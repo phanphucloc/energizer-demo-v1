@@ -1,25 +1,24 @@
+import { IEnterprises } from '../../abstract/enterprises.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IMiningIndustry } from '../../abstract/mining-industry.interface';
-import { MiningIndustryService } from '../../services/mining-industry.service';
+import { EnterprisesService } from '../../services/enterprises.service';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
-import { takeUntil, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 
 @Component({
-  selector: 'app-detail-declare-mining-industry',
-  templateUrl: './detail-declare-mining-industry.component.html',
-  styleUrls: ['./detail-declare-mining-industry.component.scss'],
+  selector: 'app-detail-enterprises-pages',
+  templateUrl: './detail-enterprises-pages.component.html',
+  styleUrls: ['./detail-enterprises-pages.component.scss'],
 })
-export class DetailDeclareMiningIndustryComponent extends BaseDestroyableDirective implements OnInit {
+export class DetailEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('formDetail', { static: true }) private elementFormDetail: LoadingOnElementDirective;
   public id: number;
-  public miningIndustry: IMiningIndustry;
+  public enterprises: IEnterprises;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private miningIndustryService: MiningIndustryService
+    private miningIndustryService: EnterprisesService
   ) {
     super();
   }
@@ -34,9 +33,9 @@ export class DetailDeclareMiningIndustryComponent extends BaseDestroyableDirecti
     this.miningIndustryService.getMiningIndustryById(this.id)
     .pipe(takeUntil(this.destroy$))
     .subscribe(
-      (result: IMiningIndustry) => {
+      (result: IEnterprises) => {
         this.elementFormDetail.hideLoadingCenter();
-        this.miningIndustry = result;
+        this.enterprises = result;
       },
       (error) => {
         this.elementFormDetail.hideLoadingCenter();

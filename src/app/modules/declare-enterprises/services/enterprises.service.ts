@@ -1,13 +1,14 @@
+import { IEnterprises, IResultAddEnterprises, IProduction } from '../abstract/enterprises.interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { IResultAddMiningIndustry, IMiningIndustry, IBranches, IEnergyConsumption, IProduct } from '../abstract/mining-industry.interface';
+import { IBranches, IEnergyConsumption, IEnterprisesToServer } from '../abstract/enterprises.interface';
 
 @Injectable({ providedIn: 'root' })
-export class MiningIndustryService {
+export class EnterprisesService {
 
   private baseUrlFake = environment.baseURlFake;
   private baseUrl = environment.baseURl;
@@ -15,25 +16,25 @@ export class MiningIndustryService {
   constructor(public router: Router, private httpClient: HttpClient) {
   }
 
-  public getListMiningIndustry(): Observable<IMiningIndustry[]> {
+  public getListMiningIndustry(): Observable<IEnterprises[]> {
     return this.httpClient.get(this.baseUrlFake + 'get-list-mining-industry').pipe(
-      map((result: IMiningIndustry[]) => {
+      map((result: IEnterprises[]) => {
         return result;
       })
     );
   }
 
-  public addMiningIndustry(): Observable<IResultAddMiningIndustry> {
-    return this.httpClient.post(this.baseUrlFake + 'add-mining-industry', { null: null }).pipe(
-      map((result: IResultAddMiningIndustry) => {
+  public addMiningIndustry(enterprises: IEnterprisesToServer): Observable<IResultAddEnterprises> {
+    return this.httpClient.post(this.baseUrlFake + 'add-mining-industry', { enterprises }).pipe(
+      map((result: IResultAddEnterprises) => {
         return result;
       })
     );
   }
 
-  public getMiningIndustryById(id: number): Observable<IMiningIndustry> {
+  public getMiningIndustryById(id: number): Observable<IEnterprises> {
     return this.httpClient.get(this.baseUrlFake + 'detail-mining-industry/' + id).pipe(
-      map((result: IMiningIndustry) => {
+      map((result: IEnterprises) => {
         return result;
       })
     );
@@ -55,9 +56,9 @@ export class MiningIndustryService {
     );
   }
 
-  public getListProductBranchesId(id: number): Observable<IProduct[]> {
+  public getListProductBranchesId(id: number): Observable<IProduction[]> {
     return this.httpClient.get(this.baseUrlFake + 'get-list-product-by-branches-id/' + id).pipe(
-      map((result: IProduct[]) => {
+      map((result: IProduction[]) => {
         return result;
       })
     );

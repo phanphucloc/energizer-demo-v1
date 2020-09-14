@@ -3,7 +3,7 @@ import { of, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import {
   usersData,
-  listMiningIndustry, listFields, energyConsumption
+  listEnterprises, listFields, energyConsumption
 } from 'src/app/common/data/fake-back-end';
 import {
   HttpInterceptor,
@@ -16,7 +16,7 @@ import {
 @Injectable()
 export class BackendInterceptor implements HttpInterceptor {
   private usersData = usersData;
-  private listMiningIndustry = listMiningIndustry;
+  private listEnterprises = listEnterprises;
   private listFields = listFields;
   private listEnergyConsumption = energyConsumption;
 
@@ -41,15 +41,15 @@ export class BackendInterceptor implements HttpInterceptor {
         break;
       case method === 'GET' &&
         url === 'http://localhost:4200:/get-list-mining-industry':
-        newHttpResponse = this.getListMiningIndustry(request);
+        newHttpResponse = this.getListEnterprises(request);
         break;
       case method === 'POST' &&
         url === 'http://localhost:4200:/add-mining-industry':
-        newHttpResponse = this.addMiningIndustry(request);
+        newHttpResponse = this.addEnterprises(request);
         break;
       case method === 'GET' &&
         url.match(/\/detail-mining-industry\/\d+$/) != null:
-        newHttpResponse = this.getMiningIndustry(request);
+        newHttpResponse = this.getEnterprises(request);
         break;
       case method === 'GET' &&
         url.match(/\/get-list-branches-production-of-fields\/\d+$/) != null:
@@ -101,42 +101,46 @@ export class BackendInterceptor implements HttpInterceptor {
     }
   }
 
-  private getListMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+  private getListEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     return of(
-      new HttpResponse({ status: 200, body: this.listMiningIndustry })
+      new HttpResponse({ status: 200, body: this.listEnterprises })
     ).pipe(delay(500));
   }
 
-  private addMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    // const miningIndustry = request.body.email;
-    const miningIndustry = {
-      id: new Date().getTime(),
-      name: 'Doanh nghiệp phát triển nông thôn',
-      foundedYear: '2010',
-      province: 'Hà Nội',
-      district: 'Hoàn kiếm',
-      town: '-',
-      xCoordinate: 'ABBS#@#@DSSA!D',
-      yCoordinate: 'ABBS#@#@DSSA!D',
-      productionValue: 50000,
-      employees: 300,
+  private addEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const enterprises = request.body.enterprises;
+
+    const enterprisesClone = {
+      id : new Date().getTime(),
+      name : enterprises.name,
+      foundedYear : enterprises.foundedYear,
+      province : enterprises.province,
+      district : enterprises.district,
+      town : enterprises.town,
+      xCoordinate : enterprises.xCoordinate,
+      yCoordinate : enterprises.yCoordinate,
+      productionValue : enterprises.productionValue,
+      employees : enterprises.employees,
+      branchesId: enterprises.branchesId,
+      branchesName: enterprises.branchesName,
+      branchesDisplayName: enterprises.branchesName,
     };
 
-    listMiningIndustry.push(miningIndustry);
+    listEnterprises.push(enterprisesClone);
 
     return of(
       new HttpResponse({
         status: 200,
-        body: { status: 'SUCCESS', miningIndustry },
+        body: { status: 'SUCCESS', enterprisesClone },
       })
     ).pipe(delay(500));
   }
 
-  private getMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const idMiningIndustry = Number(this.getIdParameterFromURL(request.url));
+  private getEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const idEnterprises = Number(this.getIdParameterFromURL(request.url));
 
-    const user = this.listMiningIndustry.find((resultMiningIndustry) => {
-      return resultMiningIndustry.id === idMiningIndustry;
+    const user = this.listEnterprises.find((resultEnterprises) => {
+      return resultEnterprises.id === idEnterprises;
     });
 
     return of(new HttpResponse({ status: 200, body: user })).pipe(delay(500));
@@ -167,7 +171,7 @@ export class BackendInterceptor implements HttpInterceptor {
         listProduct: itemField.listProduct
       };
     });
-    
+
     return of(new HttpResponse({ status: 200, body: listBranch })).pipe(delay(500));
   }
 

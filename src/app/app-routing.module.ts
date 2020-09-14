@@ -21,17 +21,10 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'mining-industry',
+        path: 'enterprises',
         loadChildren: () =>
           import(
-            './modules/declare-mining-industry/declare-mining-industry.module'
-          ).then((m) => m.DeclareMiningIndustryModule),
-      },
-      {
-        path: 'manufacturing-industry',
-        loadChildren: () =>
-          import(
-            './modules/declare-mining-industry/declare-mining-industry.module'
+            './modules/declare-enterprises/declare-enterprises.module'
           ).then((m) => m.DeclareMiningIndustryModule),
       },
     ],

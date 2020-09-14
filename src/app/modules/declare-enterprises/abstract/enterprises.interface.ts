@@ -1,5 +1,5 @@
 
-export interface IMiningIndustry {
+export interface IEnterprises {
     id: number;
     name: string;
     foundedYear: number;
@@ -12,9 +12,26 @@ export interface IMiningIndustry {
     employees: number;
 }
 
-export interface IResultAddMiningIndustry{
+export interface IEnterprisesToServer {
+    id: number;
+    name: string;
+    foundedYear: number;
+    province: string;
+    district: string;
+    town: string;
+    xCoordinate: string;
+    yCoordinate: string;
+    productionValue: number;
+    employees: number;
+    branchesId: number;
+    branchesName: string;
+    listProduction: IProduction[];
+    listEnergyConsumption: IEnergyConsumption[];
+}
+
+export interface IResultAddEnterprises{
     status: string;
-    miningIndustry: IMiningIndustry;
+    miningIndustry: IEnterprises;
 }
 
 export interface IFields{
@@ -27,14 +44,15 @@ export interface IBranches{
     id: number;
     name: string;
     displayName: string;
-    listProduct: IProduct[];
+    listProduct: IProduction[];
 }
 
-export interface IProduct{
+export interface IProduction{
     id: number;
     displayName: string;
     name: string;
     unit: string;
+    value: number;
 }
 
 export interface IEnergyConsumption{
@@ -42,4 +60,5 @@ export interface IEnergyConsumption{
     displayName: string;
     name: string;
     unit: string;
+    value: number;
 }

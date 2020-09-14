@@ -15,9 +15,11 @@ export const usersData = [
     },
   ];
 
-export let listMiningIndustry = [
+export let listEnterprises = [
     {
         id: 1,
+        branchesId: 1,
+        branchesDisplayName: 'Khai thác than',
         name: 'Doanh nghiệp phát triển nông thôn',
         foundedYear: '2010',
         province: 'Hà Nội',
@@ -30,6 +32,8 @@ export let listMiningIndustry = [
     },
     {
         id: 2,
+        branchesId: 1,
+        branchesDisplayName: 'Khai thác than',
         name: 'Doanh nghiệp khai thác khoáng sản',
         foundedYear: '2009',
         province: 'Tây Ninh',
@@ -42,6 +46,8 @@ export let listMiningIndustry = [
     },
     {
         id: 3,
+        branchesId: 2,
+        branchesDisplayName: 'Khai thác dầu khí',
         name: 'Doanh nghiệp lâm ngư Hải Hoàng',
         foundedYear: '2009',
         province: 'Bắc Ninh',
@@ -54,6 +60,8 @@ export let listMiningIndustry = [
     },
     {
         id: 4,
+        branchesId: 1,
+        branchesDisplayName: 'Khai thác than',
         name: 'Doanh nghiệp phát triển khí tự nhiên',
         foundedYear: '2015',
         province: 'Tây Ninh',
@@ -66,6 +74,8 @@ export let listMiningIndustry = [
     },
     {
         id: 5,
+        branchesId: 2,
+        branchesDisplayName: 'Khai thác dầu khí',
         name: 'Doanh nghiệp khai khoáng',
         foundedYear: '2018',
         province: 'Bắc Ninh',
@@ -85,8 +95,8 @@ export let listFields = [
         listBranches: [
             {
                 id: 1,
-                displayName: 'Sản phẩm khai thác và chế biến',
-                name: 'exploitingAndProcessingProducts',
+                displayName: 'Khai thác than',
+                name: 'coalMining',
                 listProduct: [
                     {
                         id: 1,
@@ -104,8 +114,8 @@ export let listFields = [
             },
             {
                 id: 2,
-                displayName: 'Sản phẩm khai thác và chế biến',
-                name: 'declareTheOutputOfOilOndGasExploitedAndProcessedProducts',
+                displayName: 'Khai thác dầu khí',
+                name: 'oilExploited',
                 listProduct: [
                     {
                         id: 4,
@@ -144,13 +154,13 @@ export let listFields = [
 export let energyConsumption = [
     {
         id: 1,
-        name: 'Khai khoáng',
+        name: 'anthraciteCoal',
         displayName: 'Than antraxit',
         unit: 'Nghìn tấn',
     },
     {
         id: 2,
-        name: 'anthraciteCoal',
+        name: 'anthraciteBitum',
         displayName: 'Than bitum',
         unit: 'Nghìn tấn',
     },

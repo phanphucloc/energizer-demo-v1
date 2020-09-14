@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/common/guard/auth.guard';
-import { DeclareMiningIndustryComponent } from './pages/declare-mining-industry/declare-mining-industry.component';
-import { AddDeclareMiningIndustryComponent } from './pages/add-declare-mining-industry/add-declare-mining-industry.component';
-import { DetailDeclareMiningIndustryComponent } from './pages/detail-declare-mining-industry/detail-declare-mining-industry.component';
+import { AddEnterprisesPagesComponent } from './pages/add-enterprises-pages/add-enterprises-pages.component';
+import { DetailEnterprisesPagesComponent } from './pages/detail-enterprises-pages/detail-enterprises-pages.component';
+import { ListEnterprisesPagesComponent } from './pages/list-enterprises-pages/list-enterprises-pages.component';
 
 
 const routes: Routes = [
@@ -14,24 +14,24 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'list-mining-industry',
-        component: DeclareMiningIndustryComponent,
+        path: 'list-enterprises',
+        component: ListEnterprisesPagesComponent,
         data: {
           title: 'Danh sách lĩnh vực CN Khai khoáng'
         },
         canActivate: [AuthGuard]
       },
       {
-        path: 'add-mining-industry',
-        component: AddDeclareMiningIndustryComponent,
+        path: 'add-enterprises',
+        component: AddEnterprisesPagesComponent,
         data: {
           title: 'Thêm danh sách lĩnh vực CN Khai khoáng'
         },
         canActivate: [AuthGuard]
       },
       {
-        path: 'detail-mining-industry/:id',
-        component: DetailDeclareMiningIndustryComponent,
+        path: 'detail-enterprises/:id',
+        component: DetailEnterprisesPagesComponent,
         data: {
           title: 'Chi tiết danh sách lĩnh vực CN Khai khoáng'
         },
@@ -40,7 +40,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'list-mining-industry',
+        redirectTo: 'list-enterprises',
       },
     ]
   },

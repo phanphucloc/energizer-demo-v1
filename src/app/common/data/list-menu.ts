@@ -16,12 +16,12 @@ export const listMenu: INavData[] = [
   },
   {
     name: 'Khai khoáng',
-    url: '/mining-industry/list-mining-industry',
+    url: '/enterprises/list-enterprises',
     icon: 'icon-book-open'
   },
   {
     name: 'Chế biến, chế tạo',
-    url: '/manufacturing-industry/list-manufacturing-industry',
+    url: '/enterprises/list-enterprises',
     icon: 'icon-book-open'
   },
   {

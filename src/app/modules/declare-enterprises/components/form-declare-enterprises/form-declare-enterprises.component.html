@@ -116,7 +116,7 @@
                       Lĩnh vực
                     </label>
                     <div class="col-md-9">
-                      <select id="select1" (change)="selectFields()" formControlName="fieldsId" name="select1"
+                      <select id="select1" (change)="selectFields()" formControlName="branchesId" name="select1"
                         class="form-control">
                         <option selected [value]="null">
                           -- Chọn lĩnh vực --
@@ -138,7 +138,7 @@
 
   <hr style="width: 80%" />
 
-  <div class="form-group row" [formGroupName]="'energyConsumption'">
+  <div class="form-group row" *ngIf="formAddDMiningIndustry.get('energyConsumption')"  [formGroupName]="'energyConsumption'">
     <div class="col-12">
       <div class="row">
         <div class="col-md-3 col-form-label">
@@ -182,14 +182,14 @@
   <ng-template [ngIf]="branchesSelected">
     <hr style="width: 80%" />
 
-    <div class="form-group row" [formGroupName]="branchesSelected.name">
+    <div *ngIf="formAddDMiningIndustry.get('production')" class="form-group row" [formGroupName]="'production'">
       <div class="col-12">
         <div class="row">
           <div class="col-md-3 col-form-label">
             <label>
               <strong>
                 <i class="fa fa-square" aria-hidden="true"></i>
-                {{branchesSelected.displayName}}:
+                Khai báo sản lượng sản phẩm {{branchesSelected.displayName}}:
               </strong>
             </label>
           </div>
@@ -199,7 +199,7 @@
           <div class="col-md-11">
             <ng-container *ngFor="let itemProduct of branchesSelected.listProduct">
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="{{branchesSelected.name}}">
+                <label class="col-md-3 col-form-label" for="{{itemProduct.name}}">
                   {{ itemProduct.displayName }}
                 </label>
                 <div class="col-md-9">
@@ -223,9 +223,7 @@
     </div>
   </ng-template>
 
-
-  <ng-template [ngIf]="branchesSelected"><div>Content to render when condition is
-    true.</div></ng-template>
+  <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
 
   <div class="form-actions text-center">
     <button class="btn btn-primary" type="submit" appLoadingOnElement #buttonSubmit="drLoadingOnElement">Thêm</button>

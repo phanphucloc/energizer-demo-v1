@@ -1,24 +1,24 @@
+import { IEnterprises } from '../../abstract/enterprises.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
-import { MiningIndustryService } from '../../services/mining-industry.service';
+import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
-import { IMiningIndustry } from '../../abstract/mining-industry.interface';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-list-declare-mining-industry',
-  templateUrl: './list-declare-mining-industry.component.html',
-  styleUrls: ['./list-declare-mining-industry.component.scss'],
+  selector: 'app-list-enterprises',
+  templateUrl: './list-enterprises.component.html',
+  styleUrls: ['./list-enterprises.component.scss'],
 })
-export class ListDeclareMiningIndustryComponent extends BaseDestroyableDirective implements OnInit {
+export class ListEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
 
-  public listMiningIndustry: IMiningIndustry[];
+  public listEnterprises: IEnterprises[];
 
   constructor(
     private router: Router,
-    private miningIndustryService: MiningIndustryService
+    private miningIndustryService: EnterprisesService
     ) {
     super();
   }
@@ -33,9 +33,9 @@ export class ListDeclareMiningIndustryComponent extends BaseDestroyableDirective
       .getListMiningIndustry()
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (result: IMiningIndustry[]) => {
+        (result: IEnterprises[]) => {
           this.elementTable.hideLoadingCenter();
-          this.listMiningIndustry = result;
+          this.listEnterprises = result;
         },
         (error) => {
           this.elementTable.hideLoadingCenter();
@@ -44,7 +44,7 @@ export class ListDeclareMiningIndustryComponent extends BaseDestroyableDirective
   }
 
   public redirectToEditPage(id: number): void {
-    this.router.navigate(['/mining-industry/detail-mining-industry/' + id]);
+    this.router.navigate(['/enterprises/detail-enterprises/' + id]);
   }
 
   public trackByFn(index: number, item: any): number {

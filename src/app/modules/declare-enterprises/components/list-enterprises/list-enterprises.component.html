@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Lĩnh vực</th>
+      <th>Tên doanh nghiệp</th>
+      <th>Tỉnh</th>
+      <th>Nhân viên</th>
+      <th>Giá trị sản xuất</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let enterprises of listEnterprises ; trackBy: trackByFn">
+      <td>{{enterprises.branchesDisplayName}}</td>
+      <td>{{enterprises.name}}</td>
+      <td>{{enterprises.province}}</td>
+      <td>{{enterprises.employees}}</td>
+      <td>{{enterprises.productionValue}}</td>
+      <td>
+        <i (click)="redirectToEditPage(enterprises.id)" class="button-icon fa fa-file-text-o" aria-hidden="true"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div appLoadingOnElement #table="drLoadingOnElement">
+</div>
