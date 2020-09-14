@@ -15,6 +15,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FormAddDeclareMiningIndustryComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('buttonSubmit', { static: true }) private elementButtonSubmit: LoadingOnElementDirective;
+  @ViewChild('loadingFormAdd', { static: true }) private elementLoadingFormAdd: LoadingOnElementDirective;
+
 
   public formAddDMiningIndustry: FormGroup;
   public listBranches: IBranches[];
@@ -58,18 +60,21 @@ export class FormAddDeclareMiningIndustryComponent extends BaseDestroyableDirect
   }
 
   private getProductFromFields(): void{
+    this.elementLoadingFormAdd.showLoadingCenter();
     this.miningIndustryService
       .getListBranchesIndustryProductionOfFields(1)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result: IBranches[]) => {
+          this.elementLoadingFormAdd.hideLoadingCenter();
           this.addFieldsForForm(result);
         },
         (error) => {
           this.toastr.error('Có lỗi xãy ra', 'Thông báo');
-          this.elementButtonSubmit.hideLoadingCenter();
+          this.elementLoadingFormAdd.hideLoadingCenter();
         }
       );
+
   }
 
   private addFieldsForForm(listBranches: IBranches[]): void{

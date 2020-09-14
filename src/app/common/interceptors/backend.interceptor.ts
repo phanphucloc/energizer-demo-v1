@@ -73,7 +73,7 @@ export class BackendInterceptor implements HttpInterceptor {
     if (user) {
       return of(
         new HttpResponse({ status: 200, body: { status: 'SUCCESS', user } })
-      ).pipe(delay(2000));
+      ).pipe(delay(500));
     }
     else {
       return of(
@@ -84,14 +84,14 @@ export class BackendInterceptor implements HttpInterceptor {
             message: 'user name or password incorrect',
           },
         })
-      ).pipe(delay(2000));
+      ).pipe(delay(500));
     }
   }
 
   private getListMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     return of(
       new HttpResponse({ status: 200, body: this.listMiningIndustry })
-    ).pipe(delay(2000));
+    ).pipe(delay(500));
   }
 
   private addMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -116,7 +116,7 @@ export class BackendInterceptor implements HttpInterceptor {
         status: 200,
         body: { status: 'SUCCESS', miningIndustry },
       })
-    ).pipe(delay(2000));
+    ).pipe(delay(500));
   }
 
   private getMiningIndustry(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -126,7 +126,7 @@ export class BackendInterceptor implements HttpInterceptor {
       return resultMiningIndustry.id === idMiningIndustry;
     });
 
-    return of(new HttpResponse({ status: 200, body: user })).pipe(delay(2000));
+    return of(new HttpResponse({ status: 200, body: user })).pipe(delay(500));
   }
 
   private geListFields(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -136,7 +136,7 @@ export class BackendInterceptor implements HttpInterceptor {
         name: itemField.name
       };
     });
-    return of(new HttpResponse({ status: 200, body: resultListFields })).pipe(delay(2000));
+    return of(new HttpResponse({ status: 200, body: resultListFields })).pipe(delay(500));
   }
 
 
@@ -156,7 +156,7 @@ export class BackendInterceptor implements HttpInterceptor {
       };
     });
 
-    return of(new HttpResponse({ status: 200, body: listBranch })).pipe(delay(2000));
+    return of(new HttpResponse({ status: 200, body: listBranch })).pipe(delay(500));
   }
 
   private getIdParameterFromURL(url: string): string {

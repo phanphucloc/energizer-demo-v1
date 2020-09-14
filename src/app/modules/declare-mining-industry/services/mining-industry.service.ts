@@ -9,13 +9,14 @@ import { IResultAddMiningIndustry, IMiningIndustry, IBranches } from '../abstrac
 @Injectable({ providedIn: 'root' })
 export class MiningIndustryService {
 
+  private baseUrlFake = environment.baseURlFake;
   private baseUrl = environment.baseURl;
 
   constructor(public router: Router, private httpClient: HttpClient) {
   }
 
   public getListMiningIndustry(): Observable<IMiningIndustry[]> {
-    return this.httpClient.get(this.baseUrl + 'get-list-mining-industry').pipe(
+    return this.httpClient.get(this.baseUrlFake + 'get-list-mining-industry').pipe(
       map((result: IMiningIndustry[]) => {
         return result;
       })
@@ -23,7 +24,7 @@ export class MiningIndustryService {
   }
 
   public addMiningIndustry(): Observable<IResultAddMiningIndustry> {
-    return this.httpClient.post(this.baseUrl + 'add-mining-industry', { null: null }).pipe(
+    return this.httpClient.post(this.baseUrlFake + 'add-mining-industry', { null: null }).pipe(
       map((result: IResultAddMiningIndustry) => {
         return result;
       })
@@ -31,7 +32,7 @@ export class MiningIndustryService {
   }
 
   public getMiningIndustryById(id: number): Observable<IMiningIndustry> {
-    return this.httpClient.get(this.baseUrl + 'detail-mining-industry/' + id).pipe(
+    return this.httpClient.get(this.baseUrlFake + 'detail-mining-industry/' + id).pipe(
       map((result: IMiningIndustry) => {
         return result;
       })
@@ -39,7 +40,7 @@ export class MiningIndustryService {
   }
 
   public getListBranchesIndustryProductionOfFields(id: number): Observable<IBranches[]> {
-    return this.httpClient.get(this.baseUrl + 'get-list-branches-production-of-fields/' + id).pipe(
+    return this.httpClient.get(this.baseUrlFake + 'get-list-branches-production-of-fields/' + id).pipe(
       map((result: IBranches[]) => {
         return result;
       })

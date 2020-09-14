@@ -11,13 +11,14 @@ import { Fields } from '../models/field.model';
 export class LayoutService {
   public user: UserModel;
 
+  private baseUrlFake = environment.baseURlFake;
   private baseUrl = environment.baseURl;
 
   constructor(public router: Router, private httpClient: HttpClient) {
   }
 
   public getListFields(): Observable<Fields> {
-    return this.httpClient.get(this.baseUrl + 'get-list-fields').pipe(
+    return this.httpClient.get(this.baseUrlFake + 'get-list-fields').pipe(
       map((result: Fields) => {
         return result;
       })

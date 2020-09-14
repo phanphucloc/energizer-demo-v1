@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   public user: UserModel;
 
+  private baseUrlFake = environment.baseURlFake;
   private baseUrl = environment.baseURl;
 
   constructor(public router: Router, private httpClient: HttpClient) {
@@ -22,7 +23,7 @@ export class AuthService {
   }
 
   public login(email: string, password: string): Observable<any> {
-    return this.httpClient.post(this.baseUrl + 'login', { email, password }).pipe(
+    return this.httpClient.post(this.baseUrlFake + 'login', { email, password }).pipe(
       map((result: any) => {
         if (result.status === 'SUCCESS') {
           this.handleLoginLogout(result.user);
