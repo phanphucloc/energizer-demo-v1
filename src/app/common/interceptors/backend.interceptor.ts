@@ -151,6 +151,7 @@ export class BackendInterceptor implements HttpInterceptor {
       return {
         id: itemField.id,
         name: itemField.name,
+        displayName : itemField.displayName,
         listProduct: itemField.listProduct
       };
     });
