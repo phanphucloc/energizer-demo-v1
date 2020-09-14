@@ -15,7 +15,7 @@ export const listStyleElementBackground: StyleElement[] = [
   },
   {
     key: 'background-color',
-    value: '#0000004a',
+    value: '#00000000',
   },
   {
     key: 'z-index',
@@ -54,6 +54,6 @@ export const listStyleElementIcon: StyleElement[] = [
   },
   {
     key: 'color',
-    value: 'white',
+    value: '#4a5156',
   },
 ];
