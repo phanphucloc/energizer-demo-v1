@@ -35,6 +35,8 @@ export class LoadingOnElementDirective {
     this.render.setStyle(this.eleRef.nativeElement, 'min-height', minHeightElement);
     this.render.appendChild(this.eleRef.nativeElement, this.elBackground);
 
+    this.render.setAttribute(this.eleRef.nativeElement, 'disabled', 'true');
+
   }
 
   public hideLoadingCenter(): void {

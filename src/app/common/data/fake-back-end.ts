@@ -89,18 +89,15 @@ export let listFields = [
                 name: 'exploitingAndProcessingProducts',
                 listProduct: [
                     {
+                        id: 1,
                         displayName: 'Than khai thác hầm lò',
                         name: 'coalMiningPit',
                         unit: 'Nghìn tấn'
                     },
                     {
-                        displayName: 'Than khai thác hầm lò',
+                        id: 2,
+                        displayName: 'Than khai thác lộ thiên',
                         name: 'openPitCoalMining',
-                        unit: 'Nghìn tấn'
-                    },
-                    {
-                        displayName: 'Khác (nếu có)',
-                        name: 'other',
                         unit: 'Nghìn tấn'
                     },
                 ]
@@ -111,21 +108,25 @@ export let listFields = [
                 name: 'declareTheOutputOfOilOndGasExploitedAndProcessedProducts',
                 listProduct: [
                     {
+                        id: 4,
                         displayName: 'Dầu thô',
                         name: 'crudeOil',
                         unit: 'Nghìn tấn'
                     },
                     {
+                        id: 5,
                         displayName: 'Khí đồng hành',
                         name: 'companionGas',
                         unit: 'Nghìn tấn'
                     },
                     {
+                        id: 6,
                         displayName: 'Khí không đồng hành',
                         name: 'gasDoesNotAccompany',
                         unit: 'Tr.m3'
                     },
                     {
+                        id: 7,
                         displayName: 'Khí không thành phẩm',
                         name: 'finishedGas',
                         unit: 'Tr.m3'
@@ -140,3 +141,53 @@ export let listFields = [
     }
 ];
 
+export let energyConsumption = [
+    {
+        id: 1,
+        name: 'Khai khoáng',
+        displayName: 'Than antraxit',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 2,
+        name: 'anthraciteCoal',
+        displayName: 'Than bitum',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 3,
+        name: 'fuel',
+        displayName: 'Dầu hỏa',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 4,
+        name: 'oilDO',
+        displayName: 'Dầu DO',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 5,
+        name: 'oilFO',
+        displayName: 'Dầu FO',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 6,
+        name: 'LPG',
+        displayName: 'LPG',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 7,
+        name: 'biogas',
+        displayName: 'Khí sinh học',
+        unit: 'Nghìn tấn',
+    },
+    {
+        id: 8,
+        name: 'biomassGas',
+        displayName: 'Khí sinh khối',
+        unit: 'Nghìn tấn',
+    },
+];

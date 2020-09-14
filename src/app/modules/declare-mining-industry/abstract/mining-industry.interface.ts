@@ -31,6 +31,14 @@ export interface IBranches{
 }
 
 export interface IProduct{
+    id: number;
+    displayName: string;
+    name: string;
+    unit: string;
+}
+
+export interface IEnergyConsumption{
+    id: number;
     displayName: string;
     name: string;
     unit: string;

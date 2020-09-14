@@ -3,44 +3,51 @@
     <div class="col-12">
       <div class="row">
         <div class="col-md-3 col-form-label">
-          <label>Thông tin chung doanh nghiệp:</label>
+          <label>
+            <strong>
+              <i class="fa fa-square" aria-hidden="true"></i>
+              Thông tin chung doanh nghiệp:
+            </strong>
+          </label>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-9">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
           <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="year-declare-input">Năm khai báo</label>
+            <label class="col-md-3 col-form-label" for="year-declare-input"> Năm khai báo</label>
             <div class="col-md-9">
               <input type="text" id="year-declare-input" formControlName="foundedYear" name="year-declare-input"
-                class="form-control" placeholder="Năm khai báo" />
+                class="form-control" placeholder="Năm khai báo..." />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="name-company-input">Tên doanh nghiệp</label>
             <div class="col-md-9">
               <input type="text" id="name-company-input" formControlName="name" name="name-company-input"
-                class="form-control" placeholder="Tên doanh nghiệp" />
+                class="form-control" placeholder="Tên doanh nghiệp..." />
             </div>
           </div>
           <div class="form-group row" formGroupName="address">
             <div class="col-12">
               <div class="row">
                 <div class="col-md-3 col-form-label">
-                  <label>Địa chỉ doanh nghiệp:</label>
+                  <label>
+                    Địa chỉ doanh nghiệp:
+                  </label>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-9">
+                <div class="col-md-1"></div>
+                <div class="col-md-11">
                   <div class="form-group row">
                     <label class="col-md-3 col-form-label" for="province-input">
                       Tỉnh
                     </label>
                     <div class="col-md-9">
                       <input type="text" id="province-input" formControlName="province" name="province-input"
-                        class="form-control" placeholder="Tỉnh" />
+                        class="form-control" placeholder="Tỉnh..." />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -49,7 +56,7 @@
                     </label>
                     <div class="col-md-9">
                       <input type="text" id="district-input" formControlName="district" name="district-input"
-                        class="form-control" placeholder="Huyện" />
+                        class="form-control" placeholder="Huyện..." />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -58,7 +65,7 @@
                     </label>
                     <div class="col-md-9">
                       <input type="text" id="town-input" formControlName="town" name="town-input" class="form-control"
-                        placeholder="Xã" />
+                        placeholder="Xã..." />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -69,7 +76,7 @@
                         </label>
                         <div class="col-md-6">
                           <input type="text" id="coordinates-x-input" formControlName="xCoordinate"
-                            name="coordinates-x-input" class="form-control" placeholder="Tọa độ X" />
+                            name="coordinates-x-input" class="form-control" placeholder="Tọa độ X..." />
                         </div>
                       </div>
                     </div>
@@ -80,7 +87,7 @@
                         </label>
                         <div class="col-md-6">
                           <input type="text" id="coordinates-y-input" formControlName="yCoordinate"
-                            name="coordinates-y-input" class="form-control" placeholder="Tọa độ Y" />
+                            name="coordinates-y-input" class="form-control" placeholder="Tọa độ Y..." />
                         </div>
                       </div>
                     </div>
@@ -91,7 +98,7 @@
                     </label>
                     <div class="col-md-9">
                       <input type="text" id="average-labor-input" formControlName="employees" name="average-labor-input"
-                        class="form-control" placeholder="Số lao động trung bình năm" />
+                        class="form-control" placeholder="Số lao động trung bình năm..." />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -101,7 +108,23 @@
                     <div class="col-md-9">
                       <input type="text" formControlName="productionValue" id="production-value-input"
                         name="production-value-input" class="form-control"
-                        placeholder="Giá trị sản xuấtcủa doanh nghiệp" />
+                        placeholder="Giá trị sản xuất của doanh nghiệp" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="production-value-input">
+                      Lĩnh vực
+                    </label>
+                    <div class="col-md-9">
+                      <select id="select1" (change)="selectFields()" formControlName="fieldsId" name="select1"
+                        class="form-control">
+                        <option selected [value]="null">
+                          -- Chọn lĩnh vực --
+                        </option>
+                        <option *ngFor="let itemBranches of listBranches" [value]="itemBranches.id">
+                          {{itemBranches.displayName}}
+                        </option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -115,192 +138,75 @@
 
   <hr style="width: 80%" />
 
-  <div class="form-group row">
+  <div class="form-group row" [formGroupName]="'energyConsumption'">
     <div class="col-12">
       <div class="row">
         <div class="col-md-3 col-form-label">
           <label>
-            Tiêu thụ năng lượng cho sản xuất:
+            <strong>
+              <i class="fa fa-square" aria-hidden="true"></i>
+              Tiêu thụ năng lượng cho sản xuất:
+            </strong>
           </label>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-9">
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="antraxit-input">
-              Than antraxit
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="antraxit-input" name="antraxit-input" class="form-control"
-                    placeholder="Than antraxit" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="antraxit-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="bitum-input">
-              Than bitum
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="bitum-input" name="bitum-input" class="form-control"
-                    placeholder="Than bitum" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="bitum-input">
-                    (Nghìn tấn)
-                  </label>
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+          <ng-container *ngFor="let itemEnergyConsumption of listEnergyConsumption">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="{{itemEnergyConsumption.name}}">
+                {{ itemEnergyConsumption.displayName }}
+              </label>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-10">
+                    <input type="text" id="{{itemEnergyConsumption.name}}"
+                      [formControlName]="itemEnergyConsumption.name" name="coal-from-pit" class="form-control"
+                      placeholder="{{itemEnergyConsumption.displayName}}..." />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="col-form-label" for="coal-from-input">
+                      ({{ itemEnergyConsumption.unit }})
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="Do-input">
-              Dầu DO
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="Do-input" name="Do-input" class="form-control" placeholder="Dầu DO" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="Do-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="FO-input">
-              Dầu FO
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="FO-input" name="FO-input" class="form-control" placeholder="Dầu FO" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="FO-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="LPG-input">
-              LPG
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="LPG-input" name="LPG-input" class="form-control" placeholder="LPG" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="LPG-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="biogas-input">
-              Khí sinh học
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="biogas-input" name="biogas-input" class="form-control"
-                    placeholder="Khí sinh học" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="biogas-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="biomass-input">
-              Sinh khối
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="biomass-input" name="biomass-input" class="form-control"
-                    placeholder="Sinh khối" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="biomass-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="other-input">
-              Khác (nếu có)
-            </label>
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-10">
-                  <input type="text" id="other-input" name="other-input" class="form-control"
-                    placeholder="Khác (nếu có)" />
-                </div>
-                <div class="col-md-2">
-                  <label class="col-form-label" for="other-input">
-                    (Nghìn tấn)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
 
-
-
-  <ng-container *ngFor="let itemBranches of listBranches">
+  <ng-template [ngIf]="branchesSelected">
     <hr style="width: 80%" />
 
-    <div class="form-group row" [formGroupName]="itemBranches.name">
+    <div class="form-group row" [formGroupName]="branchesSelected.name">
       <div class="col-12">
         <div class="row">
           <div class="col-md-3 col-form-label">
             <label>
-              {{itemBranches.displayName}}
+              <strong>
+                <i class="fa fa-square" aria-hidden="true"></i>
+                {{branchesSelected.displayName}}:
+              </strong>
             </label>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-9">
-            <ng-container *ngFor="let itemProduct of itemBranches.listProduct">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <ng-container *ngFor="let itemProduct of branchesSelected.listProduct">
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="coal-from-pit">
+                <label class="col-md-3 col-form-label" for="{{branchesSelected.name}}">
                   {{ itemProduct.displayName }}
                 </label>
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-10">
                       <input type="text" id="{{itemProduct.name}}" [formControlName]="itemProduct.name"
-                        name="coal-from-pit" class="form-control" placeholder="Dầu thô" />
+                        name="coal-from-pit" class="form-control" placeholder="{{itemProduct.displayName}}..." />
                     </div>
                     <div class="col-md-2">
                       <label class="col-form-label" for="coal-from-input">
@@ -315,7 +221,11 @@
         </div>
       </div>
     </div>
-  </ng-container>
+  </ng-template>
+
+
+  <ng-template [ngIf]="branchesSelected"><div>Content to render when condition is
+    true.</div></ng-template>
 
   <div class="form-actions text-center">
     <button class="btn btn-primary" type="submit" appLoadingOnElement #buttonSubmit="drLoadingOnElement">Thêm</button>

@@ -12,7 +12,7 @@ export const listMenu: INavData[] = [
   },
   {
     title: true,
-    name: 'Khai báo'
+    name: 'Khai báo doanh nghiệp'
   },
   {
     name: 'Khai khoáng',
@@ -41,6 +41,6 @@ export const listMenu: INavData[] = [
   {
     name: 'Tổng hợp phát thải KNK cho các lĩnh vực',
     url: '/theme/colors',
-    icon: 'icon-drop'
+    icon: 'icon-chart'
   },
 ];
