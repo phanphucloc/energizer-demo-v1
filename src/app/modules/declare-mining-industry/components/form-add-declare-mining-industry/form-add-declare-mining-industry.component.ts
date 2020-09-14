@@ -14,9 +14,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./form-add-declare-mining-industry.component.scss'],
 })
 export class FormAddDeclareMiningIndustryComponent extends BaseDestroyableDirective implements OnInit {
-  @ViewChild('buttonSubmit', { static: true }) private elementButtonSubmit: LoadingOnElementDirective;
   @ViewChild('loadingFormAdd', { static: true }) private elementLoadingFormAdd: LoadingOnElementDirective;
-
+  @ViewChild('buttonSubmit') private elementButtonSubmit: LoadingOnElementDirective;
 
   public formAddDMiningIndustry: FormGroup;
   public listBranches: IBranches[];
