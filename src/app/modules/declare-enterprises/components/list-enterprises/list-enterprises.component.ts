@@ -4,7 +4,7 @@ import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyab
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-enterprises',
@@ -13,24 +13,29 @@ import { Router } from '@angular/router';
 })
 export class ListEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
-
+  public fieldsId: number;
   public listEnterprises: IEnterprises[];
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private miningIndustryService: EnterprisesService
+    private enterprisesService: EnterprisesService
     ) {
     super();
   }
 
   public ngOnInit(): void {
-    this.getListMiningIndustry();
+    this.activatedRoute.params.subscribe(params => {
+      this.listEnterprises = [];
+      this.fieldsId = Number(params.fieldsId);
+      this.getListMiningIndustry();
+    });
   }
 
   public getListMiningIndustry() {
     this.elementTable.showLoadingCenter();
-    this.miningIndustryService
-      .getListMiningIndustry()
+    this.enterprisesService
+      .getListEnterprisesByFieldId(this.fieldsId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result: IEnterprises[]) => {
@@ -43,8 +48,8 @@ export class ListEnterprisesComponent extends BaseDestroyableDirective implement
       );
   }
 
-  public redirectToEditPage(id: number): void {
-    this.router.navigate(['/enterprises/detail-enterprises/' + id]);
+  public redirectToEditPage(enterprisesId: number): void {
+    this.router.navigate(['/enterprises/' + this.fieldsId + '/detail-enterprises/' + enterprisesId]);
   }
 
   public trackByFn(index: number, item: any): number {

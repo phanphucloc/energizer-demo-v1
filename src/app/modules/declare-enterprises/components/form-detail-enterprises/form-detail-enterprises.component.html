@@ -1,1 +1,237 @@
-<p>form-detail-declare-mining-industry works!</p>
+<form *ngIf="formDetailEnterprises" class="form-horizontal" [formGroup]="formDetailEnterprises">
+  <div class="form-group row" formGroupName="baseInfo">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-12 col-form-label">
+          <label>
+            <strong>
+              <i class="fa fa-square" aria-hidden="true"></i>
+              Thông tin chung doanh nghiệp:
+            </strong>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="year-declare-input">
+              Năm khai báo
+            </label>
+            <div class="col-md-9">
+              <input type="text" disabled id="year-declare-input" formControlName="foundedYear"
+                name="year-declare-input" class="form-control" placeholder="Năm khai báo..." />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="name-company-input">
+              Tên doanh nghiệp
+            </label>
+            <div class="col-md-9">
+              <input type="text" id="name-company-input" formControlName="name" name="name-company-input"
+                class="form-control" placeholder="Tên doanh nghiệp..." />
+            </div>
+          </div>
+          <div class="form-group row" formGroupName="address">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-md-3 col-form-label">
+                  <label> Địa chỉ doanh nghiệp: </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="province-input">
+                      Tỉnh
+                    </label>
+                    <div class="col-md-9">
+                      <input type="text" id="province-input" formControlName="province" name="province-input"
+                        class="form-control" placeholder="Tỉnh..." />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="district-input">
+                      Huyện
+                    </label>
+                    <div class="col-md-9">
+                      <input type="text" id="district-input" formControlName="district" name="district-input"
+                        class="form-control" placeholder="Huyện..." />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="town-input">
+                      Xã
+                    </label>
+                    <div class="col-md-9">
+                      <input type="text" id="town-input" formControlName="town" name="town-input" class="form-control"
+                        placeholder="Xã..." />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-6">
+                      <div class="row">
+                        <label class="col-md-6 col-form-label" for="coordinates-x-input">
+                          Tọa độ X
+                        </label>
+                        <div class="col-md-6">
+                          <input type="text" id="coordinates-x-input" formControlName="xCoordinate"
+                            name="coordinates-x-input" class="form-control" placeholder="Tọa độ X..." />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row">
+                        <label class="col-md-6 col-form-label" for="coordinates-y-input">
+                          Tọa độ Y
+                        </label>
+                        <div class="col-md-6">
+                          <input type="text" id="coordinates-y-input" formControlName="yCoordinate"
+                            name="coordinates-y-input" class="form-control" placeholder="Tọa độ Y..." />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="average-labor-input">
+                      Số lao động trung bình năm
+                    </label>
+                    <div class="col-md-9">
+                      <input type="text" id="average-labor-input" formControlName="employees" name="average-labor-input"
+                        class="form-control" placeholder="Số lao động trung bình năm..." />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="production-value-input">
+                      Giá trị sản xuất của doanh nghiệp
+                    </label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="productionValue" id="production-value-input"
+                        name="production-value-input" class="form-control"
+                        placeholder="Giá trị sản xuất của doanh nghiệp" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="production-value-input">
+                      Lĩnh vực
+                    </label>
+                    <div class="col-md-9">
+                      <select id="select1" formControlName="branchesId" name="select1" class="form-control">
+                        <option selected [value]="null">
+                          -- Chọn lĩnh vực --
+                        </option>
+                        <option *ngFor="let itemBranches of listBranches" [value]="itemBranches.id">
+                          {{ itemBranches.displayName }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr style="width: 80%" />
+
+  <div class="form-group row" *ngIf="formDetailEnterprises.get('energyConsumption')"
+    [formGroupName]="'energyConsumption'">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-12 col-form-label">
+          <label>
+            <strong>
+              <i class="fa fa-square" aria-hidden="true"></i>
+              Tiêu thụ năng lượng cho sản xuất:
+            </strong>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+          <ng-container *ngFor="let itemEnergyConsumption of listEnergyConsumption">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="{{ itemEnergyConsumption.name }}">
+                {{ itemEnergyConsumption.displayName }}
+              </label>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-5">
+                    <input type="text" id="{{ itemEnergyConsumption.name }}"
+                      [formControlName]="itemEnergyConsumption.name" name="coal-from-pit" class="form-control"
+                      placeholder="{{ itemEnergyConsumption.displayName }}..." />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="col-form-label" for="coal-from-input">
+                      ({{ itemEnergyConsumption.unit }})
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template [ngIf]="branchesSelected">
+    <hr style="width: 80%" />
+
+    <div *ngIf="formDetailEnterprises.get('production')" class="form-group row" [formGroupName]="'production'">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-md-12 col-form-label">
+            <label>
+              <strong>
+                <i class="fa fa-square" aria-hidden="true"></i>
+                Khai báo sản lượng sản phẩm {{ branchesSelected.displayName }}:
+              </strong>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-11">
+            <ng-container *ngFor="let itemProduct of branchesSelected.listProduct">
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="{{ itemProduct.name }}">
+                  {{ itemProduct.displayName }}
+                </label>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input type="text" id="{{ itemProduct.name }}" [formControlName]="itemProduct.name"
+                        name="coal-from-pit" class="form-control" placeholder="{{ itemProduct.displayName }}..." />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label" for="coal-from-input">
+                        ({{ itemProduct.unit }})
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
+
+  <div class="form-actions text-center">
+    <button class="btn btn-secondary" (click)="cancel()" type="button">
+      Quay lại
+    </button>
+  </div>
+</form>
+
+<div appLoadingOnElement #formDetail="drLoadingOnElement">
+</div>

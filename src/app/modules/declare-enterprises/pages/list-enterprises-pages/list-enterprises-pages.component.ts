@@ -1,39 +1,48 @@
-import { IEnterprises } from '../../abstract/enterprises.interface';
+import { IFields } from '../../abstract/enterprises.interface';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
-import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
+import { Fields } from '../../models/enterprises.model';
 
 @Component({
   selector: 'app-list-enterprises-pages',
   templateUrl: './list-enterprises-pages.component.html',
-  styleUrls: ['./list-enterprises-pages.component.scss']
+  styleUrls: ['./list-enterprises-pages.component.scss'],
 })
 export class ListEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
-  public listEnterprises: IEnterprises[];
+  public fieldsCurrent: Fields;
 
   constructor(
     private router: Router,
-    private miningIndustryService: EnterprisesService
-    ) {
+    private activatedRoute: ActivatedRoute,
+    private enterprisesService: EnterprisesService
+  ) {
     super();
+    this.fieldsCurrent = new Fields();
   }
 
   public ngOnInit(): void {
-    this.getListMiningIndustry();
-  }
-
-  public getListMiningIndustry(){
-    this.miningIndustryService.getListMiningIndustry()
-    .pipe(
-      takeUntil(this.destroy$)
-    )
-    .subscribe((result: IEnterprises[]) => {
-      this.listEnterprises = result;
+    this.activatedRoute.params.subscribe(params => {
+      this.fieldsCurrent.id = Number(params.fieldsId);
+      this.getFieldsCurrent();
     });
   }
-  public redirectToAdd(){
-    this.router.navigate(['/enterprises/add-enterprises']);
+
+  public getFieldsCurrent(){
+    this.enterprisesService.getFieldsByFieldsId(this.fieldsCurrent.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (result: IFields) => {
+          this.fieldsCurrent.name = result.name.toLocaleLowerCase();
+        },
+        (error) => {
+        }
+      );
+  }
+
+  public redirectToAdd() {
+    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/add-enterprises']);
   }
 }

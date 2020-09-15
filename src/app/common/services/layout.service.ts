@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Fields } from '../models/field.model';
+import { IFields } from 'src/app/modules/declare-enterprises/abstract/enterprises.interface';
 
 @Injectable({ providedIn: 'root' })
 export class LayoutService {
@@ -17,9 +17,9 @@ export class LayoutService {
   constructor(public router: Router, private httpClient: HttpClient) {
   }
 
-  public getListFields(): Observable<Fields> {
+  public getListFields(): Observable<IFields[]> {
     return this.httpClient.get(this.baseUrlFake + 'get-list-fields').pipe(
-      map((result: Fields) => {
+      map((result: IFields[]) => {
         return result;
       })
     );

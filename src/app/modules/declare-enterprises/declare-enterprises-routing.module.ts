@@ -10,14 +10,14 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Lĩnh vực CN Khai khoáng',
+      title: 'Khai báo doanh nghiệp',
     },
     children: [
       {
         path: 'list-enterprises',
         component: ListEnterprisesPagesComponent,
         data: {
-          title: 'Danh sách lĩnh vực CN Khai khoáng'
+          title: 'Danh sách danh nghiệp'
         },
         canActivate: [AuthGuard]
       },
@@ -25,15 +25,15 @@ const routes: Routes = [
         path: 'add-enterprises',
         component: AddEnterprisesPagesComponent,
         data: {
-          title: 'Thêm danh sách lĩnh vực CN Khai khoáng'
+          title: 'Thêm danh nghiệp'
         },
         canActivate: [AuthGuard]
       },
       {
-        path: 'detail-enterprises/:id',
+        path: 'detail-enterprises/:enterprisesId',
         component: DetailEnterprisesPagesComponent,
         data: {
-          title: 'Chi tiết danh sách lĩnh vực CN Khai khoáng'
+          title: 'Chi tiết doanh nghiệp'
         },
         canActivate: [AuthGuard]
       },

@@ -2,6 +2,7 @@
 export interface IEnterprises {
     id: number;
     name: string;
+    fieldId: number;
     foundedYear: number;
     province: string;
     district: string;
@@ -23,6 +24,7 @@ export interface IEnterprisesToServer {
     yCoordinate: string;
     productionValue: number;
     employees: number;
+    fieldId: number;
     branchesId: number;
     branchesName: string;
     listProduction: IProduction[];

@@ -1,8 +1,9 @@
-<form *ngIf="formAddDMiningIndustry" [formGroup]="formAddDMiningIndustry" (ngSubmit)="submit()" class="form-horizontal">
+<form *ngIf="formAddEnterprises" class="form-horizontal auto-validated" (ngSubmit)="submit()"
+  [formGroup]="formAddEnterprises">
   <div class="form-group row" formGroupName="baseInfo">
     <div class="col-12">
       <div class="row">
-        <div class="col-md-3 col-form-label">
+        <div class="col-md-12 col-form-label">
           <label>
             <strong>
               <i class="fa fa-square" aria-hidden="true"></i>
@@ -11,31 +12,38 @@
           </label>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
           <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="year-declare-input"> Năm khai báo</label>
+            <label class="col-md-3 col-form-label" for="year-declare-input">
+              Năm khai báo
+            </label>
             <div class="col-md-9">
-              <input type="text" id="year-declare-input" formControlName="foundedYear" name="year-declare-input"
-                class="form-control" placeholder="Năm khai báo..." />
+              <input type="text" disabled id="year-declare-input" formControlName="foundedYear"
+                name="year-declare-input" class="form-control" placeholder="Năm khai báo..." />
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="name-company-input">Tên doanh nghiệp</label>
+            <label class="col-md-3 col-form-label" for="name-company-input">
+              Tên doanh nghiệp
+            </label>
             <div class="col-md-9">
               <input type="text" id="name-company-input" formControlName="name" name="name-company-input"
                 class="form-control" placeholder="Tên doanh nghiệp..." />
+              <div class="invalid-feedback" *ngIf="
+                !this.formAddEnterprises.get('baseInfo.name').valid &&
+                this.formAddEnterprises.get('baseInfo.name').touched
+              ">
+                <div>Vui lòng nhập tên doanh nghiệp</div>
+              </div>
             </div>
           </div>
           <div class="form-group row" formGroupName="address">
             <div class="col-12">
               <div class="row">
                 <div class="col-md-3 col-form-label">
-                  <label>
-                    Địa chỉ doanh nghiệp:
-                  </label>
+                  <label> Địa chỉ doanh nghiệp: </label>
                 </div>
               </div>
               <div class="row">
@@ -48,6 +56,12 @@
                     <div class="col-md-9">
                       <input type="text" id="province-input" formControlName="province" name="province-input"
                         class="form-control" placeholder="Tỉnh..." />
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('baseInfo.address.province').valid &&
+                        this.formAddEnterprises.get('baseInfo.address.province').touched
+                      ">
+                        <div>Vui lòng nhập tỉnh</div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -57,6 +71,12 @@
                     <div class="col-md-9">
                       <input type="text" id="district-input" formControlName="district" name="district-input"
                         class="form-control" placeholder="Huyện..." />
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('baseInfo.address.district').valid &&
+                        this.formAddEnterprises.get('baseInfo.address.district').touched
+                      ">
+                        <div>Vui lòng nhập huyện</div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -66,6 +86,12 @@
                     <div class="col-md-9">
                       <input type="text" id="town-input" formControlName="town" name="town-input" class="form-control"
                         placeholder="Xã..." />
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('baseInfo.address.town').valid &&
+                        this.formAddEnterprises.get('baseInfo.address.town').touched
+                      ">
+                        <div>Vui lòng nhập xã</div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -77,6 +103,12 @@
                         <div class="col-md-6">
                           <input type="text" id="coordinates-x-input" formControlName="xCoordinate"
                             name="coordinates-x-input" class="form-control" placeholder="Tọa độ X..." />
+                          <div class="invalid-feedback" *ngIf="
+                            !this.formAddEnterprises.get('baseInfo.address.xCoordinate').valid &&
+                            this.formAddEnterprises.get('baseInfo.address.xCoordinate').touched
+                          ">
+                            <div>Vui lòng nhập toạ độ X</div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -88,6 +120,12 @@
                         <div class="col-md-6">
                           <input type="text" id="coordinates-y-input" formControlName="yCoordinate"
                             name="coordinates-y-input" class="form-control" placeholder="Tọa độ Y..." />
+                          <div class="invalid-feedback" *ngIf="
+                            !this.formAddEnterprises.get('baseInfo.address.yCoordinate').valid &&
+                            this.formAddEnterprises.get('baseInfo.address.yCoordinate').touched
+                          ">
+                            <div>Vui lòng nhập toạ độ Y</div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -99,6 +137,12 @@
                     <div class="col-md-9">
                       <input type="text" id="average-labor-input" formControlName="employees" name="average-labor-input"
                         class="form-control" placeholder="Số lao động trung bình năm..." />
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('baseInfo.address.employees').valid &&
+                        this.formAddEnterprises.get('baseInfo.address.employees').touched
+                      ">
+                        <div>Vui lòng nhập số lao động trung bình năm</div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -109,6 +153,12 @@
                       <input type="text" formControlName="productionValue" id="production-value-input"
                         name="production-value-input" class="form-control"
                         placeholder="Giá trị sản xuất của doanh nghiệp" />
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('baseInfo.address.productionValue').valid &&
+                        this.formAddEnterprises.get('baseInfo.address.productionValue').touched
+                      ">
+                        <div>Vui lòng nhập giá trị sản xuất</div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -122,9 +172,15 @@
                           -- Chọn lĩnh vực --
                         </option>
                         <option *ngFor="let itemBranches of listBranches" [value]="itemBranches.id">
-                          {{itemBranches.displayName}}
+                          {{ itemBranches.displayName }}
                         </option>
                       </select>
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('baseInfo.address.branchesId').valid &&
+                        this.formAddEnterprises.get('baseInfo.address.branchesId').touched
+                      ">
+                        <div>Vui lòng chọn lĩnh vực</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -135,13 +191,12 @@
       </div>
     </div>
   </div>
-
   <hr style="width: 80%" />
 
-  <div class="form-group row" *ngIf="formAddDMiningIndustry.get('energyConsumption')"  [formGroupName]="'energyConsumption'">
+  <div class="form-group row" *ngIf="formAddEnterprises.get('energyConsumption')" [formGroupName]="'energyConsumption'">
     <div class="col-12">
       <div class="row">
-        <div class="col-md-3 col-form-label">
+        <div class="col-md-12 col-form-label">
           <label>
             <strong>
               <i class="fa fa-square" aria-hidden="true"></i>
@@ -155,15 +210,21 @@
         <div class="col-md-11">
           <ng-container *ngFor="let itemEnergyConsumption of listEnergyConsumption">
             <div class="form-group row">
-              <label class="col-md-3 col-form-label" for="{{itemEnergyConsumption.name}}">
+              <label class="col-md-3 col-form-label" for="{{ itemEnergyConsumption.name }}">
                 {{ itemEnergyConsumption.displayName }}
               </label>
               <div class="col-md-9">
                 <div class="row">
-                  <div class="col-md-10">
-                    <input type="text" id="{{itemEnergyConsumption.name}}"
+                  <div class="col-md-5">
+                    <input type="text" id="{{ itemEnergyConsumption.name }}"
                       [formControlName]="itemEnergyConsumption.name" name="coal-from-pit" class="form-control"
-                      placeholder="{{itemEnergyConsumption.displayName}}..." />
+                      placeholder="{{ itemEnergyConsumption.displayName }}..." />
+                    <div class="invalid-feedback" *ngIf="
+                      !this.formAddEnterprises.get('energyConsumption.'+ itemEnergyConsumption.name).valid &&
+                      this.formAddEnterprises.get('energyConsumption.'+ itemEnergyConsumption.name).touched
+                    ">
+                      <div>Vui lòng nhập {{ itemEnergyConsumption.displayName }}</div>
+                    </div>
                   </div>
                   <div class="col-md-2">
                     <label class="col-form-label" for="coal-from-input">
@@ -182,14 +243,14 @@
   <ng-template [ngIf]="branchesSelected">
     <hr style="width: 80%" />
 
-    <div *ngIf="formAddDMiningIndustry.get('production')" class="form-group row" [formGroupName]="'production'">
+    <div *ngIf="formAddEnterprises.get('production')" class="form-group row" [formGroupName]="'production'">
       <div class="col-12">
         <div class="row">
-          <div class="col-md-3 col-form-label">
+          <div class="col-md-12 col-form-label">
             <label>
               <strong>
                 <i class="fa fa-square" aria-hidden="true"></i>
-                Khai báo sản lượng sản phẩm {{branchesSelected.displayName}}:
+                Khai báo sản lượng sản phẩm {{ branchesSelected.displayName }}:
               </strong>
             </label>
           </div>
@@ -199,14 +260,20 @@
           <div class="col-md-11">
             <ng-container *ngFor="let itemProduct of branchesSelected.listProduct">
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="{{itemProduct.name}}">
+                <label class="col-md-3 col-form-label" for="{{ itemProduct.name }}">
                   {{ itemProduct.displayName }}
                 </label>
                 <div class="col-md-9">
                   <div class="row">
-                    <div class="col-md-10">
-                      <input type="text" id="{{itemProduct.name}}" [formControlName]="itemProduct.name"
-                        name="coal-from-pit" class="form-control" placeholder="{{itemProduct.displayName}}..." />
+                    <div class="col-md-5">
+                      <input type="text" id="{{ itemProduct.name }}" [formControlName]="itemProduct.name"
+                        name="coal-from-pit" class="form-control" placeholder="{{ itemProduct.displayName }}..." />
+                      <div class="invalid-feedback" *ngIf="
+                        !this.formAddEnterprises.get('production.'+ itemProduct.name).valid &&
+                        this.formAddEnterprises.get('production.'+ itemProduct.name).touched
+                      ">
+                        <div>Vui lòng nhập {{ itemProduct.displayName }}</div>
+                      </div>
                     </div>
                     <div class="col-md-2">
                       <label class="col-form-label" for="coal-from-input">
@@ -224,11 +291,15 @@
   </ng-template>
 
   <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
-
   <div class="form-actions text-center">
-    <button class="btn btn-primary" type="submit" appLoadingOnElement #buttonSubmit="drLoadingOnElement">Thêm</button>
-    <button class="btn btn-secondary" (click)="cancel()" type="button">Quay lại</button>
+    <button class="btn btn-primary" type="submit" appLoadingOnElement #buttonSubmit="drLoadingOnElement">
+      Thêm
+    </button>
+    <button class="btn btn-secondary" (click)="cancel()" type="button">
+      Quay lại
+    </button>
   </div>
 </form>
+
 
 <div appLoadingOnElement #loadingFormAdd="drLoadingOnElement"></div>

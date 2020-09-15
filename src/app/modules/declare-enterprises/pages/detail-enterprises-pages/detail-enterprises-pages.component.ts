@@ -1,10 +1,10 @@
-import { IEnterprises } from '../../abstract/enterprises.interface';
+import { IFields } from '../../abstract/enterprises.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
 import { takeUntil } from 'rxjs/operators';
-import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
+import { Fields } from '../../models/enterprises.model';
 
 @Component({
   selector: 'app-detail-enterprises-pages',
@@ -12,35 +12,36 @@ import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-e
   styleUrls: ['./detail-enterprises-pages.component.scss'],
 })
 export class DetailEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
-  @ViewChild('formDetail', { static: true }) private elementFormDetail: LoadingOnElementDirective;
-  public id: number;
-  public enterprises: IEnterprises;
+  public enterprisesId: number;
+  public fieldsCurrent: Fields;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private miningIndustryService: EnterprisesService
+    private enterprisesService: EnterprisesService,
   ) {
     super();
+    this.fieldsCurrent = new Fields();
   }
-
   public ngOnInit(): void {
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.getMiningIndustry();
+    this.fieldsCurrent.id = Number(this.activatedRoute.snapshot.paramMap.get('fieldsId'));
+    this.enterprisesId = Number(this.activatedRoute.snapshot.paramMap.get('enterprisesId'));
+    this.getFieldsCurrent();
   }
 
-  public getMiningIndustry(): void{
-    this.elementFormDetail.showLoadingCenter();
-    this.miningIndustryService.getMiningIndustryById(this.id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(
-      (result: IEnterprises) => {
-        this.elementFormDetail.hideLoadingCenter();
-        this.enterprises = result;
-      },
-      (error) => {
-        this.elementFormDetail.hideLoadingCenter();
-      }
-    );
+  public getFieldsCurrent(){
+    this.enterprisesService.getFieldsByFieldsId(this.fieldsCurrent.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (result: IFields) => {
+          this.fieldsCurrent.name = result.name.toLocaleLowerCase();
+        },
+        (error) => {
+        }
+      );
   }
 
+  public cancel(): void {
+    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
+  }
 }

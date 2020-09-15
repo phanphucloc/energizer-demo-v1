@@ -1,6 +1,6 @@
-import { IEnterprises, IResultAddEnterprises, IProduction } from '../abstract/enterprises.interface';
+import { IEnterprises, IResultAddEnterprises, IProduction, IFields } from '../abstract/enterprises.interface';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
@@ -13,28 +13,44 @@ export class EnterprisesService {
   private baseUrlFake = environment.baseURlFake;
   private baseUrl = environment.baseURl;
 
-  constructor(public router: Router, private httpClient: HttpClient) {
+  constructor(
+    public router: Router,
+    private httpClient: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    ) {
   }
 
-  public getListMiningIndustry(): Observable<IEnterprises[]> {
-    return this.httpClient.get(this.baseUrlFake + 'get-list-mining-industry').pipe(
+  public get idFields(): number{
+    return Number(this.activatedRoute.snapshot.paramMap.get('fieldsId'));
+  }
+
+  public getFieldsByFieldsId(fieldId: number): Observable<IFields> {
+    return this.httpClient.get(this.baseUrlFake + 'get-fields-by-fields-id/' + fieldId).pipe(
+      map((result: IFields) => {
+        return result;
+      })
+    );
+  }
+
+  public getListEnterprisesByFieldId(fieldId: number): Observable<IEnterprises[]> {
+    return this.httpClient.get(this.baseUrlFake + 'get-list-enterprises-by-field-id/' + fieldId).pipe(
       map((result: IEnterprises[]) => {
         return result;
       })
     );
   }
 
-  public addMiningIndustry(enterprises: IEnterprisesToServer): Observable<IResultAddEnterprises> {
-    return this.httpClient.post(this.baseUrlFake + 'add-mining-industry', { enterprises }).pipe(
+  public addEnterprises(enterprises: IEnterprisesToServer): Observable<IResultAddEnterprises> {
+    return this.httpClient.post(this.baseUrlFake + 'add-enterprises', { enterprises }).pipe(
       map((result: IResultAddEnterprises) => {
         return result;
       })
     );
   }
 
-  public getMiningIndustryById(id: number): Observable<IEnterprises> {
-    return this.httpClient.get(this.baseUrlFake + 'detail-mining-industry/' + id).pipe(
-      map((result: IEnterprises) => {
+  public getEnterprisesById(id: number): Observable<IEnterprisesToServer> {
+    return this.httpClient.get(this.baseUrlFake + 'detail-enterprises/' + id).pipe(
+      map((result: IEnterprisesToServer) => {
         return result;
       })
     );

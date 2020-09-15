@@ -21,7 +21,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'enterprises',
+        path: 'enterprises/:fieldsId',
         loadChildren: () =>
           import(
             './modules/declare-enterprises/declare-enterprises.module'

@@ -40,15 +40,19 @@ export class BackendInterceptor implements HttpInterceptor {
         newHttpResponse = this.geListFields(request);
         break;
       case method === 'GET' &&
-        url === 'http://localhost:4200:/get-list-mining-industry':
-        newHttpResponse = this.getListEnterprises(request);
+        url.match(/\/get-list-enterprises-by-field-id\/\d+$/) != null:
+        newHttpResponse = this.getListEnterprisesByFieldId(request);
+        break;
+      case method === 'GET' &&
+        url.match(/\/get-fields-by-fields-id\/\d+$/) != null:
+        newHttpResponse = this.getFieldsByFieldsId(request);
         break;
       case method === 'POST' &&
-        url === 'http://localhost:4200:/add-mining-industry':
+        url === 'http://localhost:4200:/add-enterprises':
         newHttpResponse = this.addEnterprises(request);
         break;
       case method === 'GET' &&
-        url.match(/\/detail-mining-industry\/\d+$/) != null:
+        url.match(/\/detail-enterprises\/\d+$/) != null:
         newHttpResponse = this.getEnterprises(request);
         break;
       case method === 'GET' &&
@@ -85,7 +89,7 @@ export class BackendInterceptor implements HttpInterceptor {
 
     if (user) {
       return of(
-        new HttpResponse({ status: 200, body: { status: 'SUCCESS', user } })
+        new HttpResponse({ status: 200, body: { status: 'SUCCESS', user: {...user} } })
       ).pipe(delay(500));
     }
     else {
@@ -101,9 +105,27 @@ export class BackendInterceptor implements HttpInterceptor {
     }
   }
 
-  private getListEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+  private getFieldsByFieldsId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const fieldId = Number(this.getIdParameterFromURL(request.url));
+
+    const fields = this.listFields.find((fieldsItem) => {
+      return fieldsItem.id === fieldId;
+    });
+
     return of(
-      new HttpResponse({ status: 200, body: this.listEnterprises })
+      new HttpResponse({ status: 200, body: {...fields} })
+    ).pipe(delay(500));
+  }
+
+  private getListEnterprisesByFieldId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const fieldId = Number(this.getIdParameterFromURL(request.url));
+
+    const listEnterprisesByFieldId = this.listEnterprises.filter((enterprises) => {
+       return enterprises.fieldId === fieldId;
+    });
+
+    return of(
+      new HttpResponse({ status: 200, body: [...listEnterprisesByFieldId] })
     ).pipe(delay(500));
   }
 
@@ -121,17 +143,20 @@ export class BackendInterceptor implements HttpInterceptor {
       yCoordinate : enterprises.yCoordinate,
       productionValue : enterprises.productionValue,
       employees : enterprises.employees,
+      fieldId: enterprises.fieldId,
       branchesId: enterprises.branchesId,
       branchesName: enterprises.branchesName,
       branchesDisplayName: enterprises.branchesName,
+      listEnergyConsumption: enterprises.listEnergyConsumption,
+      listProduction: enterprises.listProduction,
     };
 
-    listEnterprises.push(enterprisesClone);
+    this.listEnterprises.push(enterprisesClone);
 
     return of(
       new HttpResponse({
         status: 200,
-        body: { status: 'SUCCESS', enterprisesClone },
+        body: { status: 'SUCCESS', enterprisesClone : {...enterprisesClone} },
       })
     ).pipe(delay(500));
   }
@@ -139,11 +164,11 @@ export class BackendInterceptor implements HttpInterceptor {
   private getEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     const idEnterprises = Number(this.getIdParameterFromURL(request.url));
 
-    const user = this.listEnterprises.find((resultEnterprises) => {
+    const enterprises = this.listEnterprises.find((resultEnterprises) => {
       return resultEnterprises.id === idEnterprises;
     });
 
-    return of(new HttpResponse({ status: 200, body: user })).pipe(delay(500));
+    return of(new HttpResponse({ status: 200, body: {...enterprises} })).pipe(delay(500));
   }
 
   private geListFields(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -153,7 +178,7 @@ export class BackendInterceptor implements HttpInterceptor {
         name: itemField.name
       };
     });
-    return of(new HttpResponse({ status: 200, body: resultListFields })).pipe(delay(500));
+    return of(new HttpResponse({ status: 200, body: [...resultListFields] })).pipe(delay(500));
   }
 
   private getListBranchesByFieldsId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -172,7 +197,7 @@ export class BackendInterceptor implements HttpInterceptor {
       };
     });
 
-    return of(new HttpResponse({ status: 200, body: listBranch })).pipe(delay(500));
+    return of(new HttpResponse({ status: 200, body: [...listBranch] })).pipe(delay(500));
   }
 
   private getListProductBranchesId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -190,7 +215,7 @@ export class BackendInterceptor implements HttpInterceptor {
 
     const listProduct = itemBranches.listProduct;
 
-    return of(new HttpResponse({ status: 200, body: listProduct })).pipe(delay(500));
+    return of(new HttpResponse({ status: 200, body: [...listProduct] })).pipe(delay(500));
   }
 
   private getListBranchesIndustryProductionOfFields(request: HttpRequest<any>): Observable<HttpResponse<any>> {
@@ -209,12 +234,12 @@ export class BackendInterceptor implements HttpInterceptor {
       };
     });
 
-    return of(new HttpResponse({ status: 200, body: listBranch })).pipe(delay(500));
+    return of(new HttpResponse({ status: 200, body: [...listBranch] })).pipe(delay(500));
   }
 
   private getListEnergyConsumption(request: HttpRequest<any>): Observable<HttpResponse<any>>{
     const listEnergyConsumption = this.listEnergyConsumption;
-    return of(new HttpResponse({ status: 200, body: listEnergyConsumption })).pipe(delay(500));
+    return of(new HttpResponse({ status: 200, body: [...listEnergyConsumption] })).pipe(delay(500));
   }
 
   private getIdParameterFromURL(url: string): string {

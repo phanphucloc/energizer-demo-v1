@@ -1,7 +1,8 @@
-import { IEnergyConsumption, IEnterprises, IEnterprisesToServer, IProduction } from '../abstract/enterprises.interface';
+import { IEnergyConsumption, IEnterprises, IEnterprisesToServer, IProduction, IFields, IBranches } from '../abstract/enterprises.interface';
 
 export class Enterprises implements IEnterprises {
     id: number;
+    fieldId: number;
     name: string;
     foundedYear: number;
     province: string;
@@ -23,6 +24,7 @@ export class EnterprisesToServer implements IEnterprisesToServer {
     yCoordinate: string;
     productionValue: number;
     employees: number;
+    fieldId: number;
     branchesId: number;
     branchesName: string;
     listProduction: Production[];
@@ -43,4 +45,10 @@ export class EnergyConsumption implements IEnergyConsumption{
     name: string;
     unit: string;
     value: number;
+}
+
+export class Fields implements IFields{
+    id: number;
+    name: string;
+    listBranches: IBranches[];
 }
