@@ -17,10 +17,13 @@ export class LoadingOnElementDirective {
   ) { }
 
 
-  public showLoadingCenter(sizeIcon: string = '40px', minHeightElement: string = '100px' ): void {
+  public showLoadingCenter(sizeIcon: string = '40px', minHeightElement: string = '100px', enableBackGround: boolean = false ): void {
 
     this.elBackground = this.render.createElement('div');
     this.setStyleMulti(this.elBackground, this.listStyleElBackground);
+    if (enableBackGround){
+      this.render.setStyle(this.elBackground, 'background-color', '#00000040');
+    }
 
     const elementIcon = this.render.createElement('i');
     this.addClassMulti(elementIcon, ['fa', 'fa-spinner', 'fa-spin', 'fa-fw']);

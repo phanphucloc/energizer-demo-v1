@@ -101,6 +101,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result) => {
+
           this.enterprises = result[0];
           this.fetchBaseData();
 

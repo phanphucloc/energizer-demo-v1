@@ -11,13 +11,13 @@
   </thead>
   <tbody>
     <tr *ngFor="let enterprises of listEnterprises ; trackBy: trackByFn">
-      <td title="{{enterprises.branchNameAll}}">{{enterprises.branchNameAll}}
+      <td class="medium-width" title="{{enterprises.branchNameAll}}">{{enterprises.branchNameAll}}
       </td>
       <td>{{enterprises.name}}</td>
       <td>{{enterprises.province}}</td>
       <td>{{enterprises.employees}}</td>
       <td>{{enterprises.productionValue}}</td>
-      <td>
+      <td class="very-small-width text-center">
         <i 
           (click)="redirectToEditPage(enterprises.id)"
           class="button-icon fa fa-file-text-o"
