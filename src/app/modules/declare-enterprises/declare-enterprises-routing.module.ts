@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/common/guard/auth.guard';
-import { AddEnterprisesPagesComponent } from './pages/add-enterprises-pages/add-enterprises-pages.component';
+import { DeclareEnterprisesPagesComponent } from './pages/declare-enterprises-pages/declare-enterprises-pages.component';
 import { DetailEnterprisesPagesComponent } from './pages/detail-enterprises-pages/detail-enterprises-pages.component';
 import { ListEnterprisesPagesComponent } from './pages/list-enterprises-pages/list-enterprises-pages.component';
 
@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'add-enterprises',
-        component: AddEnterprisesPagesComponent,
+        component: DeclareEnterprisesPagesComponent,
         data: {
           title: 'Thêm danh nghiệp'
         },

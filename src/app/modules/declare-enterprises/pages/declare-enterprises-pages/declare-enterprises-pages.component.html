@@ -6,12 +6,13 @@
           <i class="fa fa-plus" aria-hidden="true"></i>Khai báo doanh nghiệp lĩnh vực {{fieldsCurrent.name}}
         </div>
         <div class="card-body">
-          <app-form-enterprises (cancelEmitter)="cancel()" [fieldsId]="fieldsCurrent.id">
-          </app-form-enterprises>
+          <app-form-declare-enterprises 
+              (submitEmitter)="submit($event)"
+              (cancelEmitter)="cancel()"
+              [fieldsId]="fieldsCurrent.id">
+          </app-form-declare-enterprises>
         </div>
       </div>
     </div>
-    <!--/.col-->
   </div>
-  <!--/.row-->
 </div>

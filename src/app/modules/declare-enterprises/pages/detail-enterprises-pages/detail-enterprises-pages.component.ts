@@ -5,6 +5,8 @@ import { EnterprisesService } from '../../services/enterprises.service';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
 import { takeUntil } from 'rxjs/operators';
 import { Fields } from '../../models/enterprises.model';
+import { ToastrService } from 'ngx-toastr';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
   selector: 'app-detail-enterprises-pages',
@@ -19,6 +21,7 @@ export class DetailEnterprisesPagesComponent extends BaseDestroyableDirective im
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private enterprisesService: EnterprisesService,
+    private toastr: ToastrService
   ) {
     super();
     this.fieldsCurrent = new Fields();
@@ -36,7 +39,8 @@ export class DetailEnterprisesPagesComponent extends BaseDestroyableDirective im
         (result: IFields) => {
           this.fieldsCurrent.name = result.name.toLocaleLowerCase();
         },
-        (error) => {
+        () => {
+          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
         }
       );
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
+import { ToastrService } from 'ngx-toastr';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
   selector: 'app-login-page',
@@ -8,11 +10,12 @@ import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyab
 })
 export class LoginPageComponent extends BaseDestroyableDirective implements OnInit {
 
-  constructor() {
+  constructor(
+    private toastr: ToastrService
+  ) {
     super();
   }
 
   ngOnInit(): void {
   }
-
 }

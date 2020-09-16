@@ -80,6 +80,14 @@ export class EnterprisesService {
     );
   }
 
+  public getListProductBranchesIds(ids: number[]): Observable<IProduction[]> {
+    return this.httpClient.post(this.baseUrlFake + 'get-list-product-by-branches-ids/', {ids} ).pipe(
+      map((result: IProduction[]) => {
+        return result;
+      })
+    );
+  }
+
   public getListEnergyConsumption(){
     return this.httpClient.get(this.baseUrlFake + 'get-list-energy-consumption/').pipe(
       map((result: IEnergyConsumption[]) => {

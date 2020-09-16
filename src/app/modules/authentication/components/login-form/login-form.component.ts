@@ -5,6 +5,7 @@ import { ValidateService } from 'src/app/common/services/validate-form.service';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
   selector: 'app-login-form',
@@ -49,14 +50,14 @@ export class LoginFormComponent extends BaseDestroyableDirective implements OnIn
       .subscribe(
         (result) => {
           if (result.status === 'SUCCESS'){
-            this.toastr.success('Đăng nhập thành công', 'Thông báo');
+            this.toastr.success(MESSAGE.LOGIN_SUCCESS, MESSAGE.NOTIFICATION);
           }
           else{
             this.loginForm.setErrors({ incorrect: true, message : result.message });
           }
           this.elementButtonSubmit.hideLoadingCenter();
         },
-        (err) => {
+        () => {
           this.elementButtonSubmit.hideLoadingCenter();
         }
       );

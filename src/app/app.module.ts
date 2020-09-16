@@ -13,6 +13,7 @@ import { NotFoundComponent } from './common/pages/not-found/not-found.component'
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {
   AppAsideModule,
   AppBreadcrumbModule,
@@ -29,6 +30,7 @@ import { LayoutService } from './common/services/layout.service';
     NotFoundComponent,
   ],
   imports: [
+    NgMultiSelectDropDownModule.forRoot(),
     RouterModule,
     BrowserModule,
     AppRoutingModule,

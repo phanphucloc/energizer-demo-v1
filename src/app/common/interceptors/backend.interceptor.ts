@@ -67,6 +67,10 @@ export class BackendInterceptor implements HttpInterceptor {
         url.match(/\/get-list-product-by-branches-id\/\d+$/) != null:
         newHttpResponse = this.getListProductBranchesId(request);
         break;
+      case method === 'POST' &&
+        url === 'http://localhost:4200:/get-list-product-by-branches-ids/':
+        newHttpResponse = this.getListProductBranchesIds(request);
+        break;
       case method === 'GET' &&
         url === 'http://localhost:4200:/get-list-energy-consumption/':
         newHttpResponse = this.getListEnergyConsumption(request);
@@ -132,31 +136,12 @@ export class BackendInterceptor implements HttpInterceptor {
   private addEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     const enterprises = request.body.enterprises;
 
-    const enterprisesClone = {
-      id : new Date().getTime(),
-      name : enterprises.name,
-      foundedYear : enterprises.foundedYear,
-      province : enterprises.province,
-      district : enterprises.district,
-      town : enterprises.town,
-      xCoordinate : enterprises.xCoordinate,
-      yCoordinate : enterprises.yCoordinate,
-      productionValue : enterprises.productionValue,
-      employees : enterprises.employees,
-      fieldId: enterprises.fieldId,
-      branchesId: enterprises.branchesId,
-      branchesName: enterprises.branchesName,
-      branchesDisplayName: enterprises.branchesName,
-      listEnergyConsumption: enterprises.listEnergyConsumption,
-      listProduction: enterprises.listProduction,
-    };
-
-    this.listEnterprises.push(enterprisesClone);
+    this.listEnterprises.push(enterprises);
 
     return of(
       new HttpResponse({
         status: 200,
-        body: { status: 'SUCCESS', enterprisesClone : {...enterprisesClone} },
+        body: { status: 'SUCCESS', enterprises : {...enterprises} },
       })
     ).pipe(delay(500));
   }
@@ -214,6 +199,38 @@ export class BackendInterceptor implements HttpInterceptor {
     });
 
     const listProduct = itemBranches.listProduct;
+
+    return of(new HttpResponse({ status: 200, body: [...listProduct] })).pipe(delay(500));
+  }
+
+  private getListProductBranchesIds(request: HttpRequest<any>): Observable<HttpResponse<any>> {
+    const branchesId = request.body.ids;
+
+    const listProduct = [];
+
+    branchesId.forEach(branchId => {
+
+      const itemFields = this.listFields.find((fields) => {
+        return fields.listBranches.find((branch) => {
+          return branch.id === branchId;
+        });
+      });
+
+      const itemBranches = itemFields.listBranches.find((branch) => {
+        return branch.id === branchId;
+      });
+
+      itemBranches.listProduct.forEach(product => {
+         const productNew: any = {};
+         productNew.name = product.name;
+         productNew.productionId = product.productionId;
+         productNew.unit = product.unit;
+         productNew.branchId = itemBranches.id;
+         listProduct.push(productNew);
+      });
+
+    });
+
 
     return of(new HttpResponse({ status: 200, body: [...listProduct] })).pipe(delay(500));
   }

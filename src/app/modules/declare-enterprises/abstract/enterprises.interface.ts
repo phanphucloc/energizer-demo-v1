@@ -11,6 +11,8 @@ export interface IEnterprises {
     yCoordinate: string;
     productionValue: number;
     employees: number;
+    branches: IBranchesValue[];
+    branchNameAll: string;
 }
 
 export interface IEnterprisesToServer {
@@ -25,10 +27,9 @@ export interface IEnterprisesToServer {
     productionValue: number;
     employees: number;
     fieldId: number;
-    branchesId: number;
-    branchesName: string;
-    listProduction: IProduction[];
-    listEnergyConsumption: IEnergyConsumption[];
+    branches: IBranchesValue[];
+    productions: IProduction[];
+    energies: IEnergyConsumption[];
 }
 
 export interface IResultAddEnterprises{
@@ -49,18 +50,31 @@ export interface IBranches{
     listProduct: IProduction[];
 }
 
-export interface IProduction{
+export interface IBranchesValue{
     id: number;
+    name: string;
+}
+
+export interface IProduction{
+    enterpriseId: number;
+    productionId: number;
+    branchId: number;
     displayName: string;
     name: string;
     unit: string;
-    value: number;
+    volume: number;
 }
 
 export interface IEnergyConsumption{
-    id: number;
+    productionId: number;
+    energyId: number;
     displayName: string;
     name: string;
     unit: string;
-    value: number;
+    volume: number;
+}
+
+export interface IDropdown{
+    item_id: number;
+    item_text: string;
 }

@@ -1,4 +1,4 @@
-import { IEnergyConsumption, IEnterprises, IEnterprisesToServer, IProduction, IFields, IBranches } from '../abstract/enterprises.interface';
+import { IEnergyConsumption, IEnterprises, IEnterprisesToServer, IProduction, IFields, IBranches, IDropdown, IBranchesValue } from '../abstract/enterprises.interface';
 
 export class Enterprises implements IEnterprises {
     id: number;
@@ -12,6 +12,8 @@ export class Enterprises implements IEnterprises {
     yCoordinate: string;
     productionValue: number;
     employees: number;
+    branches: BranchesValue[];
+    branchNameAll: string;
 }
 export class EnterprisesToServer implements IEnterprisesToServer {
     id: number;
@@ -25,30 +27,52 @@ export class EnterprisesToServer implements IEnterprisesToServer {
     productionValue: number;
     employees: number;
     fieldId: number;
-    branchesId: number;
-    branchesName: string;
-    listProduction: Production[];
-    listEnergyConsumption: EnergyConsumption[];
+    branches: BranchesValue[];
+    productions: Production[];
+    energies: EnergyConsumption[];
 }
 
-export class Production implements IProduction{
+export class Branches implements IBranches{
     id: number;
+    name: string;
+    displayName: string;
+    listProduct: IProduction[];
+}
+
+export class BranchesValue implements IBranchesValue{
+    id: number;
+    name: string;
+}
+
+
+export class Production implements IProduction{
+    enterpriseId: number;
+    productionId: number;
+    branchId: number;
     displayName: string;
     name: string;
     unit: string;
-    value: number;
+    volume: number;
 }
 
 export class EnergyConsumption implements IEnergyConsumption{
-    id: number;
+    productionId: number;
+    energyId: number;
     displayName: string;
     name: string;
     unit: string;
-    value: number;
+    volume: number;
 }
 
 export class Fields implements IFields{
     id: number;
     name: string;
     listBranches: IBranches[];
+}
+
+export class Dropdown implements IDropdown{
+    // tslint:disable-next-line: variable-name
+    item_id: number;
+    // tslint:disable-next-line: variable-name
+    item_text: string;
 }

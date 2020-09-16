@@ -1,6 +1,6 @@
 <form class="was-validated" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
-  <h1>Login</h1>
-  <p class="text-muted">Sign In to your account</p>
+  <h1>Đăng nhập</h1>
+  <p class="text-muted">Đăng nhập vào tài khoản của bạn</p>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text"><i class="icon-user"></i></span>
@@ -11,20 +11,20 @@
         loginForm.controls.username?.errors?.required &&
         loginForm.controls.username?.touched
       ">
-      <div>Username is required</div>
+      <div>Vui lòng nhập tên đăng nhập</div>
     </div>
     <div class="invalid-feedback" *ngIf="
         loginForm.controls.username?.errors?.emailIncorrect &&
         loginForm.controls.username?.touched
       ">
-      <div>Email format is incorrect</div>
+      <div>Email sai định dạng</div>
     </div>
     <div class="invalid-feedback" *ngIf="
         loginForm.controls.username?.errors?.maxlength &&
         loginForm.controls.username?.touched
       ">
       <span>
-        Max length is:
+        Độ dài tối đa là:
       </span>
       <span>
         {{ loginForm.get("username")?.errors.maxlength.requiredLength }}
@@ -40,14 +40,14 @@
         loginForm.controls.password?.errors?.required &&
         loginForm.controls.password?.touched
       ">
-      <div>password is required</div>
+      <div>Vui lòng nhập mật khẩu</div>
     </div>
     <div class="invalid-feedback" *ngIf="
         loginForm.controls.password?.errors?.maxlength &&
         loginForm.controls.password?.touched
       ">
       <span>
-        Max length is:
+        Độ dài tối đa là:
       </span>
       <span>
         {{ loginForm.get("password")?.errors.maxlength.requiredLength }}
@@ -58,13 +58,10 @@
     {{loginForm.errors.message}}
   </div>
   <div class="row">
-    <div class="col-6">
+    <div class="col-12 text-center">
       <button type="submit" class="btn btn-primary px-4" appLoadingOnElement #buttonSubmit="drLoadingOnElement">
-        Login
+        Đăng nhập
       </button>
-    </div>
-    <div class="col-6 text-right">
-      <button type="button" class="btn btn-link px-0">Forgot password?</button>
     </div>
   </div>
 </form>

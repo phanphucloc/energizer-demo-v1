@@ -5,6 +5,8 @@ import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyab
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
 import { Fields } from '../../models/enterprises.model';
+import { ToastrService } from 'ngx-toastr';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
   selector: 'app-list-enterprises-pages',
@@ -17,7 +19,8 @@ export class ListEnterprisesPagesComponent extends BaseDestroyableDirective impl
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private enterprisesService: EnterprisesService
+    private enterprisesService: EnterprisesService,
+    private toastr: ToastrService
   ) {
     super();
     this.fieldsCurrent = new Fields();
@@ -37,12 +40,17 @@ export class ListEnterprisesPagesComponent extends BaseDestroyableDirective impl
         (result: IFields) => {
           this.fieldsCurrent.name = result.name.toLocaleLowerCase();
         },
-        (error) => {
+        () => {
+          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
         }
       );
   }
 
   public redirectToAdd() {
     this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/add-enterprises']);
+  }
+
+  public redirectToEditPage(enterprisesId: number): void {
+    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/detail-enterprises/' + enterprisesId]);
   }
 }

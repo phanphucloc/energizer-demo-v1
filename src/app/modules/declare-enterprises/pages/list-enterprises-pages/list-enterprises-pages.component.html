@@ -15,11 +15,12 @@
               </button>
             </div>
           </div>
-          <app-list-enterprises></app-list-enterprises>
+          <app-list-enterprises 
+            [fieldsId]="fieldsCurrent.id" 
+            (toEditPageEmitter)="redirectToEditPage($event)">
+          </app-list-enterprises>
         </div>
       </div>
     </div>
-    <!--/.col-->
   </div>
-  <!--/.row-->
 </div>

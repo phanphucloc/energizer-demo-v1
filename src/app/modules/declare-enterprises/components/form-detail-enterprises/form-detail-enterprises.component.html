@@ -123,7 +123,7 @@
                           -- Chọn lĩnh vực --
                         </option>
                         <option *ngFor="let itemBranches of listBranches" [value]="itemBranches.id">
-                          {{ itemBranches.displayName }}
+                          {{ itemBranches.name }}
                         </option>
                       </select>
                     </div>
@@ -157,14 +157,14 @@
           <ng-container *ngFor="let itemEnergyConsumption of listEnergyConsumption">
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="{{ itemEnergyConsumption.name }}">
-                {{ itemEnergyConsumption.displayName }}
+                {{ itemEnergyConsumption.name }}
               </label>
               <div class="col-md-9">
                 <div class="row">
                   <div class="col-md-5">
                     <input type="text" id="{{ itemEnergyConsumption.name }}"
                       [formControlName]="itemEnergyConsumption.name" name="coal-from-pit" class="form-control"
-                      placeholder="{{ itemEnergyConsumption.displayName }}..." />
+                      placeholder="{{ itemEnergyConsumption.name }}..." />
                   </div>
                   <div class="col-md-2">
                     <label class="col-form-label" for="coal-from-input">
@@ -180,17 +180,18 @@
     </div>
   </div>
 
-  <ng-template [ngIf]="branchesSelected">
+  <ng-container *ngFor="let branchSelected of branchesSelected">
     <hr style="width: 80%" />
 
-    <div *ngIf="formDetailEnterprises.get('production')" class="form-group row" [formGroupName]="'production'">
+    <div class="form-group row" *ngIf="formDetailEnterprises.get('production'+ branchSelected.id)"
+      [formGroupName]="'production'+ branchSelected.id">
       <div class="col-12">
         <div class="row">
           <div class="col-md-12 col-form-label">
             <label>
               <strong>
                 <i class="fa fa-square" aria-hidden="true"></i>
-                Khai báo sản lượng sản phẩm {{ branchesSelected.displayName }}:
+                Khai báo sản lượng sản phẩm {{ branchSelected.name }}:
               </strong>
             </label>
           </div>
@@ -198,20 +199,22 @@
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-11">
-            <ng-container *ngFor="let itemProduct of branchesSelected.listProduct">
+            <ng-container *ngFor="let itemProduction of branchSelected.listProduct">
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="{{ itemProduct.name }}">
-                  {{ itemProduct.displayName }}
+                <label class="col-md-3 col-form-label" for="product-{{ itemProduction.productionId }}">
+                  {{ itemProduction.name }}
                 </label>
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-5">
-                      <input type="text" id="{{ itemProduct.name }}" [formControlName]="itemProduct.name"
-                        name="coal-from-pit" class="form-control" placeholder="{{ itemProduct.displayName }}..." />
+                      <input type="text" id="product-{{ itemProduction.productionId }}"
+                        [formControlName]="itemProduction.productionId" name="coal-from-pit" class="form-control"
+                        placeholder="{{ itemProduction.name }}..." />
+                        {{formDetailEnterprises.get('production.1')}}
                     </div>
                     <div class="col-md-2">
                       <label class="col-form-label" for="coal-from-input">
-                        ({{ itemProduct.unit }})
+                        ({{ itemProduction.unit }})
                       </label>
                     </div>
                   </div>
@@ -222,7 +225,7 @@
         </div>
       </div>
     </div>
-  </ng-template>
+  </ng-container>
 
   <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
 

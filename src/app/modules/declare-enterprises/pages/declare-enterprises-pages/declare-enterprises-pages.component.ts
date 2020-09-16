@@ -5,19 +5,22 @@ import { takeUntil } from 'rxjs/operators';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
 import { IFields } from '../../abstract/enterprises.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
-  selector: 'app-add-enterprises-pages',
-  templateUrl: './add-enterprises-pages.component.html',
-  styleUrls: ['./add-enterprises-pages.component.scss']
+  selector: 'app-declare-enterprises-pages',
+  templateUrl: './declare-enterprises-pages.component.html',
+  styleUrls: ['./declare-enterprises-pages.component.scss']
 })
-export class AddEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
+export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
   public fieldsCurrent: Fields;
 
   constructor(
     private router: Router,
     private enterprisesService: EnterprisesService,
     private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) {
     super();
     this.fieldsCurrent = new Fields();
@@ -28,10 +31,6 @@ export class AddEnterprisesPagesComponent extends BaseDestroyableDirective imple
     this.getFieldsCurrent();
   }
 
-  public cancel(): void {
-    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
-  }
-
   public getFieldsCurrent(){
     this.enterprisesService.getFieldsByFieldsId(this.fieldsCurrent.id)
       .pipe(takeUntil(this.destroy$))
@@ -39,8 +38,23 @@ export class AddEnterprisesPagesComponent extends BaseDestroyableDirective imple
         (result: IFields) => {
           this.fieldsCurrent.name = result.name.toLocaleLowerCase();
         },
-        (error) => {
+        () => {
+          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
         }
       );
+  }
+
+  public cancel(): void {
+    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
+  }
+
+  public submit(status: string): void{
+    if (status === 'SUCCESS'){
+      this.toastr.success(MESSAGE.ADD_SUCCESS, MESSAGE.NOTIFICATION);
+      this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
+    }
+    else{
+      this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
+    }
   }
 }

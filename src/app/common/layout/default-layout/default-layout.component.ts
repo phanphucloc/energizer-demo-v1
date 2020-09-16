@@ -1,4 +1,4 @@
-import { listMenu } from './../../data/list-menu';
+import { listMenuReport } from './../../data/list-menu';
 import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { BaseDestroyableDirective } from '../../abstract/base-destroyable';
@@ -11,9 +11,7 @@ import { IFields } from 'src/app/modules/declare-enterprises/abstract/enterprise
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',
 })
-export class DefaultLayoutComponent
-  extends BaseDestroyableDirective
-  implements OnInit {
+export class DefaultLayoutComponent extends BaseDestroyableDirective implements OnInit {
   public sidebarMinimized = false;
   public listMenu: INavData[] = [{
       name: 'Dashboard',
@@ -40,22 +38,14 @@ export class DefaultLayoutComponent
     this.layoutService
       .getListFields()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((listFields: IFields[]) => {
-        console.log(listFields);
-        const titleMenuAdd: INavData = { title: true, name: 'Khai báo' };
-        this.listMenu.push(titleMenuAdd);
-        if (listFields) {
-          listFields.forEach((fields) => {
-            const itemMenuAdd: INavData = {
-              name: fields.name,
-              url: '/enterprises/' + fields.id + '/list-enterprises',
-              icon: 'icon-book-open',
-            };
-            this.listMenu.push(itemMenuAdd);
-          });
+      .subscribe(
+        (listFields: IFields[]) => {
+          this.updateMenu(listFields);
+        },
+        (err) => {
+          console.error(err);
         }
-        this.listMenu = [...this.listMenu, ...listMenu];
-      });
+      );
   }
 
   public toggleMinimize(e: boolean): void {
@@ -64,5 +54,22 @@ export class DefaultLayoutComponent
 
   public logout() {
     this.authService.logout();
+  }
+
+  private updateMenu(listFields: IFields[]){
+    const titleMenuAdd: INavData = { title: true, name: 'Khai báo' };
+    this.listMenu.push(titleMenuAdd);
+
+    if (listFields) {
+      listFields.forEach((fields) => {
+        const itemMenuAdd: INavData = {
+          name: fields.name,
+          url: '/enterprises/' + fields.id + '/list-enterprises',
+          icon: 'icon-book-open',
+        };
+        this.listMenu.push(itemMenuAdd);
+      });
+    }
+    this.listMenu = [...this.listMenu, ...listMenuReport];
   }
 }
