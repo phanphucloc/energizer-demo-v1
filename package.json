@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "flag-icon-css": "^3.5.0",
     "font-awesome": "^4.7.0",
+    "ng-multiselect-dropdown": "^0.2.10",
     "ng2-charts": "^2.3.2",
     "ngx-bootstrap": "^5.6.1",
     "ngx-perfect-scrollbar": "^10.0.1",
