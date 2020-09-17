@@ -135,6 +135,7 @@ export class BackendInterceptor implements HttpInterceptor {
 
   private addEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
     const enterprises = request.body.enterprises;
+    enterprises.id = new Date().getTime();
 
     this.listEnterprises.push(enterprises);
 
