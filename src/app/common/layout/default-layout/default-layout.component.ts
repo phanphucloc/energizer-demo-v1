@@ -56,6 +56,10 @@ export class DefaultLayoutComponent extends BaseDestroyableDirective implements 
     this.authService.logout();
   }
 
+  public onActivate(event: Event) {
+    window.scrollTo(0, 0);
+  }
+
   private updateMenu(listFields: IFields[]){
     const titleMenuAdd: INavData = { title: true, name: 'Khai báo' };
     this.listMenu.push(titleMenuAdd);

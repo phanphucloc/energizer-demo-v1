@@ -151,18 +151,15 @@ export let listFields = [
     listBranches: [
       {
         id: 1,
-        displayName: 'Khai thác than',
         name: 'Khai thác than',
         listProduct: [
           {
             productionId: 1,
-            displayName: 'Than khai thác hầm lò',
             name: 'Than khai thác hầm lò',
             unit: 'Nghìn tấn',
           },
           {
             productionId: 2,
-            displayName: 'Than khai thác lộ thiên',
             name: 'Than khai thác lộ thiên',
             unit: 'Nghìn tấn',
           },
@@ -170,30 +167,25 @@ export let listFields = [
       },
       {
         id: 2,
-        displayName: 'Khai thác dầu khí',
         name: 'Khai thác dầu khí',
         listProduct: [
           {
             productionId: 4,
-            displayName: 'Dầu thô',
             name: 'Dầu thô',
             unit: 'Nghìn tấn',
           },
           {
             productionId: 5,
-            displayName: 'Khí đồng hành',
             name: 'Khí đồng hành',
             unit: 'Nghìn tấn',
           },
           {
             productionId: 6,
-            displayName: 'Khí không đồng hành',
             name: 'Khí không đồng hành',
             unit: 'Tr.m3',
           },
           {
             productionId: 7,
-            displayName: 'Khí không thành phẩm',
             name: 'Khí không thành phẩm',
             unit: 'Tr.m3',
           },
@@ -207,72 +199,60 @@ export let listFields = [
     listBranches: [
       {
         id: 3,
-        displayName: 'CN sản xuất sắt thép',
         name: 'CN sản xuất sắt thép',
         listProduct: [
           {
             productionId: 8,
-            displayName: 'Axit nitric (HNO3)',
             name: 'Axit nitric (HNO3)',
             unit: 'Tấn',
           },
           {
             productionId: 9,
-            displayName: 'Than cốc dùng làm nguyên liệu cho sản xuất HNO3',
             name: 'Than cốc dùng làm nguyên liệu cho sản xuất HNO3',
             unit: 'Tấn',
           },
           {
             productionId: 10,
-            displayName: 'Axit adipic (C6H10O4)',
             name: 'Axit adipic (C6H10O4)',
             unit: 'Tấn',
           },
           {
             productionId: 11,
-            displayName: 'Than cốc dùng làm nguyên liệu cho sản xuất C6H10O4',
             name: 'Than cốc dùng làm nguyên liệu cho sản xuất C6H10O4',
             unit: 'Tấn',
           },
           {
             productionId: 12,
-            displayName: 'Amoniac (NH3)',
             name: 'Amoniac (NH3)',
             unit: 'Tấn',
           },
           {
             productionId: 13,
-            displayName: 'Khí dùng làm nguyên liệu cho sản xuất NH3',
             name: 'Khí dùng làm nguyên liệu cho sản xuất NH3',
             unit: 'Tấn',
           },
           {
             productionId: 14,
-            displayName: 'Than cốc dùng làm nguyên liệu cho sản xuất NH3',
             name: 'Than cốc dùng làm nguyên liệu cho sản xuất NH3',
             unit: 'Tấn',
           },
           {
             productionId: 15,
-            displayName: 'Canxi cácbua (CaC2)',
             name: 'Canxi cácbua (CaC2)',
             unit: 'Tấn',
           },
           {
             productionId: 16,
-            displayName: 'Than cốc dùng làm nguyên liệu cho sản xuất CaC2',
             name: 'Than cốc dùng làm nguyên liệu cho sản xuất CaC2',
             unit: 'Tấn',
           },
           {
             productionId: 17,
-            displayName: 'Sản xuất Na2CO3',
             name: 'Sản xuất Na2CO3',
             unit: 'Tấn',
           },
           {
             productionId: 18,
-            displayName: 'Sử dụng Na2CO3',
             name: 'Sử dụng Na2CO3',
             unit: 'Tấn',
           },
@@ -280,60 +260,50 @@ export let listFields = [
       },
       {
         id: 4,
-        displayName: 'CN sản xuất hóa chất và dầu mỏ',
         name: 'CN sản xuất hóa chất và dầu mỏ ',
         listProduct: [
           {
             productionId: 18,
-            displayName: 'Gang',
             name: 'Gang',
             unit: 'Tấn',
           },
           {
             productionId: 19,
-            displayName: 'Than cốc dùng làm nguyên liệu cho sản xuất gang',
             name: 'Than cốc dùng làm nguyên liệu cho sản xuất gang',
             unit: 'Tấn',
           },
           {
             productionId: 20,
-            displayName: 'Thép',
             name: 'Thép',
             unit: 'Tấn',
           },
           {
             productionId: 21,
-            displayName: 'Than cốc dùng làm nguyên liệu cho sản xuất thép',
             name: 'Than cốc dùng làm nguyên liệu cho sản xuất thép',
             unit: 'Tấn',
           },
           {
             productionId: 22,
-            displayName: 'Hợp kim chứa sắt',
             name: 'Hợp kim chứa sắt',
             unit: 'Tấn',
           },
           {
             productionId: 23,
-            displayName: 'Nhôm (Al)',
             name: 'Nhôm (Al)',
             unit: 'Tấn',
           },
           {
             productionId: 24,
-            displayName: 'Khí SF6 sử dụng trong luyện Al',
             name: 'Khí SF6 sử dụng trong luyện Al',
             unit: 'm³',
           },
           {
             productionId: 25,
-            displayName: 'Magie (Mg)',
             name: 'Magie (Mg)',
             unit: 'Tấn',
           },
           {
             productionId: 26,
-            displayName: 'Khí SF6 sử dụng trong luyện Mg',
             name: 'Khí SF6 sử dụng trong luyện Mg',
             unit: 'm³',
           },
@@ -347,49 +317,41 @@ export let energyConsumption = [
   {
     energyId: 1,
     name: 'Than antraxit',
-    displayName: 'Than antraxit',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 2,
     name: 'Than bitum',
-    displayName: 'Than bitum',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 3,
     name: 'Dầu hỏa',
-    displayName: 'Dầu hỏa',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 4,
     name: 'Dầu DO',
-    displayName: 'Dầu DO',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 5,
     name: 'Dầu FO',
-    displayName: 'Dầu FO',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 6,
     name: 'LPG',
-    displayName: 'LPG',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 7,
     name: 'Khí sinh học',
-    displayName: 'Khí sinh học',
     unit: 'Nghìn tấn',
   },
   {
     energyId: 8,
     name: 'Khí sinh khối',
-    displayName: 'Khí sinh khối',
     unit: 'Nghìn tấn',
   },
 ];

@@ -88,7 +88,6 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result) => {
-
           const listBranches: IBranches[] = result[0];
           this.listBranches = listBranches;
 
@@ -103,6 +102,10 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           this.elementLoadingFormAdd.hideLoadingCenter();
         }
       );
+  }
+
+  public dropDownClose(): void {
+    this.formAddEnterprises.get('baseInfo.address.branchesId').markAsTouched();
   }
 
   public selectBranch(branch: IBranches): void {

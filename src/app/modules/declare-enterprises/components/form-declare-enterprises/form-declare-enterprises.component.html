@@ -186,11 +186,17 @@
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label" for="production-value-input">
                         Lĩnh vực
+                        {{!formAddEnterprises.get(
+                          'baseInfo.address.branchesId'
+                        ).valid }}
+                        {{formAddEnterprises.get(
+                          'baseInfo.address.branchesId'
+                        ).touched}}
                       </label>
                       <div class="col-md-9">
-                        <ng-multiselect-dropdown formControlName="branchesId" [placeholder]="' -- Chọn lĩnh vực --'"
-                          [data]="listBranches" [settings]="settingDropdown" (onSelect)="selectBranch($event)"
-                          (onDeSelect)="deSelectBranch($event)">
+                        <ng-multiselect-dropdown class="form-control" formControlName="branchesId" 
+                          [placeholder]="' -- Chọn lĩnh vực --'" [data]="listBranches" [settings]="settingDropdown" 
+                          (onSelect)="selectBranch($event)" (onDeSelect)="deSelectBranch($event)" (onDropDownClose)="dropDownClose()" >
                         </ng-multiselect-dropdown>
                         <div class="invalid-feedback" *ngIf="
                             !formAddEnterprises.get(
