@@ -8,7 +8,6 @@ import { forkJoin } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MESSAGE } from 'src/app/common/data/message';
-import { BranchesValue } from '../../models/enterprises.model';
 
 @Component({
   selector: 'app-form-detail-enterprises',
@@ -24,6 +23,16 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
 
   @Output() public cancelEmitter = new EventEmitter<void>();
 
+  public settingDropdown = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    enableCheckAll: false,
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: false
+  };
   public formDetailEnterprises: FormGroup;
   public enterprises: IEnterprisesToServer;
   public listBranches: IBranches[];

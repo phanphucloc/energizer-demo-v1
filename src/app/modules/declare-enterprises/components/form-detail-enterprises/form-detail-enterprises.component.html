@@ -119,14 +119,9 @@
                         Lĩnh vực
                       </label>
                       <div class="col-md-9">
-                        <select id="select1" formControlName="branchesId" name="select1" class="form-control">
-                          <option selected [value]="null">
-                            -- Chọn lĩnh vực --
-                          </option>
-                          <option *ngFor="let itemBranches of listBranches" [value]="itemBranches.id">
-                            {{ itemBranches.name }}
-                          </option>
-                        </select>
+                        <ng-multiselect-dropdown formControlName="branchesId" [placeholder]="' -- Chọn lĩnh vực --'"
+                          [data]="listBranches" [settings]="settingDropdown" [disabled]="true" >
+                        </ng-multiselect-dropdown>
                       </div>
                     </div>
                   </div>
