@@ -20,7 +20,8 @@
 </app-header>
 <div class="app-body">
     <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
-      <app-sidebar-nav [navItems]="this.listMenu" [perfectScrollbar] [disabled]="appSidebar.minimized">
+      <app-sidebar-nav [navItems]="listMenu" [perfectScrollbar] [disabled]="appSidebar.minimized">
+        <div>aaa</div>
       </app-sidebar-nav>
       <app-sidebar-minimizer></app-sidebar-minimizer>
     </app-sidebar>

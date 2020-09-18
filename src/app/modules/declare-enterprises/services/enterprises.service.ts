@@ -1,11 +1,12 @@
-import { IEnterprises, IResultAddEnterprises, IProduction, IFields } from '../abstract/enterprises.interface';
+import { IEnterprises, IResultAddEnterprises, IProductionData, IFields, IEnergy, IProduction } from '../abstract/enterprises.interface';
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { IBranches, IEnergyConsumption, IEnterprisesToServer } from '../abstract/enterprises.interface';
+import { IBranches, IEnergyData, IEnterprisesToServer } from '../abstract/enterprises.interface';
+import { EnterprisesToServer, ResultAddEnterprises, Fields } from '../models/enterprises.model';
 
 @Injectable({ providedIn: 'root' })
 export class EnterprisesService {
@@ -16,42 +17,38 @@ export class EnterprisesService {
   constructor(
     public router: Router,
     private httpClient: HttpClient,
-    private activatedRoute: ActivatedRoute,
     ) {
   }
 
-  public get idFields(): number{
-    return Number(this.activatedRoute.snapshot.paramMap.get('fieldsId'));
-  }
 
   public getFieldsByFieldsId(fieldId: number): Observable<IFields> {
-    return this.httpClient.get(this.baseUrlFake + 'get-fields-by-fields-id/' + fieldId).pipe(
+    return this.httpClient.get(this.baseUrl + 'fields/' + fieldId).pipe(
       map((result: IFields) => {
-        return result;
+        return result || new Fields();
       })
     );
   }
 
   public getListEnterprisesByFieldId(fieldId: number): Observable<IEnterprises[]> {
-    return this.httpClient.get(this.baseUrlFake + 'get-list-enterprises-by-field-id/' + fieldId).pipe(
+    return this.httpClient.get(this.baseUrl + 'fields/' + fieldId + '/get-list-enterprises-by-field-id/').pipe(
       map((result: IEnterprises[]) => {
-        return result;
+        return result || [];
       })
     );
   }
 
   public addEnterprises(enterprises: IEnterprisesToServer): Observable<IResultAddEnterprises> {
-    return this.httpClient.post(this.baseUrlFake + 'add-enterprises', { enterprises }).pipe(
+    return this.httpClient.post(this.baseUrl + 'enterprises', enterprises ).pipe(
       map((result: IResultAddEnterprises) => {
-        return result;
+        return result || new ResultAddEnterprises();
       })
     );
   }
 
   public getEnterprisesById(id: number): Observable<IEnterprisesToServer> {
-    return this.httpClient.get(this.baseUrlFake + 'detail-enterprises/' + id).pipe(
+    return this.httpClient.get(this.baseUrl + 'enterprises/' + id).pipe(
       map((result: IEnterprisesToServer) => {
-        return result;
+        return result || new EnterprisesToServer();
       })
     );
   }
@@ -59,23 +56,23 @@ export class EnterprisesService {
   public getListBranchesIndustryProductionOfFields(id: number): Observable<IBranches[]> {
     return this.httpClient.get(this.baseUrlFake + 'get-list-branches-production-of-fields/' + id).pipe(
       map((result: IBranches[]) => {
-        return result;
+        return result || [];
       })
     );
   }
 
   public getListBranchesByFieldsId(id: number): Observable<IBranches[]> {
-    return this.httpClient.get(this.baseUrlFake + 'get-list-branches-by-fields-id/' + id).pipe(
+    return this.httpClient.get(this.baseUrl + 'fields/' + id + '/get-list-branches-by-fields-id').pipe(
       map((result: IBranches[]) => {
-        return result;
+        return result || [];
       })
     );
   }
 
   public getListProductBranchesId(id: number): Observable<IProduction[]> {
-    return this.httpClient.get(this.baseUrlFake + 'get-list-product-by-branches-id/' + id).pipe(
+    return this.httpClient.get(this.baseUrl + 'branches/' + id + '/productions').pipe(
       map((result: IProduction[]) => {
-        return result;
+        return result || [];
       })
     );
   }
@@ -83,23 +80,23 @@ export class EnterprisesService {
   public getListProductBranchesIds(ids: number[]): Observable<IProduction[]> {
     return this.httpClient.post(this.baseUrlFake + 'get-list-product-by-branches-ids/', {ids} ).pipe(
       map((result: IProduction[]) => {
-        return result;
+        return result || [];
       })
     );
   }
 
-  public getListEnergyConsumption(){
-    return this.httpClient.get(this.baseUrlFake + 'get-list-energy-consumption/').pipe(
-      map((result: IEnergyConsumption[]) => {
-        return result;
+  public getListEnergyConsumption(): Observable<IEnergy[]>{
+    return this.httpClient.get(this.baseUrl + 'energies').pipe(
+      map((result: IEnergy[]) => {
+        return result || [];
       })
     );
   }
 
-  public getListFieldsByFieldsId(fieldsId: number){
+  public getListFieldsByFieldsId(fieldsId: number): Observable<IEnergyData[]> {
     return this.httpClient.get(this.baseUrlFake + 'get-list-fields-by-fields-id/' + fieldsId).pipe(
-      map((result: IEnergyConsumption[]) => {
-        return result;
+      map((result: IEnergyData[]) => {
+        return result || [];
       })
     );
   }

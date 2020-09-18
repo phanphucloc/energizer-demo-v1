@@ -1,5 +1,6 @@
 <div appLoadingOnElement #formDetail="drLoadingOnElement">
-  <form *ngIf="formDetailEnterprises" class="form-horizontal" [formGroup]="formDetailEnterprises">
+  <form *ngIf="formDetailEnterprises" class="form-horizontal"
+    [formGroup]="formDetailEnterprises">
     <div class="form-group row" formGroupName="baseInfo">
       <div class="col-12">
         <div class="row">
@@ -21,8 +22,14 @@
                 Năm khai báo
               </label>
               <div class="col-md-9">
-                <input type="text" disabled id="year-declare-input" formControlName="foundedYear"
-                  name="year-declare-input" class="form-control" placeholder="Năm khai báo..." />
+                <input [readonly]="true"
+                  type="text"
+                  id="year-declare-input"
+                  name="year-declare-input"
+                  class="form-control"
+                  placeholder="Năm khai báo..." 
+                  formControlName="foundedYear"
+                  />
               </div>
             </div>
             <div class="form-group row">
@@ -30,8 +37,12 @@
                 Tên doanh nghiệp
               </label>
               <div class="col-md-9">
-                <input type="text" id="name-company-input" formControlName="name" name="name-company-input"
-                  class="form-control" placeholder="Tên doanh nghiệp..." />
+                <input type="text" 
+                  id="name-company-input"
+                  name="name-company-input"
+                  class="form-control"
+                  placeholder="Tên doanh nghiệp..." 
+                  formControlName="name">
               </div>
             </div>
             <div class="form-group row" formGroupName="address">
@@ -45,21 +56,31 @@
                   <div class="col-md-1"></div>
                   <div class="col-md-11">
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="province-input">
+                      <label class="col-md-3 col-form-label"
+                        for="province-input">
                         Tỉnh
                       </label>
                       <div class="col-md-9">
-                        <input type="text" id="province-input" formControlName="province" name="province-input"
-                          class="form-control" placeholder="Tỉnh..." />
+                        <input type="text"
+                          id="province-input"
+                          name="province-input"
+                          class="form-control"
+                          placeholder="Tỉnh..." 
+                          formControlName="province" />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="district-input">
+                      <label class="col-md-3 col-form-label"
+                        for="district-input">
                         Huyện
                       </label>
                       <div class="col-md-9">
-                        <input type="text" id="district-input" formControlName="district" name="district-input"
-                          class="form-control" placeholder="Huyện..." />
+                        <input type="text" 
+                          id="district-input"
+                          name="district-input"
+                          class="form-control"
+                          formControlName="district" 
+                          placeholder="Huyện..."/>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -67,60 +88,89 @@
                         Xã
                       </label>
                       <div class="col-md-9">
-                        <input type="text" id="town-input" formControlName="town" name="town-input" class="form-control"
-                          placeholder="Xã..." />
+                        <input type="text" 
+                          id="town-input"
+                          name="town-input"
+                          class="form-control"
+                          placeholder="Xã..."
+                          formControlName="town"/>
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-6">
                         <div class="row">
-                          <label class="col-md-6 col-form-label" for="coordinates-x-input">
+                          <label class="col-md-6 col-form-label"
+                            for="coordinates-x-input">
                             Tọa độ X
                           </label>
                           <div class="col-md-6">
-                            <input type="text" id="coordinates-x-input" formControlName="xCoordinate"
-                              name="coordinates-x-input" class="form-control" placeholder="Tọa độ X..." />
+                            <input type="text" 
+                              id="coordinates-x-input"
+                              name="coordinates-x-input"
+                              class="form-control"
+                              placeholder="Tọa độ X..." 
+                              formControlName="xCoordinate"/>
                           </div>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="row">
-                          <label class="col-md-6 col-form-label" for="coordinates-y-input">
+                          <label class="col-md-6 col-form-label"
+                            for="coordinates-y-input">
                             Tọa độ Y
                           </label>
                           <div class="col-md-6">
-                            <input type="text" id="coordinates-y-input" formControlName="yCoordinate"
-                              name="coordinates-y-input" class="form-control" placeholder="Tọa độ Y..." />
+                            <input type="text" 
+                              id="coordinates-y-input"
+                              name="coordinates-y-input"
+                              class="form-control"
+                              placeholder="Tọa độ Y..."
+                              formControlName="yCoordinate" />
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="average-labor-input">
+                      <label class="col-md-3 col-form-label"
+                        for="average-labor-input">
                         Số lao động trung bình năm
                       </label>
                       <div class="col-md-9">
-                        <input type="text" id="average-labor-input" formControlName="employees"
-                          name="average-labor-input" class="form-control" placeholder="Số lao động trung bình năm..." />
+                        <input type="text"
+                          id="average-labor-input"
+                          name="average-labor-input"
+                          class="form-control"
+                          placeholder="Số lao động trung bình năm..." 
+                          formControlName="employees"/>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="production-value-input">
+                      <label 
+                        class="col-md-3 col-form-label"
+                        for="production-value-input">
                         Giá trị sản xuất của doanh nghiệp
                       </label>
                       <div class="col-md-9">
-                        <input type="text" formControlName="productionValue" id="production-value-input"
-                          name="production-value-input" class="form-control"
-                          placeholder="Giá trị sản xuất của doanh nghiệp" />
+                        <input type="text" 
+                          class="form-control"
+                          id="production-value-input"
+                          name="production-value-input" 
+                          placeholder="Giá trị sản xuất của doanh nghiệp" 
+                          formControlName="productionValue"/>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="production-value-input">
+                      <label class="col-md-3 col-form-label"
+                        for="production-value-input">
                         Lĩnh vực
                       </label>
                       <div class="col-md-9">
-                        <ng-multiselect-dropdown formControlName="branchesId" [placeholder]="' -- Chọn lĩnh vực --'"
-                          [data]="listBranches" [settings]="settingDropdown" [disabled]="true" >
+                        <ng-multiselect-dropdown 
+                          formControlName="branchesId"
+                          [placeholder]="' -- Chọn lĩnh vực --'"
+                          [data]="listBranches" 
+                          [settings]="settingDropdown"
+                          [disabled]="true">
                         </ng-multiselect-dropdown>
                       </div>
                     </div>
@@ -134,7 +184,8 @@
     </div>
     <hr style="width: 80%" />
 
-    <div class="form-group row" *ngIf="formDetailEnterprises.get('energyConsumption')"
+    <div class="form-group row"
+      *ngIf="formDetailEnterprises.get('energyConsumption')"
       [formGroupName]="'energyConsumption'">
       <div class="col-12">
         <div class="row">
@@ -150,20 +201,26 @@
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-11">
-            <ng-container *ngFor="let itemEnergyConsumption of listEnergyConsumption">
+            <ng-container *ngFor="let itemEnergyConsumption of
+              listEnergyConsumption">
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="{{ itemEnergyConsumption.name }}">
+                <label 
+                  class="col-md-3 col-form-label" 
+                  for="energy-{{itemEnergyConsumption.id }}">
                   {{ itemEnergyConsumption.name }}
                 </label>
                 <div class="col-md-9">
                   <div class="row">
                     <div class="col-md-5">
-                      <input type="text" id="{{ itemEnergyConsumption.name }}"
-                        [formControlName]="itemEnergyConsumption.name" name="coal-from-pit" class="form-control"
-                        placeholder="{{ itemEnergyConsumption.name }}..." />
+                      <input type="text"
+                        id="energy-{{ itemEnergyConsumption.id}}"
+                        class="form-control"
+                        name="coal-from-pit" 
+                        placeholder="{{ itemEnergyConsumption.id }}..." 
+                        [formControlName]="itemEnergyConsumption.id"/>
                     </div>
                     <div class="col-md-2">
-                      <label class="col-form-label" for="coal-from-input">
+                      <label class="col-form-label" for="energy-{{itemEnergyConsumption.id }}">
                         ({{ itemEnergyConsumption.unit }})
                       </label>
                     </div>
@@ -179,7 +236,8 @@
     <ng-container *ngFor="let branchSelected of branchesSelected">
       <hr style="width: 80%" />
 
-      <div class="form-group row" *ngIf="formDetailEnterprises.get('production' + branchSelected.id)"
+      <div class="form-group row"
+         *ngIf="formDetailEnterprises.get('production'+ branchSelected.id)"
         [formGroupName]="'production' + branchSelected.id">
         <div class="col-12">
           <div class="row">
@@ -197,16 +255,19 @@
             <div class="col-md-11">
               <ng-container *ngFor="let itemProduction of branchSelected.listProduct">
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="product-{{ itemProduction.productionId }}">
+                  <label class="col-md-3 col-form-label" 
+                    for="product-{{itemProduction.id }}">
                     {{ itemProduction.name }}
                   </label>
                   <div class="col-md-9">
                     <div class="row">
                       <div class="col-md-5">
-                        <input type="text" id="product-{{ itemProduction.productionId }}"
-                          [formControlName]="itemProduction.productionId" name="coal-from-pit" class="form-control"
-                          placeholder="{{ itemProduction.name }}..." />
-                        {{ formDetailEnterprises.get("production.1") }}
+                        <input type="text" 
+                          id="product-{{ itemProduction.id }}"
+                          name="coal-from-pit"
+                          class="form-control"
+                          placeholder="{{ itemProduction.name }}..." 
+                          [formControlName]="itemProduction.id"/>
                       </div>
                       <div class="col-md-2">
                         <label class="col-form-label" for="coal-from-input">
@@ -224,7 +285,6 @@
     </ng-container>
 
     <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
-
     <div class="form-actions text-center">
       <button class="btn btn-secondary" (click)="cancel()" type="button">
         Quay lại

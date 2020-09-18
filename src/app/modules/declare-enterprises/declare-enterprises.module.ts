@@ -12,6 +12,7 @@ import { ListEnterprisesComponent } from './components/list-enterprises/list-ent
 import { FormDetailEnterprisesComponent } from './components/form-detail-enterprises/form-detail-enterprises.component';
 import { FormDeclareEnterprisesComponent } from './components/form-declare-enterprises/form-declare-enterprises.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { FormCustomModule } from 'src/app/common/module/form-custom/form-custom.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     ReactiveFormsModule,
     LoadingModule,
+    FormCustomModule,
   ],
 })
 export class DeclareMiningIndustryModule {}

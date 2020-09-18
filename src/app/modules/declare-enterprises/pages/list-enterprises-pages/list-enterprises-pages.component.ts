@@ -38,7 +38,7 @@ export class ListEnterprisesPagesComponent extends BaseDestroyableDirective impl
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result: IFields) => {
-          this.fieldsCurrent.name = result.name.toLocaleLowerCase();
+          this.fieldsCurrent.name = result.name?.toLocaleLowerCase();
         },
         () => {
           this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);

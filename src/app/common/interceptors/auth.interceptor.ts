@@ -10,10 +10,11 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 
-
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
   constructor(public authService: AuthService) {}
+
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -22,14 +23,19 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if (userInfo) {
       request = request.clone({
-        headers: request.headers.set('Authorization', 'Bearer ' + userInfo.accessToken),
+        headers: request.headers
+          .append(
+            'Authorization',
+            'Bearer ' + userInfo.accessToken
+          )
+          .append('Access-Control-Allow-Origin', '*'),
       });
     }
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-            this.authService.logout();
+          this.authService.logout();
         }
         return throwError(error);
       })

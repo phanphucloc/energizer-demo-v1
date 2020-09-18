@@ -27,57 +27,60 @@ export class BackendInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const { url, method } = request;
     let newHttpResponse: Observable<HttpResponse<any>>;
-    switch (true) {
-      case method === 'GET' && url === 'http://localhost:4200/users':
-        newHttpResponse = of(
-          new HttpResponse({ status: 200, body: usersData })
-        );
-        break;
-      case method === 'POST' && url === 'http://localhost:4200:/login':
-        newHttpResponse = this.login(request);
-        break;
-      case method === 'GET' && url === 'http://localhost:4200:/get-list-fields':
-        newHttpResponse = this.geListFields(request);
-        break;
-      case method === 'GET' &&
-        url.match(/\/get-list-enterprises-by-field-id\/\d+$/) != null:
-        newHttpResponse = this.getListEnterprisesByFieldId(request);
-        break;
-      case method === 'GET' &&
-        url.match(/\/get-fields-by-fields-id\/\d+$/) != null:
-        newHttpResponse = this.getFieldsByFieldsId(request);
-        break;
-      case method === 'POST' &&
-        url === 'http://localhost:4200:/add-enterprises':
-        newHttpResponse = this.addEnterprises(request);
-        break;
-      case method === 'GET' &&
-        url.match(/\/detail-enterprises\/\d+$/) != null:
-        newHttpResponse = this.getEnterprises(request);
-        break;
-      case method === 'GET' &&
-        url.match(/\/get-list-branches-production-of-fields\/\d+$/) != null:
-        newHttpResponse = this.getListBranchesIndustryProductionOfFields(request);
-        break;
-      case method === 'GET' &&
-        url.match(/\/get-list-branches-by-fields-id\/\d+$/) != null:
-        newHttpResponse = this.getListBranchesByFieldsId(request);
-        break;
-      case method === 'GET' &&
-        url.match(/\/get-list-product-by-branches-id\/\d+$/) != null:
-        newHttpResponse = this.getListProductBranchesId(request);
-        break;
-      case method === 'POST' &&
-        url === 'http://localhost:4200:/get-list-product-by-branches-ids/':
-        newHttpResponse = this.getListProductBranchesIds(request);
-        break;
-      case method === 'GET' &&
-        url === 'http://localhost:4200:/get-list-energy-consumption/':
-        newHttpResponse = this.getListEnergyConsumption(request);
-        break;
-      default:
-        newHttpResponse = null;
-        break;
+    const typeResponse = url.split('/');
+    if (typeResponse[2] === 'localhost:4200:'){
+      switch (true) {
+        case method === 'GET' && url === 'http://localhost:4200/users':
+          newHttpResponse = of(
+            new HttpResponse({ status: 200, body: usersData })
+          );
+          break;
+        case method === 'POST' && url === 'http://localhost:4200:/login':
+          newHttpResponse = this.login(request);
+          break;
+        case method === 'GET' && url === 'http://localhost:4200:/fields':
+          newHttpResponse = this.geListFields(request);
+          break;
+        case method === 'GET' &&
+          url.match('get-list-enterprises-by-field-id') != null:
+          newHttpResponse = this.getListEnterprisesByFieldId(request);
+          break;
+        case method === 'GET' &&
+          url.match(/\/fields\/\d+$/) != null:
+          newHttpResponse = this.getFieldsByFieldsId(request);
+          break;
+        case method === 'POST' &&
+          url === 'http://localhost:4200:/enterprises':
+          newHttpResponse = this.addEnterprises(request);
+          break;
+        case method === 'GET' &&
+          url.match('enterprises') != null:
+          newHttpResponse = this.getEnterprises(request);
+          break;
+        case method === 'GET' &&
+          url.match(/\/get-list-branches-production-of-fields\/\d+$/) != null:
+          newHttpResponse = this.getListBranchesIndustryProductionOfFields(request);
+          break;
+        case method === 'GET' &&
+          url.match('get-list-branches-by-fields-id') != null:
+          newHttpResponse = this.getListBranchesByFieldsId(request);
+          break;
+        case method === 'POST' &&
+          url === 'http://localhost:4200:/get-list-product-by-branches-ids/':
+          newHttpResponse = this.getListProductBranchesIds(request);
+          break;
+        case method === 'GET' &&
+          url.match('productions') != null:
+          newHttpResponse = this.getListProductBranchesId(request);
+          break;
+        case method === 'GET' &&
+          url === 'http://localhost:4200:/energies/':
+          newHttpResponse = this.getListEnergyConsumption(request);
+          break;
+        default:
+          newHttpResponse = null;
+          break;
+      }
     }
     return newHttpResponse || next.handle(request);
 
@@ -122,7 +125,7 @@ export class BackendInterceptor implements HttpInterceptor {
   }
 
   private getListEnterprisesByFieldId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const fieldId = Number(this.getIdParameterFromURL(request.url));
+    const fieldId = Number(this.getIdParameterFromURL(request.url, 4 ));
 
     const listEnterprisesByFieldId = this.listEnterprises.filter((enterprises) => {
        return enterprises.fieldId === fieldId;
@@ -134,7 +137,7 @@ export class BackendInterceptor implements HttpInterceptor {
   }
 
   private addEnterprises(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const enterprises = request.body.enterprises;
+    const enterprises = request.body;
     enterprises.id = new Date().getTime();
 
     this.listEnterprises.push(enterprises);
@@ -168,7 +171,7 @@ export class BackendInterceptor implements HttpInterceptor {
   }
 
   private getListBranchesByFieldsId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const idFields = Number(this.getIdParameterFromURL(request.url));
+    const idFields = Number(this.getIdParameterFromURL(request.url, 4 ));
 
     const itemFields = this.listFields.find((resultListFields) => {
       return resultListFields.id === idFields;
@@ -186,7 +189,7 @@ export class BackendInterceptor implements HttpInterceptor {
   }
 
   private getListProductBranchesId(request: HttpRequest<any>): Observable<HttpResponse<any>> {
-    const branchesId = Number(this.getIdParameterFromURL(request.url));
+    const branchesId = Number(this.getIdParameterFromURL(request.url, 4));
 
     const itemFields = this.listFields.find((fields) => {
       return fields.listBranches.find((branch) => {
@@ -258,9 +261,14 @@ export class BackendInterceptor implements HttpInterceptor {
     return of(new HttpResponse({ status: 200, body: [...listEnergyConsumption] })).pipe(delay(500));
   }
 
-  private getIdParameterFromURL(url: string): string {
+  private getIdParameterFromURL(url: string, position: number = -1): string {
     const urlParts = url.split('/');
-    return urlParts[urlParts.length - 1];
+    if (position  === -1){
+      return urlParts[urlParts.length - 1];
+    }
+    else{
+      return urlParts[position];
+    }
   }
 
 }

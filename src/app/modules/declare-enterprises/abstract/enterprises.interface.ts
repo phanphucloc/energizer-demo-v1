@@ -7,8 +7,8 @@ export interface IEnterprises {
     province: string;
     district: string;
     town: string;
-    xCoordinate: string;
-    yCoordinate: string;
+    xcoordinate: string;
+    ycoordinate: string;
     productionValue: number;
     employees: number;
     branches: IBranchesValue[];
@@ -22,14 +22,14 @@ export interface IEnterprisesToServer {
     province: string;
     district: string;
     town: string;
-    xCoordinate: string;
-    yCoordinate: string;
+    xcoordinate: string;
+    ycoordinate: string;
     productionValue: number;
     employees: number;
     fieldId: number;
     branches: IBranchesValue[];
-    productions: IProduction[];
-    energies: IEnergyConsumption[];
+    productions: IProductionData[];
+    energies: IEnergyData[];
 }
 
 export interface IResultAddEnterprises{
@@ -55,23 +55,37 @@ export interface IBranchesValue{
     name: string;
 }
 
-export interface IProduction{
+export interface IProductionData{
     enterpriseId: number;
     productionId: number;
     branchId: number;
     displayName: string;
     name: string;
+    production: string;
     unit: string;
     volume: number;
 }
 
-export interface IEnergyConsumption{
+export interface IProduction{
+    branchId: number;
+    id: number;
+    name: string;
+    unit: string;
+}
+
+export interface IEnergyData{
     productionId: number;
     energyId: number;
     displayName: string;
     name: string;
     unit: string;
     volume: number;
+}
+
+export interface IEnergy{
+    id: number;
+    name: string;
+    unit: string;
 }
 
 export interface IDropdown{

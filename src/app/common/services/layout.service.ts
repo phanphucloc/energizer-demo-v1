@@ -18,7 +18,7 @@ export class LayoutService {
   }
 
   public getListFields(): Observable<IFields[]> {
-    return this.httpClient.get(this.baseUrlFake + 'get-list-fields').pipe(
+    return this.httpClient.get(this.baseUrl + 'fields').pipe(
       map((result: IFields[]) => {
         return result;
       })

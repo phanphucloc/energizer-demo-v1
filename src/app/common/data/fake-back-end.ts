@@ -315,42 +315,42 @@ export let listFields = [
 
 export let energyConsumption = [
   {
-    energyId: 1,
+    id: 1,
     name: 'Than antraxit',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 2,
+    id: 2,
     name: 'Than bitum',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 3,
+    id: 3,
     name: 'Dầu hỏa',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 4,
+    id: 4,
     name: 'Dầu DO',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 5,
+    id: 5,
     name: 'Dầu FO',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 6,
+    id: 6,
     name: 'LPG',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 7,
+    id: 7,
     name: 'Khí sinh học',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 8,
+    id: 8,
     name: 'Khí sinh khối',
     unit: 'Nghìn tấn',
   },
