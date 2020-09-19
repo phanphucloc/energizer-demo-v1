@@ -11,7 +11,7 @@ export class OnlyInputNumberFormDirective {
     @HostListener('input', ['$event']) onInputChange(event) {
         const value = this.el.nativeElement.value;
         const valueFormatted = value.replace(/[^0-9]*/g, '');
-        this.control.control.patchValue(valueFormatted);
+        this.control.control.patchValue(Number(valueFormatted));
         if ((!valueFormatted || valueFormatted.trim() === '')){
             this.control.control.patchValue(0);
         }
@@ -32,7 +32,7 @@ export class OnlyInputNumberModelDirective {
     @HostListener('input', ['$event']) onInputChange(event) {
         const value = this.el.nativeElement.value;
         const valueFormatted = value.replace(/[^0-9]*/g, '');
-        this.model.control.patchValue(valueFormatted);
+        this.model.control.patchValue(Number(valueFormatted));
         if ((!valueFormatted || valueFormatted.trim() === '')){
             this.model.control.patchValue(0);
         }
