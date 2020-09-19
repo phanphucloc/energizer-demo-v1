@@ -213,7 +213,9 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
       }
     }
     if (countEnergyEmpty === countEnergy){
-      this.formAddEnterprises.get('energyConsumption')?.setErrors({ energyIncorrect: true, message : MESSAGE.ENERGY_INCORRECT });
+      this.formAddEnterprises
+        .get('energyConsumption')
+        ?.setErrors({ energyIncorrect: true, message : MESSAGE.ENERGY_INCORRECT });
       return false;
     }
     else{

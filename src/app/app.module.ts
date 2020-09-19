@@ -22,6 +22,7 @@ import {
   AppSidebarModule,
 } from '@coreui/angular';
 import { LayoutService } from './common/services/layout.service';
+import { LoadingModule } from './common/module/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LayoutService } from './common/services/layout.service';
   imports: [
     RouterModule,
     BrowserModule,
+    LoadingModule,
     AppAsideModule,
     AppHeaderModule,
     AppFooterModule,
