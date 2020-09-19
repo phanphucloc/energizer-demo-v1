@@ -186,7 +186,7 @@
                           class="form-control"                        
                           placeholder="Số lao động trung bình năm..."
                           formControlName="employees" 
-                          appInputOnlyNumber/>
+                          appInputOnlyNumberForm/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(
                           'baseInfo.address.employees'
@@ -209,7 +209,7 @@
                           class="form-control"                          
                           placeholder="Giá trị sản xuất của doanh nghiệp" 
                           formControlName="productionValue"
-                          appInputOnlyNumber/>
+                          appInputOnlyNumberForm/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(
                           'baseInfo.address.productionValue'
@@ -291,7 +291,7 @@
                         name="coal-from-pit"
                         class="form-control"
                         placeholder="{{itemEnergyConsumption.name }}..." 
-                        appInputOnlyNumber />
+                        appInputOnlyNumberForm />
                       <div class="invalid-feedback"
                         *ngIf="!formAddEnterprises.get(
                         'energyConsumption.' +
@@ -354,7 +354,7 @@
                           name="coal-from-pit" 
                           class="form-control"
                           placeholder="{{ itemProduction.name }}..."
-                          appInputOnlyNumber
+                          appInputOnlyNumberForm
                           [formControlName]="itemProduction.id"/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(

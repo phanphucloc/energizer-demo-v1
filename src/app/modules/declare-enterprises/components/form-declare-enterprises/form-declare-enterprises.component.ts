@@ -45,7 +45,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public branchesSelected: IBranches[] = [];
   public listEnergyConsumption: IEnergy[];
   public listFields: IFields[];
-
+  public test: number;
   private isOpenedDropDown = false;
 
   constructor(

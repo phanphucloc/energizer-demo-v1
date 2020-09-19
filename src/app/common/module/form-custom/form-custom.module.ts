@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { OnlyInputNumberDirective } from '../../directive/input-only-number.directive';
-
-
+import {
+  OnlyInputNumberModelDirective,
+  OnlyInputNumberFormDirective,
+} from '../../directive/input-only-number.directive';
 
 @NgModule({
-  exports: [OnlyInputNumberDirective],
-  declarations: [OnlyInputNumberDirective],
+  exports: [OnlyInputNumberModelDirective, OnlyInputNumberFormDirective],
+  declarations: [OnlyInputNumberModelDirective, OnlyInputNumberFormDirective],
 })
-export class FormCustomModule { }
+export class FormCustomModule {}
