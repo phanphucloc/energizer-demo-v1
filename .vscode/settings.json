@@ -6,7 +6,9 @@
         "Danh",
         "Huy",
         "Huyện",
+        "Kh",
         "Khai",
+        "Không",
         "L",
         "Lĩnh",
         "Magie",
@@ -60,8 +62,11 @@
         "u",
         "vi",
         "viên",
+        "xcoordinate",
         "xu",
         "xuất",
+        "ycoordinate",
+        "được",
         "định",
         "động"
     ]
