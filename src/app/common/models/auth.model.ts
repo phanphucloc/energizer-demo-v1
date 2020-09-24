@@ -8,4 +8,5 @@ export class UserModel {
   name: string;
   email: string;
   accessToken: string;
+  type: string;
 }

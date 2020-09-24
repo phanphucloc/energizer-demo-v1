@@ -81,6 +81,10 @@ export class DefaultLayoutComponent extends BaseDestroyableDirective implements 
         this.listMenu.push(itemMenuAdd);
       });
     }
-    this.listMenu = [...this.listMenu, ...listMenuReport];
+    this.listMenu = [...this.listMenu];
+
+    if (this.authService.user.type === 'Admin'){
+      this.listMenu = [...this.listMenu, ...listMenuReport];
+    }
   }
 }

@@ -4,6 +4,7 @@ export const usersData = [
     password: '123456',
     uid: '0001',
     name: 'test',
+    type: 'Admin',
     accessToken: 'TEST-TOKEN',
   },
   {
@@ -11,6 +12,7 @@ export const usersData = [
     password: '123456',
     uid: '0001',
     name: 'test',
+    type: 'Enterprise',
     accessToken: 'TEST-TOKEN',
   },
 ];
