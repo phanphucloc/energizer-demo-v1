@@ -5,18 +5,17 @@
       <th>Tên doanh nghiệp</th>
       <th>Mã số thuế</th>
       <th>Địa chỉ</th>
-      <th>Ngành sản xuất</th>
-      <th>Số lao động hoạt động trong năm</th>
+      <th>Số lao động</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let report of listReportEnergizer;">
-      <td>{{report.yearDeclare}}</td>
+      <td>{{report.year}}</td>
       <td>{{report.enterpriseName}}</td>
       <td>{{report.taxCode}}</td>
-      <td>{{report.productMajor}}</td>
-      <td>{{report.employeesPerYear}}</td>
+      <td>{{report.province}}</td>
+      <td>{{report.employees}}</td>
       <td class="very-small-width text-center">
         <i
           (click)="redirectToEditPage(report.id)"

@@ -1,41 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { ReportEmission } from './../../models/report-energizer.model';
+import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
+import { takeUntil } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { ReportService } from './../../services/report.service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
   selector: 'app-form-detail-report',
   templateUrl: './form-detail-report.component.html',
   styleUrls: ['./form-detail-report.component.scss'],
 })
-export class FormDetailReportComponent implements OnInit {
-  public detailReport = {
-    id: 1,
-    year: 2020,
-    enterpriseName: 'Petrolimex Hòa Bình',
-    taxCode: '1',
-    province: 'Hòa Bình',
-    branches: [
-      {
-        id: 2,
-        name: 'Khai thác dầu khí',
-        groupCode: '',
-        industryCode: '06',
-        fieldId: 1,
-      },
-    ],
-    employees: 246,
-    energyProcess: {
-      co2: 1.97903381e9,
-      ch4: 110496.8,
-      n2o: 16104.050000000001,
-    },
-    productionProcess: {
-      co2: 1898552.0000000002,
-      ch4: 1906232.8800000001,
-      n2o: 25.157999999999998,
-    },
-    totalCO2: 1.980932362e9,
-  };
+export class FormDetailReportComponent extends BaseDestroyableDirective implements OnInit {
+  @ViewChild('formDetail', { static: true })
+  private elementFormDetail: LoadingOnElementDirective;
+  @ViewChild('loadingFormProduction')
+  private elementLoadingFormProduction: LoadingOnElementDirective;
 
-  constructor() {}
+  @Input() public reportId: number;
+  @Output() public cancelEmitter = new EventEmitter<void>();
 
-  ngOnInit(): void {}
+  public detailEmissionReport: ReportEmission;
+  constructor(private reportService: ReportService, private toastr: ToastrService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.getEmissionReportByEnterpriseId();
+  }
+
+  public getEmissionReportByEnterpriseId() {
+    this.elementFormDetail.showLoadingCenter();
+    this.reportService
+      .getEmissionReportByEnterpriseId(this.reportId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (res) => {
+          this.detailEmissionReport = res;
+          this.elementFormDetail.hideLoadingCenter();
+        },
+        () => {
+          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
+          this.elementFormDetail.hideLoadingCenter();
+        }
+      );
+  }
+  public cancel(): void {
+    this.cancelEmitter.emit();
+  }
 }

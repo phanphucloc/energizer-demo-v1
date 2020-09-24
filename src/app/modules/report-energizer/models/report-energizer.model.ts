@@ -1,18 +1,19 @@
+import { BranchesValue } from './../../declare-enterprises/models/enterprises.model';
 export class ReportEmission {
   public id: number;
-  public yearDeclare: number;
+  public year: number;
   public taxCode: number;
-  public address: string;
-  public productMajor: string;
-  public employeesPerYear: number;
-  public co2Electric: number;
+  public enterpriseName: string;
+  public province: string;
+  public employees: number;
+  public branches: BranchesValue[];
   public energyProcess: Emission;
   public productionProcess: Emission;
-  public co2Total: number;
+  public totalCO2: number;
 }
 
 export class Emission {
   public co2: number;
   public ch4: number;
-  public no2: number;
+  public n2O: number;
 }

@@ -1,7 +1,11 @@
+import { takeUntil } from 'rxjs/operators';
+import { ReportService } from './../../services/report.service';
+import { ReportEmission } from './../../models/report-energizer.model';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
+import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({
   selector: 'app-list-report-energizer',
@@ -9,54 +13,9 @@ import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-e
   styleUrls: ['./list-report-energizer.component.scss'],
 })
 export class ListReportEnergizerComponent extends BaseDestroyableDirective implements OnInit {
-  public listReportEnergizer = [
-    {
-      id: 1,
-      yearDeclare: 2020,
-      enterpriseName: 'DHBK',
-      taxCode: 34324234324,
-      address: 'abc',
-      productMajor: 'aslfsakfs',
-      employeesPerYear: 123,
-      co2Electric: 343,
-      energyProcess: {
-        co2: 33,
-        ch4: 12,
-        n2o: 30,
-      },
-      productionProcess: {
-        co2: 33,
-        ch4: 12,
-        n2o: 30,
-      },
-      co2Total: 235,
-    },
-    {
-      id:2,
-      yearDeclare: 2020,
-      enterpriseName: 'ABC',
-      taxCode: 34324234324,
-      address: 'abc',
-      productMajor: 'aslfsakfs',
-      employeesPerYear: 123,
-      co2Electric: 343,
-      energyProcess: {
-        co2: 33,
-        ch4: 12,
-        n2o: 30,
-      },
-      productionProcess: {
-        co2: 33,
-        ch4: 12,
-        n2o: 30,
-      },
-      co2Total: 235,
-    },
-  ];
-
   @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
 
-/*   @Input() public set fieldsId(value: number){
+  /*   @Input() public set fieldsId(value: number){
     this.listEnterprises = [];
     this.fieldsIdValue = value;
     this.getListMiningIndustry();
@@ -65,16 +24,14 @@ export class ListReportEnergizerComponent extends BaseDestroyableDirective imple
   @Output() public toEditPageEmitter = new EventEmitter<number>();
 
   public fieldsIdValue: number;
-/*   public listEnterprises: IEnterprises[];
- */
-  constructor(
-   // private enterprisesService: EnterprisesService,
-    private toastr: ToastrService,
-    ) {
+  public listReportEnergizer: ReportEmission[];
+
+  constructor(private reportService: ReportService, private toastr: ToastrService) {
     super();
   }
 
   public ngOnInit(): void {
+    this.getEmissionReports();
   }
 
   public redirectToEditPage(reportId: number): void {
@@ -85,5 +42,20 @@ export class ListReportEnergizerComponent extends BaseDestroyableDirective imple
     return item.id;
   }
 
-
+  public getEmissionReports() {
+    this.elementTable.showLoadingCenter();
+    this.reportService
+      .getAllEmissionReport()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (res) => {
+          this.listReportEnergizer = res;
+          this.elementTable.hideLoadingCenter();
+        },
+        () => {
+          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
+          this.elementTable.hideLoadingCenter();
+        }
+      );
+  }
 }

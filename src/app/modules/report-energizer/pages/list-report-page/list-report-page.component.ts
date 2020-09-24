@@ -17,15 +17,9 @@ export class ListReportPageComponent extends BaseDestroyableDirective implements
     super();
   }
 
-  public ngOnInit(): void {
-    /*     this.activatedRoute.params.subscribe(params => {
-      this.fieldsCurrent.id = Number(params.fieldsId);
-      this.getFieldsCurrent();
-    }); */
-  }
+  public ngOnInit(): void {}
 
   public redirectToEditPage(reportId: number): void {
-    console.log('hello in to edit page', reportId);
     this.router.navigate(['/reports/detail-reports', reportId]);
   }
 }
