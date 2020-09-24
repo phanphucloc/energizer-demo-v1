@@ -8,7 +8,15 @@ export const usersData = [
     accessToken: 'TEST-TOKEN',
   },
   {
-    email: 'test@gmail.com',
+    email: 'admin@gmail.com',
+    password: '123456',
+    uid: '0001',
+    name: 'test',
+    type: 'Admin',
+    accessToken: 'TEST-TOKEN',
+  },
+  {
+    email: 'doanhnghiep@gmail.com',
     password: '123456',
     uid: '0001',
     name: 'test',
