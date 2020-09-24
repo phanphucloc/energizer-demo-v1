@@ -7,7 +7,7 @@ export const listMenuReport: INavData[] = [
   },
   {
     name: 'Phát thải KNK ',
-    url: '/theme/colors',
+    url: '/reports/list-reports',
     icon: 'icon-chart'
   },
   {

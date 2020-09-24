@@ -1,0 +1,185 @@
+<div class="conainer">
+  <div class="card">
+    <div class="card-header">Báo cáo</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Năm khai báo </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.year }}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Tên doanh nghiệp </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.enterpriseName }}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Mã số thuế </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.taxCode }}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Địa chỉ theo tỉnh </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.province }}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Tên ngành sản xuất kinh doanh </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.branches[0].name }}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Số lao động hoạt động trong năm </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.employees }}"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-md-4 col-form-label">
+                  <label>Phát thải do quá trình đốt nhiên liệu</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label"> CO2 </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailReport.energyProcess.co2 }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label"> CH4 </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailReport.energyProcess.ch4 }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label"> N2O </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailReport.energyProcess.n2o }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-md-3 col-form-label">
+                  <label>Phát thải do quá trình sản xuất</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-11">
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label"> CO2 </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailReport.energyProcess.co2 }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label"> CH4 </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailReport.energyProcess.ch4 }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label"> N2O </label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailReport.energyProcess.n2o }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label"> Tổng CO2 </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailReport.totalCO2 }}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

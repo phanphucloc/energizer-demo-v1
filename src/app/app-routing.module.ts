@@ -16,16 +16,21 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./modules/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule
-          ),
+          import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
         path: 'enterprises/:fieldsId',
         loadChildren: () =>
-          import(
-            './modules/declare-enterprises/declare-enterprises.module'
-          ).then((m) => m.DeclareMiningIndustryModule),
+          import('./modules/declare-enterprises/declare-enterprises.module').then(
+            (m) => m.DeclareMiningIndustryModule
+          ),
+      },
+      {
+        path: 'reports',
+        loadChildren: () =>
+          import('./modules/report-energizer/report-energizer.module').then(
+            (m) => m.ReportEnergizerModule
+          ),
       },
     ],
   },

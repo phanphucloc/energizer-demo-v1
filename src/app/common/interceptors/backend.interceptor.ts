@@ -77,6 +77,10 @@ export class BackendInterceptor implements HttpInterceptor {
           url === 'http://localhost:4200:/energies/':
           newHttpResponse = this.getListEnergyConsumption(request);
           break;
+        case method === 'GET' &&
+          url === 'http://localhost:4200:/reports/':
+          newHttpResponse = this.getListEnergyConsumption(request);
+          break;
         default:
           newHttpResponse = null;
           break;

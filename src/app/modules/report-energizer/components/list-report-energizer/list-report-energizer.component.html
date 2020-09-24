@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Năm khai báo</th>
+      <th>Tên doanh nghiệp</th>
+      <th>Mã số thuế</th>
+      <th>Địa chỉ</th>
+      <th>Ngành sản xuất</th>
+      <th>Số lao động hoạt động trong năm</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of listReportEnergizer;">
+      <td>{{report.yearDeclare}}</td>
+      <td>{{report.enterpriseName}}</td>
+      <td>{{report.taxCode}}</td>
+      <td>{{report.productMajor}}</td>
+      <td>{{report.employeesPerYear}}</td>
+      <td class="very-small-width text-center">
+        <i
+          (click)="redirectToEditPage(report.id)"
+          class="button-icon fa fa-file-text-o"
+          aria-hidden="true">
+        </i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div appLoadingOnElement #table="drLoadingOnElement">
+</div>
