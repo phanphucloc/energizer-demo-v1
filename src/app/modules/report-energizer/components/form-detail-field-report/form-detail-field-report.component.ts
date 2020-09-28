@@ -1,43 +1,44 @@
-import { ReportEmission } from './../../models/report-energizer.model';
+import { ReportComsumption } from './../../models/report-energizer.model';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
-import { takeUntil } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { ReportService } from './../../services/report.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
+import { ToastrService } from 'ngx-toastr';
+import { takeUntil } from 'rxjs/operators';
 import { MESSAGE } from 'src/app/common/data/message';
+import { ReportEmission } from '../../models/report-energizer.model';
+import { ReportService } from '../../services/report.service';
 
 @Component({
-  selector: 'app-form-detail-report',
-  templateUrl: './form-detail-report.component.html',
-  styleUrls: ['./form-detail-report.component.scss'],
+  selector: 'app-form-detail-field-report',
+  templateUrl: './form-detail-field-report.component.html',
+  styleUrls: ['./form-detail-field-report.component.scss'],
 })
-export class FormDetailReportComponent extends BaseDestroyableDirective implements OnInit {
+export class FormDetailFieldReportComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('formDetail', { static: true })
   private elementFormDetail: LoadingOnElementDirective;
   @ViewChild('loadingFormProduction')
   private elementLoadingFormProduction: LoadingOnElementDirective;
 
-  @Input() public reportId: number;
+  @Input() public fieldId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 
-  public detailEmissionReport: ReportEmission;
+  public fieldReport: ReportComsumption;
   constructor(private reportService: ReportService, private toastr: ToastrService) {
     super();
   }
 
   ngOnInit(): void {
-    this.getEmissionReportByEnterpriseId();
+    this.getComsumptionReportByFieldId();
   }
 
-  public getEmissionReportByEnterpriseId() {
+  public getComsumptionReportByFieldId() {
     this.elementFormDetail.showLoadingCenter();
     this.reportService
-      .getEmissionReportByEnterpriseId(this.reportId)
+      .getFieldReportByFieldId(this.fieldId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (res) => {
-          this.detailEmissionReport = res;
+          this.fieldReport = res;
           this.elementFormDetail.hideLoadingCenter();
         },
         () => {
@@ -49,20 +50,4 @@ export class FormDetailReportComponent extends BaseDestroyableDirective implemen
   public cancel(): void {
     this.cancelEmitter.emit();
   }
-
-  fieldReport = {
-    id: 1,
-    year: 2020,
-    fieldName: 'CN khai khoáng',
-    employees: 40020,
-    antraxitCoal: 1070,
-    bitumCoal: 3663,
-    lignite: 0,
-    coke: 0,
-    peat: 0,
-    fuel: 6582,
-    dooil: 585,
-    fooil: 672,
-    lpg: 2560,
-  };
 }

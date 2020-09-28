@@ -12,7 +12,7 @@ export const listMenuReport: INavData[] = [
   },
   {
     name: 'Tổng hợp tiêu thụ năng lượng của các lĩnh vực',
-    url: '/theme/colors',
+    url: '/reports/fields/list-reports',
     icon: 'icon-chart'
   },
   {

@@ -10,21 +10,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let report of listReportEnergizer;">
-      <td>{{report.year}}</td>
-      <td>{{report.enterpriseName}}</td>
-      <td>{{report.taxCode}}</td>
-      <td>{{report.province}}</td>
-      <td>{{report.employees}}</td>
+    <tr *ngFor="let report of listReportEnergizer; trackBy: trackByFn">
+      <td>{{ report.year }}</td>
+      <td>{{ report.enterpriseName }}</td>
+      <td>{{ report.taxCode }}</td>
+      <td>{{ report.province }}</td>
+      <td>{{ report.employees }}</td>
       <td class="very-small-width text-center">
         <i
           (click)="redirectToEditPage(report.id)"
           class="button-icon fa fa-file-text-o"
-          aria-hidden="true">
+          aria-hidden="true"
+        >
         </i>
       </td>
     </tr>
   </tbody>
 </table>
-<div appLoadingOnElement #table="drLoadingOnElement">
-</div>
+<div appLoadingOnElement #table="drLoadingOnElement"></div>

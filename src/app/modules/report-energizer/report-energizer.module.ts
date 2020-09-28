@@ -8,15 +8,22 @@ import { ListReportEnergizerComponent } from './components/list-report-energizer
 import { FormDetailReportComponent } from './components/form-detail-report/form-detail-report.component';
 import { ListReportPageComponent } from './pages/list-report-page/list-report-page.component';
 import { DetailReportPageComponent } from './pages/detail-report-page/detail-report-page.component';
-
+import { ListReportFieldPageComponent } from './pages/list-report-field-page/list-report-field-page.component';
+import { DetailReportFieldPageComponent } from './pages/detail-report-field-page/detail-report-field-page.component';
+import { FormDetailFieldReportComponent } from './components/form-detail-field-report/form-detail-field-report.component';
+import { ListFieldReportComponent } from './components/list-field-report/list-field-report.component';
 
 @NgModule({
-  declarations: [ListReportEnergizerComponent, FormDetailReportComponent, ListReportPageComponent, DetailReportPageComponent],
-  imports: [
-    CommonModule,
-    ReportEnergizerRoutingModule,
-    LoadingModule,
-    FormCustomModule
-  ]
+  declarations: [
+    ListReportEnergizerComponent,
+    FormDetailReportComponent,
+    ListReportPageComponent,
+    DetailReportPageComponent,
+    ListReportFieldPageComponent,
+    DetailReportFieldPageComponent,
+    FormDetailFieldReportComponent,
+    ListFieldReportComponent,
+  ],
+  imports: [CommonModule, ReportEnergizerRoutingModule, LoadingModule, FormCustomModule],
 })
-export class ReportEnergizerModule { }
+export class ReportEnergizerModule {}

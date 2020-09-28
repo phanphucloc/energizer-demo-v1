@@ -1,0 +1,166 @@
+<div appLoadingOnElement #formDetail="drLoadingOnElement">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-11">
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Năm khai báo </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.year }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Tên Lĩnh vực </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.fieldName }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Số lao động hoạt động trong năm </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.employees }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Tiêu thụ điện </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.year }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Than antraxit </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.antraxitCoal }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Than non </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.bitumCoal }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Than cốc </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.lignite }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Than bùn </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.coke }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Dầu hỏa </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.fuel }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Dầu DO </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.dooil }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Dầu FO </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.fooil }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> LPG </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.lpg }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Khí sinh học </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.lpg }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Sinh khối </label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            readonly="readonly"
+            value="{{ fieldReport?.lpg }}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
+  <div class="form-actions text-center">
+    <button class="btn btn-secondary" (click)="cancel()" type="button">Quay lại</button>
+  </div>
+</div>
