@@ -53,7 +53,7 @@
             type="text"
             class="form-control"
             readonly="readonly"
-            value="{{ detailEmissionReport?.branches[0].name }}"
+            value="{{ detailEmissionReport?.branches[0]?.name }}"
           />
         </div>
       </div>
@@ -81,34 +81,55 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label"> CO2 </label>
                 <div class="col-md-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    readonly="readonly"
-                    value="{{ detailEmissionReport?.energyProcess.co2 }}"
-                  />
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailEmissionReport?.energyProcess.co2 }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 col-form-label"> CH4 </label>
                 <div class="col-md-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    readonly="readonly"
-                    value="{{ detailEmissionReport?.energyProcess.ch4 }}"
-                  />
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailEmissionReport?.energyProcess.ch4 }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 col-form-label"> N2O </label>
                 <div class="col-md-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    readonly="readonly"
-                    value="{{ detailEmissionReport?.energyProcess.n2O }}"
-                  />
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailEmissionReport?.energyProcess.n2O }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -119,8 +140,8 @@
       <div class="form-group row">
         <div class="col-12">
           <div class="row">
-            <div class="col-md-3 col-form-label">
-              <label>Phát thải do quá trình sản xuất</label>
+            <div class="col-md-4 col-form-label">
+              <label>Phát thải do quá trình QTSX</label>
             </div>
           </div>
           <div class="row">
@@ -129,34 +150,55 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label"> CO2 </label>
                 <div class="col-md-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    readonly="readonly"
-                    value="{{ detailEmissionReport?.energyProcess.co2 }}"
-                  />
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailEmissionReport?.productionProcess.co2 }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 col-form-label"> CH4 </label>
                 <div class="col-md-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    readonly="readonly"
-                    value="{{ detailEmissionReport?.energyProcess.ch4 }}"
-                  />
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailEmissionReport?.productionProcess.ch4 }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 col-form-label"> N2O </label>
                 <div class="col-md-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    readonly="readonly"
-                    value="{{ detailEmissionReport?.energyProcess.n2O }}"
-                  />
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ detailEmissionReport?.productionProcess.n2O }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -167,12 +209,19 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label"> Tổng CO2 </label>
         <div class="col-md-9">
-          <input
-            type="text"
-            class="form-control"
-            readonly="readonly"
-            value="{{ detailEmissionReport?.totalCO2 }}"
-          />
+          <div class="row">
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailEmissionReport?.totalCO2 }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <label class="col-form-label"> (Kg) </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
