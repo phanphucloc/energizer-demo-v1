@@ -12,6 +12,18 @@ export class ReportEmission {
   public totalCO2: number;
 }
 
+export class ReportEmissionByField {
+  public id: number;
+  public year: number;
+  public fieldName: string;
+  public employees: number;
+  public energyProcess: Emission;
+  public productionProcess: Emission;
+  public totalCO2: number;
+  public co2inEnergyProcess: number;
+  public co2inProductionProcess: number;
+}
+
 export class Emission {
   public co2: number;
   public ch4: number;

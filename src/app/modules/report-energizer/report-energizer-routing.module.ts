@@ -1,3 +1,6 @@
+import { ListReportEmissionFieldPageComponent } from './pages/list-report-emission-field-page/list-report-emission-field-page.component';
+import { DetailReportEmissionFieldPageComponent } from './pages/detail-report-emission-field-page/detail-report-emission-field-page.component';
+import { ListEmissionFieldReportComponent } from './components/list-emission-field-report/list-emission-field-report.component';
 import { ListReportFieldPageComponent } from './pages/list-report-field-page/list-report-field-page.component';
 import { DetailReportPageComponent } from './pages/detail-report-page/detail-report-page.component';
 import { ListReportPageComponent } from './pages/list-report-page/list-report-page.component';
@@ -40,6 +43,22 @@ const routes: Routes = [
       {
         path: 'fields/detail-reports/:fieldId',
         component: DetailReportFieldPageComponent,
+        data: {
+          title: 'Chi tiết báo cáo',
+        },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'emission-by-fields/list-reports',
+        component: ListReportEmissionFieldPageComponent,
+        data: {
+          title: 'Danh sách báo cáo',
+        },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'emission-by-fields/detail-reports/:fieldId',
+        component: DetailReportEmissionFieldPageComponent,
         data: {
           title: 'Chi tiết báo cáo',
         },

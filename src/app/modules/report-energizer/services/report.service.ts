@@ -1,4 +1,4 @@
-import { ReportComsumption } from './../models/report-energizer.model';
+import { ReportComsumption, ReportEmissionByField } from './../models/report-energizer.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -33,7 +33,13 @@ export class ReportService {
     );
   }
 
-   public getListFields(): Observable<IFields[]> {
+  public getEmissionReportByFieldId(fieldId: number): Observable<ReportEmissionByField> {
+    return this.httpClient.get<ReportEmissionByField>(
+      `${this.baseUrl}/reports/emissions/fields/${fieldId}`
+    );
+  }
+
+  public getListFields(): Observable<IFields[]> {
     return this.httpClient.get(this.baseUrl + 'fields').pipe(
       map((result: IFields[]) => {
         return result;

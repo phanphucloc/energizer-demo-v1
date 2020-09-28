@@ -12,6 +12,10 @@ import { ListReportFieldPageComponent } from './pages/list-report-field-page/lis
 import { DetailReportFieldPageComponent } from './pages/detail-report-field-page/detail-report-field-page.component';
 import { FormDetailFieldReportComponent } from './components/form-detail-field-report/form-detail-field-report.component';
 import { ListFieldReportComponent } from './components/list-field-report/list-field-report.component';
+import { ListReportEmissionFieldPageComponent } from './pages/list-report-emission-field-page/list-report-emission-field-page.component';
+import { DetailReportEmissionFieldPageComponent } from './pages/detail-report-emission-field-page/detail-report-emission-field-page.component';
+import { ListEmissionFieldReportComponent } from './components/list-emission-field-report/list-emission-field-report.component';
+import { FormDetailEmissionFieldReportComponent } from './components/form-detail-emission-field-report/form-detail-emission-field-report.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { ListFieldReportComponent } from './components/list-field-report/list-fi
     DetailReportFieldPageComponent,
     FormDetailFieldReportComponent,
     ListFieldReportComponent,
+    ListReportEmissionFieldPageComponent,
+    DetailReportEmissionFieldPageComponent,
+    ListEmissionFieldReportComponent,
+    FormDetailEmissionFieldReportComponent,
   ],
   imports: [CommonModule, ReportEnergizerRoutingModule, LoadingModule, FormCustomModule],
 })
