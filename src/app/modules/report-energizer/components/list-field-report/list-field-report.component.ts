@@ -17,9 +17,7 @@ import { IFields } from 'src/app/modules/declare-enterprises/abstract/enterprise
 })
 export class ListFieldReportComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
-
   @Output() public toEditPageEmitter = new EventEmitter<number>();
-
   public fields: IFields[];
 
   constructor(private reportService: ReportService, private toastr: ToastrService) {

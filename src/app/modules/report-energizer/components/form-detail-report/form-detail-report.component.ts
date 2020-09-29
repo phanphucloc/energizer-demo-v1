@@ -49,20 +49,4 @@ export class FormDetailReportComponent extends BaseDestroyableDirective implemen
   public cancel(): void {
     this.cancelEmitter.emit();
   }
-
-  fieldReport = {
-    id: 1,
-    year: 2020,
-    fieldName: 'CN khai khoáng',
-    employees: 40020,
-    antraxitCoal: 1070,
-    bitumCoal: 3663,
-    lignite: 0,
-    coke: 0,
-    peat: 0,
-    fuel: 6582,
-    dooil: 585,
-    fooil: 672,
-    lpg: 2560,
-  };
 }

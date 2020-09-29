@@ -14,9 +14,7 @@ import { ReportService } from '../../services/report.service';
 })
 export class ListEmissionFieldReportComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
-
   @Output() public toEditPageEmitter = new EventEmitter<number>();
-
   public fields: IFields[];
 
   constructor(private reportService: ReportService, private toastr: ToastrService) {

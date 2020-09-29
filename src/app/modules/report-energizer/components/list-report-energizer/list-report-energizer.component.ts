@@ -14,13 +14,6 @@ import { MESSAGE } from 'src/app/common/data/message';
 })
 export class ListReportEnergizerComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
-
-  /*   @Input() public set fieldsId(value: number){
-    this.listEnterprises = [];
-    this.fieldsIdValue = value;
-    this.getListMiningIndustry();
-  } */
-
   @Output() public toEditPageEmitter = new EventEmitter<number>();
 
   public fieldsIdValue: number;
