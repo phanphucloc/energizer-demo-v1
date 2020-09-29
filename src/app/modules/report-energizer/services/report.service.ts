@@ -42,6 +42,7 @@ export class ReportService {
   public getListFields(): Observable<IFields[]> {
     return this.httpClient.get(this.baseUrl + 'fields').pipe(
       map((result: IFields[]) => {
+        result.sort((a, b) => a.id - b.id);
         return result;
       })
     );
