@@ -26,7 +26,7 @@
                   type="text"
                   id="year-declare-input"
                   name="year-declare-input"
-                  formControlName="foundedYear" 
+                  formControlName="foundedYear"
                   class="form-control"
                   placeholder="Năm khai báo..." />
               </div>
@@ -36,8 +36,8 @@
                 Tên doanh nghiệp
               </label>
               <div class="col-md-9">
-                <input type="text" 
-                  id="name-company-input"                 
+                <input type="text"
+                  id="name-company-input"
                   name="name-company-input"
                   class="form-control"
                   formControlName="name"
@@ -91,7 +91,7 @@
                           id="district-input"
                           name="district-input"
                           class="form-control"
-                          placeholder="Huyện..." 
+                          placeholder="Huyện..."
                           formControlName="district"/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get('baseInfo.address.district')
@@ -111,7 +111,7 @@
                           id="town-input"
                           name="town-input"
                           class="form-control"
-                          placeholder="Xã..." 
+                          placeholder="Xã..."
                           formControlName="town"/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get('baseInfo.address.town')
@@ -130,11 +130,11 @@
                             Tọa độ X
                           </label>
                           <div class="col-md-6">
-                            <input type="text" 
+                            <input type="text"
                               id="coordinates-x-input"
                               name="coordinates-x-input"
                               class="form-control"
-                              placeholder="Tọa độ X..." 
+                              placeholder="Tọa độ X..."
                               formControlName="xCoordinate"/>
                             <div class="invalid-feedback"
                               *ngIf="!formAddEnterprises.get(
@@ -155,11 +155,11 @@
                             Tọa độ Y
                           </label>
                           <div class="col-md-6">
-                            <input type="text" 
+                            <input type="text"
                               id="coordinates-y-input"
                               name="coordinates-y-input"
                               class="form-control"
-                              placeholder="Tọa độ Y..." 
+                              placeholder="Tọa độ Y..."
                               formControlName="yCoordinate"/>
                             <div class="invalid-feedback"
                               *ngIf="!formAddEnterprises.get(
@@ -180,12 +180,12 @@
                         Số lao động trung bình năm
                       </label>
                       <div class="col-md-9">
-                        <input type="text" 
+                        <input type="text"
                           id="average-labor-input"
                           name="average-labor-input"
-                          class="form-control"                        
+                          class="form-control"
                           placeholder="Số lao động trung bình năm..."
-                          formControlName="employees" 
+                          formControlName="employees"
                           appInputOnlyNumberForm/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(
@@ -203,13 +203,12 @@
                         Giá trị sản xuất của doanh nghiệp
                       </label>
                       <div class="col-md-9">
-                        <input type="text" 
+                        <input type="number"
                           id="production-value-input"
                           name="production-value-input"
-                          class="form-control"                          
-                          placeholder="Giá trị sản xuất của doanh nghiệp" 
-                          formControlName="productionValue"
-                          appInputOnlyNumberForm/>
+                          class="form-control"
+                          placeholder="Giá trị sản xuất của doanh nghiệp"
+                          formControlName="productionValue" />
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(
                           'baseInfo.address.productionValue'
@@ -286,12 +285,11 @@
                   <div class="row">
                     <div class="col-md-5">
                       <input [formControlName]="itemEnergyConsumption.id"
-                        type="text"
+                        type="number"
                         id="energy-consumption-{{itemEnergyConsumption.id}}"
                         name="coal-from-pit"
                         class="form-control"
-                        placeholder="{{itemEnergyConsumption.name }}..." 
-                        appInputOnlyNumberForm />
+                        placeholder="{{itemEnergyConsumption.name }}..." />
                       <div class="invalid-feedback"
                         *ngIf="!formAddEnterprises.get(
                         'energyConsumption.' +
@@ -325,7 +323,7 @@
     <ng-container *ngFor="let branchSelected of branchesSelected">
       <hr style="width: 80%" />
 
-      <div class="form-group row" 
+      <div class="form-group row"
         *ngIf="formAddEnterprises.get('production' + branchSelected.id)"
         [formGroupName]="'production' + branchSelected.id">
         <div class="col-12">
@@ -350,11 +348,10 @@
                   <div class="col-md-9">
                     <div class="row">
                       <div class="col-md-5">
-                        <input type="text" id="product-{{ itemProduction.id }}"
-                          name="coal-from-pit" 
+                        <input type="number" id="product-{{ itemProduction.id }}"
+                          name="coal-from-pit"
                           class="form-control"
                           placeholder="{{ itemProduction.name }}..."
-                          appInputOnlyNumberForm
                           [formControlName]="itemProduction.id"/>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(
