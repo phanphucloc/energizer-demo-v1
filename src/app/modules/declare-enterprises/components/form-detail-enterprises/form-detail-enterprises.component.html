@@ -159,7 +159,7 @@
                           formControlName="productionValue"/>
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" *ngIf="fieldsId !== 3">
                       <label class="col-md-3 col-form-label"
                         for="production-value-input">
                         Lĩnh vực
@@ -170,7 +170,8 @@
                           [placeholder]="' -- Chọn lĩnh vực --'"
                           [data]="listBranches"
                           [settings]="settingDropdown"
-                          [disabled]="true">
+                          [disabled]="true"
+                          required>
                         </ng-multiselect-dropdown>
                       </div>
                     </div>

@@ -69,6 +69,24 @@
         </div>
       </div>
       <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Phát thải CO2 do tiêu thụ điện </label>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ detailEmissionReport?.electricCO2.toFixed(3) }}"
+              />
+            </div>
+            <div class="col-md-2">
+              <label class="col-form-label"> (Kg) </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
         <div class="col-12">
           <div class="row">
             <div class="col-md-4 col-form-label">
@@ -87,7 +105,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ detailEmissionReport?.energyProcess.co2 }}"
+                        value="{{ detailEmissionReport?.energyProcess.co2.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -105,7 +123,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ detailEmissionReport?.energyProcess.ch4 }}"
+                        value="{{ detailEmissionReport?.energyProcess.ch4.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -123,7 +141,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ detailEmissionReport?.energyProcess.n2O }}"
+                        value="{{ detailEmissionReport?.energyProcess.n2O.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -156,7 +174,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ detailEmissionReport?.productionProcess.co2 }}"
+                        value="{{ detailEmissionReport?.productionProcess.co2.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -174,7 +192,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ detailEmissionReport?.productionProcess.ch4 }}"
+                        value="{{ detailEmissionReport?.productionProcess.ch4.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -192,7 +210,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ detailEmissionReport?.productionProcess.n2O }}"
+                        value="{{ detailEmissionReport?.productionProcess.n2O.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -215,7 +233,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ detailEmissionReport?.totalCO2 }}"
+                value="{{ detailEmissionReport?.totalCO2.toFixed(3) }}"
               />
             </div>
             <div class="col-md-2">
@@ -227,7 +245,6 @@
     </div>
   </div>
 
-  <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
   <div class="form-actions text-center">
     <button class="btn btn-secondary" (click)="cancel()" type="button">Quay lại</button>
   </div>

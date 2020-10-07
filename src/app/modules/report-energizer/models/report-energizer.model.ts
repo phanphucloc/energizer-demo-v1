@@ -10,6 +10,7 @@ export class ReportEmission {
   public energyProcess: Emission;
   public productionProcess: Emission;
   public totalCO2: number;
+  public electricCO2: number;
 }
 
 export class ReportEmissionByField {
@@ -22,6 +23,7 @@ export class ReportEmissionByField {
   public totalCO2: number;
   public co2inEnergyProcess: number;
   public co2inProductionProcess: number;
+  public electricCO2: number;
 }
 
 export class Emission {

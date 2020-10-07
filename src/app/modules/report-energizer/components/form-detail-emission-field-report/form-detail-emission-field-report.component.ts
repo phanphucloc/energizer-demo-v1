@@ -17,8 +17,6 @@ export class FormDetailEmissionFieldReportComponent
   implements OnInit {
   @ViewChild('formDetail', { static: true })
   private elementFormDetail: LoadingOnElementDirective;
-  @ViewChild('loadingFormProduction')
-  private elementLoadingFormProduction: LoadingOnElementDirective;
   @Input() public fieldId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 

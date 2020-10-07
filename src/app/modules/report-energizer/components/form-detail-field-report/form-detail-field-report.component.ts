@@ -16,9 +16,6 @@ import { ReportService } from '../../services/report.service';
 export class FormDetailFieldReportComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('formDetail', { static: true })
   private elementFormDetail: LoadingOnElementDirective;
-  @ViewChild('loadingFormProduction')
-  private elementLoadingFormProduction: LoadingOnElementDirective;
-
   @Input() public fieldId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 

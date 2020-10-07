@@ -109,8 +109,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
             Validators.required
           ),
           branchesId: new FormControl(
-            { value: null, disabled: true },
-            Validators.required
+            { value: null, disabled: true }
           ),
         }),
       }),

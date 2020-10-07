@@ -15,9 +15,6 @@ import { MESSAGE } from 'src/app/common/data/message';
 export class FormDetailReportComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('formDetail', { static: true })
   private elementFormDetail: LoadingOnElementDirective;
-  @ViewChild('loadingFormProduction')
-  private elementLoadingFormProduction: LoadingOnElementDirective;
-
   @Input() public reportId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 

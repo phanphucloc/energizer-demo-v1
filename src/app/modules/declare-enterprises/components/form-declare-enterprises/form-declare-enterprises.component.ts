@@ -75,7 +75,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           yCoordinate: new FormControl('', Validators.required),
           productionValue: new FormControl('', Validators.required),
           employees: new FormControl('', Validators.required),
-          branchesId: new FormControl([], Validators.required),
+          branchesId: new FormControl([]),
         }),
       }),
     });
@@ -172,7 +172,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     if (branch) {
       const productionGroup: FormGroup = new FormGroup({});
       branch.listProduct.forEach((production) => {
-        const productControl = new FormControl(0, []);
+        const productControl = new FormControl(0, [Validators.required]);
         productionGroup.addControl(production.id.toString(), productControl);
       });
       this.formAddEnterprises.addControl('production' + branch.id, productionGroup);
@@ -184,7 +184,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     if (listEnergyConsumption) {
       const energyConsumptionGroup: FormGroup = new FormGroup({});
       listEnergyConsumption.forEach((energyConsumption) => {
-        const energyConsumptionControl = new FormControl(0, []);
+        const energyConsumptionControl = new FormControl(0, [Validators.required]);
         energyConsumptionGroup.addControl(energyConsumption.id.toString(), energyConsumptionControl);
       });
       this.formAddEnterprises.addControl('energyConsumption', energyConsumptionGroup);
@@ -192,14 +192,12 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     }
   }
 
-  private validateForm(): boolean{
-    let statusValidate = true;
-    statusValidate = this.validateEnergy();
-    statusValidate = this.validateBranch();
+  private validateForm(): boolean {
+    const statusValidate = this.validateEnergy() && this.validateBranch();
     return statusValidate;
   }
 
-  private validateEnergy(): boolean{
+  private validateEnergy(): boolean {
     let countEnergyEmpty = 0;
     let countEnergy = 0;
     if (this.formAddEnterprises?.value?.energyConsumption != null) {
@@ -238,7 +236,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
             countProduction++;
           }
         }
-        if (countProductionEmpty === countProduction) {
+        if (countProductionEmpty === countProduction && countProduction) {
           this.formAddEnterprises
             .get('production' + branch.id)
             ?.setErrors({ productIncorrect: true, message : MESSAGE.PRODUCT_INCORRECT + ' ' +  branch.name});

@@ -37,69 +37,19 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-12">
+        <label class="col-md-3 col-form-label"> Phát thải CO2 do tiêu thụ điện </label>
+        <div class="col-md-9">
           <div class="row">
-            <div class="col-md-4 col-form-label">
-              <label>Phát thải do quá trình đốt nhiên liệu</label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                readonly="readonly"
+                value="{{ emissionFieldReport?.electricCO2.toFixed(3) }}"
+              />
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-11">
-              <div class="form-group row">
-                <label class="col-md-3 col-form-label"> CO2 </label>
-                <div class="col-md-9">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <input
-                        type="text"
-                        class="form-control"
-                        readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.co2 }}"
-                      />
-                    </div>
-                    <div class="col-md-2">
-                      <label class="col-form-label"> (Kg) </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 col-form-label"> CH4 </label>
-                <div class="col-md-9">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <input
-                        type="text"
-                        class="form-control"
-                        readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.ch4 }}"
-                      />
-                    </div>
-                    <div class="col-md-2">
-                      <label class="col-form-label"> (Kg) </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 col-form-label"> N2O </label>
-                <div class="col-md-9">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <input
-                        type="text"
-                        class="form-control"
-                        readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.n2O }}"
-                      />
-                    </div>
-                    <div class="col-md-2">
-                      <label class="col-form-label"> (Kg) </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="col-md-2">
+              <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
         </div>
@@ -124,7 +74,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.co2 }}"
+                        value="{{ emissionFieldReport?.energyProcess.co2.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -142,7 +92,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.ch4 }}"
+                        value="{{ emissionFieldReport?.energyProcess.ch4.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -160,7 +110,76 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.n2O }}"
+                        value="{{ emissionFieldReport?.energyProcess.n2O.toFixed(3) }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-4 col-form-label">
+              <label>Phát thải do quá trình QTSX</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label"> CO2 </label>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ emissionFieldReport?.productionProcess.co2.toFixed(3) }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label"> CH4 </label>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ emissionFieldReport?.productionProcess.ch4.toFixed(3) }}"
+                      />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="col-form-label"> (Kg) </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label"> N2O </label>
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly="readonly"
+                        value="{{ emissionFieldReport?.productionProcess.n2O.toFixed(3) }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -183,7 +202,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.co2inEnergyProcess }}"
+                value="{{ emissionFieldReport?.co2inEnergyProcess.toFixed(3) }}"
               />
             </div>
             <div class="col-md-2">
@@ -201,7 +220,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.co2inProductionProcess }}"
+                value="{{ emissionFieldReport?.co2inProductionProcess.toFixed(3) }}"
               />
             </div>
             <div class="col-md-2">
@@ -219,7 +238,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.totalCO2 }}"
+                value="{{ emissionFieldReport?.totalCO2.toFixed(3) }}"
               />
             </div>
             <div class="col-md-2">
@@ -230,7 +249,6 @@
       </div>
     </div>
   </div>
-  <div appLoadingOnElement #loadingFormProduction="drLoadingOnElement"></div>
   <div class="form-actions text-center">
     <button class="btn btn-secondary" (click)="cancel()" type="button">Quay lại</button>
   </div>
