@@ -1,5 +1,5 @@
 import { IProductionData, IDropdown, IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyab
 import { IBranches, IEnergyData, IEnterprisesToServer, IFields } from '../../abstract/enterprises.interface';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { EnergyData, EnterprisesToServer, ProductionData, Branches, Dropdown } from '../../models/enterprises.model';
 import { MESSAGE } from 'src/app/common/data/message';
 
@@ -16,7 +16,7 @@ import { MESSAGE } from 'src/app/common/data/message';
   templateUrl: './form-declare-enterprises.component.html',
   styleUrls: ['./form-declare-enterprises.component.scss'],
 })
-export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
+export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective implements OnInit, AfterViewInit {
   @ViewChild('loadingFormAdd', { static: true })
   private elementLoadingFormAdd: LoadingOnElementDirective;
   @ViewChild('buttonSubmit')
@@ -56,6 +56,9 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   ) {
     super();
   }
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
+  }
 
   public ngOnInit(): void {
     this.loadData();
@@ -86,42 +89,34 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
   public loadData() {
     this.elementLoadingFormAdd.showLoadingCenter();
-    forkJoin([
+    const groupForkJoin: (Observable<IBranches[]> | Observable<IEnergy[]> | Observable<IEnterprisesToServer>)[] = [
       this.enterprisesService.getListBranchesByFieldsId(this.fieldsId),
       this.enterprisesService.getListEnergyConsumption(),
-    ])
+    ];
+
+    if (this.enterprisesId){
+      groupForkJoin.push( this.enterprisesService.getEnterprisesById(this.enterprisesId));
+    }
+
+    forkJoin(
+      groupForkJoin
+    )
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (result) => {
-          const listBranches: IBranches[] = result[0];
+        (result: (IBranches[] | IEnergy[] | IEnterprisesToServer)[]) => {
+          const listBranches = result[0] as IBranches[];
           this.listBranches = listBranches;
 
-          const listEnergyConsumption: IEnergy[] = result[1];
+          const listEnergyConsumption = result[1] as IEnergy[];
           this.listEnergyConsumption = listEnergyConsumption;
           this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
 
-          this.elementLoadingFormAdd.hideLoadingCenter();
-          if (this.enterprisesId) {
-            this.elementLoadingFormAdd.showLoadingCenter();
-            this.enterprisesService
-              .getEnterprisesById(this.enterprisesId)
-              .pipe(takeUntil(this.destroy$))
-              .subscribe(
-                (enterprises) => {
-                  this.enterprises = enterprises;
-                  this.fetchBaseData();
-                  this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
-                  this.branchesSelected = this.enterprises.branches as IBranches[];
-                  this.addFieldsProductionDetailForForm(this.branchesSelected);
-                  this.formAddEnterprises.updateValueAndValidity();
-                  this.elementLoadingFormAdd.hideLoadingCenter();
-                },
-                () => {
-                  this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
-                  this.elementLoadingFormAdd.hideLoadingCenter();
-               }
-            );
+          if (result[2]){
+            this.enterprises = result[2] as IEnterprisesToServer;
+            this.fetchBaseData();
           }
+
+          this.elementLoadingFormAdd.hideLoadingCenter();
         },
         () => {
           this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
@@ -147,7 +142,6 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
         },
       },
     });
-    this.cdr.detectChanges();
   }
 
   public dropDownClose(): void {

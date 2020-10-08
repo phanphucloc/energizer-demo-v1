@@ -228,7 +228,6 @@
                       <div class="col-md-9">
                         <ng-multiselect-dropdown class="form-control"
                           [formControlName]="'branchesId'"
-
                           [placeholder]="' -- Chọn lĩnh vực --'"
                           [data]="listBranches"
                           [settings]="settingDropdown"
@@ -236,7 +235,7 @@
                           (onDeSelect)="deSelectBranch($event)"
                           (click)="dropDownOpen()"       
                           (onDropDownClose)="dropDownClose()"
-                          required>
+                          >
                         </ng-multiselect-dropdown>
                         <div class="invalid-feedback"
                           *ngIf="!formAddEnterprises.get(
