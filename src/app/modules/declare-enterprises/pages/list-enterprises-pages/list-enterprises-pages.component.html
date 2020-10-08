@@ -17,6 +17,7 @@
           </div>
           <app-list-enterprises 
             [fieldsId]="fieldsCurrent.id" 
+            (toDetailPageEmitter)="redirectToDetailPage($event)"
             (toEditPageEmitter)="redirectToEditPage($event)">
           </app-list-enterprises>
         </div>

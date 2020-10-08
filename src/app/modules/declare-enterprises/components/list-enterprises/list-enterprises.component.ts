@@ -21,6 +21,7 @@ export class ListEnterprisesComponent extends BaseDestroyableDirective implement
     this.getListMiningIndustry();
   }
 
+  @Output() public toDetailPageEmitter = new EventEmitter<number>();
   @Output() public toEditPageEmitter = new EventEmitter<number>();
 
   public fieldsIdValue: number;
@@ -51,6 +52,10 @@ export class ListEnterprisesComponent extends BaseDestroyableDirective implement
           this.elementTable.hideLoadingCenter();
         }
       );
+  }
+
+  public redirectToDetailPage(enterprisesId: number): void {
+    this.toDetailPageEmitter.emit(enterprisesId);
   }
 
   public redirectToEditPage(enterprisesId: number): void {

@@ -45,6 +45,14 @@ export class EnterprisesService {
     );
   }
 
+  public editEnterprises(enterprises: IEnterprisesToServer, id: number): Observable<IResultAddEnterprises> {
+    return this.httpClient.put(this.baseUrl + 'enterprises/' + id , enterprises ).pipe(
+      map((result: IResultAddEnterprises) => {
+        return result || new ResultAddEnterprises();
+      })
+    );
+  }
+
   public getEnterprisesById(id: number): Observable<IEnterprisesToServer> {
     return this.httpClient.get(this.baseUrl + 'enterprises/' + id).pipe(
       map((result: IEnterprisesToServer) => {

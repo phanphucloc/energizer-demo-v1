@@ -247,9 +247,6 @@
                           <div>Vui lòng chọn lĩnh vực</div>
                         </div>
                       </div>
-                      <div>
-                        {{ formAddEnterprises.value  | json }}
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -414,7 +411,7 @@
         [disabled]="formAddEnterprises?.invalid || formAddEnterprises?.pending"
         appLoadingOnElement
         #buttonSubmit="drLoadingOnElement">
-        Thêm
+        {{ enterprisesId ? 'Chỉnh sửa' : 'Thêm'}}
       </button>
       <button class="btn btn-secondary" (click)="cancel()" type="button">
         Quay lại

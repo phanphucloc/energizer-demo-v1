@@ -19,8 +19,13 @@
       <td>{{enterprises.productionValue}}</td>
       <td class="very-small-width text-center">
         <i 
-          (click)="redirectToEditPage(enterprises.id)"
+          (click)="redirectToDetailPage(enterprises.id)"
           class="button-icon fa fa-file-text-o"
+          aria-hidden="true">
+        </i>
+        <i 
+          (click)="redirectToEditPage(enterprises.id)"
+          class="button-icon fa fa-edit ml-3"
           aria-hidden="true">
         </i>
       </td>

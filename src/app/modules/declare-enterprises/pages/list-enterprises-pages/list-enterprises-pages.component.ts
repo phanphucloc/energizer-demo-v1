@@ -50,7 +50,11 @@ export class ListEnterprisesPagesComponent extends BaseDestroyableDirective impl
     this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/add-enterprises']);
   }
 
-  public redirectToEditPage(enterprisesId: number): void {
+  public redirectToDetailPage(enterprisesId: number): void {
     this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/detail-enterprises/' + enterprisesId]);
+  }
+
+  public redirectToEditPage(enterprisesId: number): void {
+    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/edit-enterprises/' + enterprisesId]);
   }
 }

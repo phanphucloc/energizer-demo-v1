@@ -1,5 +1,5 @@
 import { IProductionData, IDropdown, IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { MESSAGE } from 'src/app/common/data/message';
   templateUrl: './form-declare-enterprises.component.html',
   styleUrls: ['./form-declare-enterprises.component.scss'],
 })
-export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective implements OnInit, AfterViewInit {
+export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('loadingFormAdd', { static: true })
   private elementLoadingFormAdd: LoadingOnElementDirective;
   @ViewChild('buttonSubmit')
@@ -52,12 +52,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   constructor(
     private enterprisesService: EnterprisesService,
     private toastr: ToastrService,
-    private cdr: ChangeDetectorRef
   ) {
     super();
-  }
-  ngAfterViewInit(): void {
-    this.cdr.detectChanges();
   }
 
   public ngOnInit(): void {
@@ -87,8 +83,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     });
   }
 
-  public loadData() {
-    this.elementLoadingFormAdd.showLoadingCenter();
+  public loadData(): void {
     const groupForkJoin: (Observable<IBranches[]> | Observable<IEnergy[]> | Observable<IEnterprisesToServer>)[] = [
       this.enterprisesService.getListBranchesByFieldsId(this.fieldsId),
       this.enterprisesService.getListEnergyConsumption(),
@@ -98,9 +93,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
       groupForkJoin.push( this.enterprisesService.getEnterprisesById(this.enterprisesId));
     }
 
-    forkJoin(
-      groupForkJoin
-    )
+    this.elementLoadingFormAdd.showLoadingCenter();
+    forkJoin(groupForkJoin)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result: (IBranches[] | IEnergy[] | IEnterprisesToServer)[]) => {
@@ -109,13 +103,15 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
           const listEnergyConsumption = result[1] as IEnergy[];
           this.listEnergyConsumption = listEnergyConsumption;
-          this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
 
           if (result[2]){
             this.enterprises = result[2] as IEnterprisesToServer;
             this.fetchBaseData();
+            this.branchesSelected = this.enterprises.branches as IBranches[];
+            this.addFieldsProductionDetailForForm(this.branchesSelected);
           }
 
+          this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
           this.elementLoadingFormAdd.hideLoadingCenter();
         },
         () => {
@@ -184,21 +180,37 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public submit(): void {
     if (this.validateForm()){
       const valueFormatted = this.formatDataSendSever();
-      // this.elementButtonSubmit.showLoadingCenter('16px', 'auto');
-      console.log(valueFormatted);
-      // this.enterprisesService
-      //   .addEnterprises(valueFormatted)
-      //   .pipe(takeUntil(this.destroy$))
-      //   .subscribe(
-      //     () => {
-      //       this.elementButtonSubmit.hideLoadingCenter();
-      //       this.submitEmitter.emit('SUCCESS');
-      //     },
-      //     () => {
-      //       this.elementButtonSubmit.hideLoadingCenter();
-      //       this.submitEmitter.emit('ERROR');
-      //     }
-      //   );
+      this.elementButtonSubmit.showLoadingCenter('16px', 'auto');
+      if (this.enterprisesId) {
+        this.enterprisesService
+          .editEnterprises(valueFormatted, this.enterprisesId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            () => {
+              this.elementButtonSubmit.hideLoadingCenter();
+              this.submitEmitter.emit('EDIT_SUCCESS');
+            },
+            () => {
+              this.elementButtonSubmit.hideLoadingCenter();
+              this.submitEmitter.emit('ERROR');
+            }
+        );
+      }
+      else {
+        this.enterprisesService
+          .addEnterprises(valueFormatted)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            () => {
+              this.elementButtonSubmit.hideLoadingCenter();
+              this.submitEmitter.emit('ADD_SUCCESS');
+            },
+            () => {
+              this.elementButtonSubmit.hideLoadingCenter();
+              this.submitEmitter.emit('ERROR');
+            }
+        );
+      }
     }
   }
 
