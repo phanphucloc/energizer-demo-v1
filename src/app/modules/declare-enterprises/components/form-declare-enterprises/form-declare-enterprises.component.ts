@@ -1,5 +1,5 @@
 import { IProductionData, IDropdown, IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
@@ -25,6 +25,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private elementLoadingFormProduction: LoadingOnElementDirective;
 
   @Input() public fieldsId: number;
+  @Input() public enterprisesId: number;
 
   @Output() public cancelEmitter = new EventEmitter<void>();
   @Output() public submitEmitter = new EventEmitter<string>();
@@ -40,6 +41,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     allowSearchFilter: false,
     defaultOpen: false
   };
+  public enterprises: IEnterprisesToServer;
   public formAddEnterprises: FormGroup;
   public listBranches: IBranches[];
   public branchesSelected: IBranches[] = [];
@@ -49,7 +51,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
   constructor(
     private enterprisesService: EnterprisesService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
   ) {
     super();
   }
@@ -98,12 +101,53 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
 
           this.elementLoadingFormAdd.hideLoadingCenter();
+          if (this.enterprisesId) {
+            this.elementLoadingFormAdd.showLoadingCenter();
+            this.enterprisesService
+              .getEnterprisesById(this.enterprisesId)
+              .pipe(takeUntil(this.destroy$))
+              .subscribe(
+                (enterprises) => {
+                  this.enterprises = enterprises;
+                  this.fetchBaseData();
+                  this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
+                  this.branchesSelected = this.enterprises.branches as IBranches[];
+                  this.addFieldsProductionDetailForForm(this.branchesSelected);
+                  this.formAddEnterprises.updateValueAndValidity();
+                  this.elementLoadingFormAdd.hideLoadingCenter();
+                },
+                () => {
+                  this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
+                  this.elementLoadingFormAdd.hideLoadingCenter();
+               }
+            );
+          }
         },
         () => {
           this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
           this.elementLoadingFormAdd.hideLoadingCenter();
         }
       );
+  }
+
+  private fetchBaseData(): void {
+    this.formAddEnterprises.patchValue({
+      baseInfo: {
+        name: this.enterprises.name,
+        foundedYear: this.enterprises.foundedYear,
+        address: {
+          province: this.enterprises.province,
+          district: this.enterprises.district,
+          town: this.enterprises.town,
+          xCoordinate: this.enterprises.xcoordinate,
+          yCoordinate: this.enterprises.ycoordinate,
+          productionValue: this.enterprises.productionValue,
+          employees: this.enterprises.employees,
+          branchesId: this.enterprises.branches,
+        },
+      },
+    });
+    this.cdr.detectChanges();
   }
 
   public dropDownClose(): void {
@@ -146,25 +190,63 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public submit(): void {
     if (this.validateForm()){
       const valueFormatted = this.formatDataSendSever();
-      this.elementButtonSubmit.showLoadingCenter('16px', 'auto');
-      this.enterprisesService
-        .addEnterprises(valueFormatted)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          () => {
-            this.elementButtonSubmit.hideLoadingCenter();
-            this.submitEmitter.emit('SUCCESS');
-          },
-          () => {
-            this.elementButtonSubmit.hideLoadingCenter();
-            this.submitEmitter.emit('ERROR');
-          }
-        );
+      // this.elementButtonSubmit.showLoadingCenter('16px', 'auto');
+      console.log(valueFormatted);
+      // this.enterprisesService
+      //   .addEnterprises(valueFormatted)
+      //   .pipe(takeUntil(this.destroy$))
+      //   .subscribe(
+      //     () => {
+      //       this.elementButtonSubmit.hideLoadingCenter();
+      //       this.submitEmitter.emit('SUCCESS');
+      //     },
+      //     () => {
+      //       this.elementButtonSubmit.hideLoadingCenter();
+      //       this.submitEmitter.emit('ERROR');
+      //     }
+      //   );
     }
   }
 
   public cancel(): void {
     this.cancelEmitter.emit();
+  }
+
+  private addFieldsProductionDetailForForm(listBranches: IBranches[]): void {
+    if (listBranches) {
+      listBranches.forEach((branch) => {
+        const productionGroup: FormGroup = new FormGroup({});
+        branch.listProduct = [];
+
+        this.enterprises.productions.forEach((production) => {
+          if (production.branchId === branch.id) {
+
+            branch.listProduct.push({
+              branchId: branch.id,
+              id: production.productionId,
+              name: production.production,
+              unit: production.unit,
+            });
+
+            const productControl = new FormControl(
+              production.volume,
+              Validators.required
+            );
+
+            productionGroup.addControl(
+              production.productionId.toString(),
+              productControl
+            );
+
+          }
+        });
+        this.formAddEnterprises.addControl(
+          'production' + branch.id,
+          productionGroup
+        );
+        this.formAddEnterprises.updateValueAndValidity();
+      });
+    }
   }
 
 
@@ -184,10 +266,26 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     if (listEnergyConsumption) {
       const energyConsumptionGroup: FormGroup = new FormGroup({});
       listEnergyConsumption.forEach((energyConsumption) => {
-        const energyConsumptionControl = new FormControl(0, [Validators.required]);
-        energyConsumptionGroup.addControl(energyConsumption.id.toString(), energyConsumptionControl);
+
+        const energyConsumptionItem = this.enterprises?.energies.find((energyConsumptionData) => {
+            return energyConsumptionData.energyId === energyConsumption.id;
+          }
+        );
+
+        let energyConsumptionControl: FormControl;
+        if (energyConsumptionItem){
+           energyConsumptionControl = new FormControl(energyConsumptionItem.volume, Validators.required);
+        }
+        else{
+            energyConsumptionControl = new FormControl(0, Validators.required);
+        }
+
+        energyConsumptionGroup.addControl(
+          energyConsumption.id.toString(),
+          energyConsumptionControl
+        );
       });
-      this.formAddEnterprises.addControl('energyConsumption', energyConsumptionGroup);
+      this.formAddEnterprises.setControl('energyConsumption', energyConsumptionGroup);
       this.formAddEnterprises.updateValueAndValidity();
     }
   }

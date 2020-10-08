@@ -15,6 +15,7 @@ import { MESSAGE } from 'src/app/common/data/message';
 })
 export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
   public fieldsCurrent: Fields;
+  public enterprisesId: number;
 
   constructor(
     private router: Router,
@@ -28,6 +29,7 @@ export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective i
 
   public ngOnInit(): void {
     this.fieldsCurrent.id = Number(this.activatedRoute.snapshot.paramMap.get('fieldsId'));
+    this.enterprisesId = Number(this.activatedRoute.snapshot.paramMap.get('enterprisesId'));
     this.getFieldsCurrent();
   }
 

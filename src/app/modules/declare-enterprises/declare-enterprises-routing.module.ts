@@ -30,6 +30,14 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'edit-enterprises/:enterprisesId',
+        component: DeclareEnterprisesPagesComponent,
+        data: {
+          title: 'Chỉnh sửa chi tiết doanh nghiệp'
+        },
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'detail-enterprises/:enterprisesId',
         component: DetailEnterprisesPagesComponent,
         data: {

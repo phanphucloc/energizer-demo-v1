@@ -1,5 +1,5 @@
 <div appLoadingOnElement #loadingFormAdd="drLoadingOnElement">
-  <form class="form-horizontal auto-validated" (ngSubmit)="submit()"
+  <form *ngIf="formAddEnterprises" class="form-horizontal auto-validated" (ngSubmit)="submit()"
     [formGroup]="formAddEnterprises">
 
     <div class="form-group row" formGroupName="baseInfo">
@@ -227,13 +227,14 @@
                       </label>
                       <div class="col-md-9">
                         <ng-multiselect-dropdown class="form-control"
-                          formControlName="branchesId"
+                          [formControlName]="'branchesId'"
+
                           [placeholder]="' -- Chọn lĩnh vực --'"
                           [data]="listBranches"
                           [settings]="settingDropdown"
                           (onSelect)="selectBranch($event)"
                           (onDeSelect)="deSelectBranch($event)"
-                          (click)="dropDownOpen()"
+                          (click)="dropDownOpen()"       
                           (onDropDownClose)="dropDownClose()"
                           required>
                         </ng-multiselect-dropdown>
@@ -246,6 +247,9 @@
                           ).touched">
                           <div>Vui lòng chọn lĩnh vực</div>
                         </div>
+                      </div>
+                      <div>
+                        {{ formAddEnterprises.value  | json }}
                       </div>
                     </div>
                   </div>
