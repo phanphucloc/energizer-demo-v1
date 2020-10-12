@@ -58,15 +58,15 @@ export class DefaultLayoutComponent extends BaseDestroyableDirective implements 
   }
 
   private updateMenu(listFields: IFields[]){
-    this.listMenu.push({
-      name: 'Dashboard',
-      url: '/dashboard',
-      icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW'
-      }
-    });
+    // this.listMenu.push({
+    //   name: 'Dashboard',
+    //   url: '/dashboard',
+    //   icon: 'icon-speedometer',
+    //   badge: {
+    //     variant: 'info',
+    //     text: 'NEW'
+    //   }
+    // });
 
     const titleMenuAdd: INavData = { title: true, name: 'Khai báo' };
     this.listMenu.push(titleMenuAdd);
