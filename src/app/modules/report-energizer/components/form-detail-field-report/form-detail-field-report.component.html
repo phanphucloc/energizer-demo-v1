@@ -5,12 +5,23 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label"> Năm khai báo </label>
         <div class="col-md-9">
-          <input
-            type="text"
-            class="form-control"
-            readonly="readonly"
-            value="{{ fieldReport?.year }}"
-          />
+          <div class="dropdown" dropdown>
+            <a 
+              class="btn btn-secondary dropdown-toggle" 
+              style="cursor: pointer;" 
+              role="button" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false" 
+              dropdownToggle>
+              {{ fieldReport?.year }}
+            </a>
+            <div class="dropdown-menu" role="menu" *dropdownMenu>
+              <a *ngFor="let year of listYears" class="dropdown-item" style="cursor: pointer" (click)="getComsumptionReportByFieldId(year)">
+                {{ year }}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row">

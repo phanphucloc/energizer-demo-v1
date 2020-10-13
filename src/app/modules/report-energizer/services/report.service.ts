@@ -1,6 +1,6 @@
 import { ReportComsumption, ReportEmissionByField } from './../models/report-energizer.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -27,16 +27,22 @@ export class ReportService {
     );
   }
 
-  public getFieldReportByFieldId(fieldId: number): Observable<ReportComsumption> {
+  public getFieldReportByFieldId(fieldId: number, year: string): Observable<ReportComsumption> {
+    const params = new HttpParams().append('year', year);
     return this.httpClient.get<ReportComsumption>(
-      `${this.baseUrl}/reports/consumptions/fields/${fieldId}`
+      `${this.baseUrl}/reports/consumptions/fields/${fieldId}`, { params }
     );
   }
 
-  public getEmissionReportByFieldId(fieldId: number): Observable<ReportEmissionByField> {
+  public getEmissionReportByFieldId(fieldId: number, year: string): Observable<ReportEmissionByField> {
+    const params = new HttpParams().append('year', year);
     return this.httpClient.get<ReportEmissionByField>(
-      `${this.baseUrl}/reports/emissions/fields/${fieldId}`
+      `${this.baseUrl}/reports/emissions/fields/${fieldId}`, { params }
     );
+  }
+
+  public getListYears(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${this.baseUrl}/reports/years`);
   }
 
   public getListFields(): Observable<IFields[]> {

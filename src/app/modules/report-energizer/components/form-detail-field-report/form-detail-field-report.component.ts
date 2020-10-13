@@ -5,8 +5,9 @@ import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-e
 import { ToastrService } from 'ngx-toastr';
 import { takeUntil } from 'rxjs/operators';
 import { MESSAGE } from 'src/app/common/data/message';
-import { ReportEmission } from '../../models/report-energizer.model';
 import { ReportService } from '../../services/report.service';
+import { forkJoin } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-detail-field-report',
@@ -19,23 +20,43 @@ export class FormDetailFieldReportComponent extends BaseDestroyableDirective imp
   @Input() public fieldId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 
+  public listYears: string[];
   public fieldReport: ReportComsumption;
   constructor(private reportService: ReportService, private toastr: ToastrService) {
     super();
   }
 
   ngOnInit(): void {
-    this.getComsumptionReportByFieldId();
+    this.loadData();
   }
 
-  public getComsumptionReportByFieldId() {
+  public getComsumptionReportByFieldId(year: string) {
+    if (year !== this.fieldReport.year.toString()) {
+      this.elementFormDetail.showLoadingCenter();
+      this.reportService
+        .getFieldReportByFieldId(this.fieldId, year)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          (res) => {
+            this.fieldReport = res;
+            this.elementFormDetail.hideLoadingCenter();
+          },
+          () => {
+            this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
+            this.elementFormDetail.hideLoadingCenter();
+          }
+        );
+    }
+  }
+
+  public loadData(): void {
     this.elementFormDetail.showLoadingCenter();
-    this.reportService
-      .getFieldReportByFieldId(this.fieldId)
+    forkJoin([this.reportService.getFieldReportByFieldId(this.fieldId, ''), this.reportService.getListYears()])
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (res) => {
-          this.fieldReport = res;
+        (result) => {
+          this.fieldReport = result[0];
+          this.listYears = result[1];
           this.elementFormDetail.hideLoadingCenter();
         },
         () => {
@@ -44,6 +65,7 @@ export class FormDetailFieldReportComponent extends BaseDestroyableDirective imp
         }
       );
   }
+
   public cancel(): void {
     this.cancelEmitter.emit();
   }
