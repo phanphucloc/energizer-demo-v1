@@ -34,7 +34,7 @@ export class FormDetailReportComponent extends BaseDestroyableDirective implemen
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (res) => {
-          this.detailEmissionReport = res;
+          this.detailEmissionReport = this.joinAllBranchName(res);
           this.elementFormDetail.hideLoadingCenter();
         },
         () => {
@@ -45,5 +45,13 @@ export class FormDetailReportComponent extends BaseDestroyableDirective implemen
   }
   public cancel(): void {
     this.cancelEmitter.emit();
+  }
+
+  private joinAllBranchName(report: ReportEmission): ReportEmission{
+    const listBranchName = report.branches.map(branch => {
+      return branch.name;
+    });
+    report.branchNameAll = listBranchName.join(' - ');
+    return report;
   }
 }

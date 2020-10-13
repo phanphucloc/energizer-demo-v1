@@ -28,8 +28,22 @@ export const routes: Routes = [
       {
         path: 'reports',
         loadChildren: () =>
-          import('./modules/report-energizer/report-energizer.module').then(
-            (m) => m.ReportEnergizerModule
+          import('./modules/report-energizer/report-energizer-routing.module').then(
+            (m) => m.ReportEnergizerRoutingModule
+          ),
+      },
+      {
+        path: 'reports/emission-by-fields',
+        loadChildren: () =>
+          import('./modules/report-energizer/report-emission-routing.module').then(
+            (m) => m.ReportEmissionRoutingModule
+          ),
+      },
+      {
+        path: 'reports/fields',
+        loadChildren: () =>
+          import('./modules/report-energizer/report-field-routing.module').then(
+            (m) => m.ReportFieldRoutingModule
           ),
       },
     ],

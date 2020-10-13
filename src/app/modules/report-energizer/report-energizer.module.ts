@@ -17,6 +17,8 @@ import { DetailReportEmissionFieldPageComponent } from './pages/detail-report-em
 import { ListEmissionFieldReportComponent } from './components/list-emission-field-report/list-emission-field-report.component';
 import { FormDetailEmissionFieldReportComponent } from './components/form-detail-emission-field-report/form-detail-emission-field-report.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ReportEmissionRoutingModule } from './report-emission-routing.module';
+import { ReportFieldRoutingModule } from './report-field-routing.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,13 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ListEmissionFieldReportComponent,
     FormDetailEmissionFieldReportComponent,
   ],
-  imports: [CommonModule, ReportEnergizerRoutingModule, LoadingModule, FormCustomModule, BsDropdownModule.forRoot()],
+  imports: [
+    CommonModule,
+    ReportEnergizerRoutingModule,
+    ReportEmissionRoutingModule,
+    ReportFieldRoutingModule,
+    LoadingModule,
+    FormCustomModule,
+    BsDropdownModule.forRoot()],
 })
 export class ReportEnergizerModule {}

@@ -23,6 +23,7 @@ import {
 } from '@coreui/angular';
 import { LayoutService } from './common/services/layout.service';
 import { LoadingModule } from './common/module/loading/loading.module';
+import { ReportEnergizerModule } from './modules/report-energizer/report-energizer.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LoadingModule } from './common/module/loading/loading.module';
     NotFoundComponent,
   ],
   imports: [
+    ReportEnergizerModule,
     RouterModule,
     BrowserModule,
     LoadingModule,

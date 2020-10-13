@@ -1,12 +1,8 @@
-import { ListReportEmissionFieldPageComponent } from './pages/list-report-emission-field-page/list-report-emission-field-page.component';
-import { DetailReportEmissionFieldPageComponent } from './pages/detail-report-emission-field-page/detail-report-emission-field-page.component';
-import { ListReportFieldPageComponent } from './pages/list-report-field-page/list-report-field-page.component';
-import { DetailReportPageComponent } from './pages/detail-report-page/detail-report-page.component';
-import { ListReportPageComponent } from './pages/list-report-page/list-report-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/common/guard/auth.guard';
 import { DetailReportFieldPageComponent } from './pages/detail-report-field-page/detail-report-field-page.component';
+import { ListReportFieldPageComponent } from './pages/list-report-field-page/list-report-field-page.component';
 
 const routes: Routes = [
   {
@@ -17,15 +13,15 @@ const routes: Routes = [
     children: [
       {
         path: 'list-reports',
-        component: ListReportPageComponent,
+        component: ListReportFieldPageComponent,
         data: {
           title: 'Danh sách báo cáo',
         },
         canActivate: [AuthGuard],
       },
       {
-        path: 'detail-reports/:reportId',
-        component: DetailReportPageComponent,
+        path: 'detail-reports/:fieldId',
+        component: DetailReportFieldPageComponent,
         data: {
           title: 'Chi tiết báo cáo',
         },
@@ -44,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReportEnergizerRoutingModule {}
+export class ReportFieldRoutingModule {}
