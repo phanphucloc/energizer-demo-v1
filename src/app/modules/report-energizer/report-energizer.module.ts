@@ -37,9 +37,6 @@ import { ReportFieldRoutingModule } from './report-field-routing.module';
   ],
   imports: [
     CommonModule,
-    ReportEnergizerRoutingModule,
-    ReportEmissionRoutingModule,
-    ReportFieldRoutingModule,
     LoadingModule,
     FormCustomModule,
     BsDropdownModule.forRoot()],
