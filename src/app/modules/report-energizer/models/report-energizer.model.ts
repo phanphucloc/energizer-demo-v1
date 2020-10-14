@@ -48,4 +48,6 @@ export interface ReportComsumption {
   fooil: number;
   lpg: number;
   electric: number;
+  bioGas: number;
+  biomass: number;
 }

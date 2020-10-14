@@ -84,6 +84,21 @@
 
       <div class="form-group row">
         <div class="col-md-1"></div>
+        <label class="col-md-2 col-form-label"> Than bitum </label>
+        <div class="col-md-9">
+          <div class="row ml-4">
+            <div class="col-md-4 bg-secondary col-form-label rounded">
+              {{ fieldReport?.bitumCoal | number: '1.2-2' : 'it' }}
+            </div>
+            <div class="col-md-3">
+              <label class="col-form-label"> (Nghìn tấn) </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-1"></div>
         <label class="col-md-2 col-form-label"> Than non </label>
         <div class="col-md-9">
           <div class="row ml-4">
@@ -179,6 +194,36 @@
           <div class="row ml-4">
             <div class="col-md-4 bg-secondary col-form-label rounded">
               {{ fieldReport?.lpg | number: '1.2-2' : 'it' }}
+            </div>
+            <div class="col-md-3">
+              <label class="col-form-label"> (Nghìn tấn) </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-1"></div>
+        <label class="col-md-2 col-form-label"> Khí sinh học </label>
+        <div class="col-md-9">
+          <div class="row ml-4">
+            <div class="col-md-4 bg-secondary col-form-label rounded">
+              {{ fieldReport?.bioGas | number: '1.2-2' : 'it' }}
+            </div>
+            <div class="col-md-3">
+              <label class="col-form-label"> (Nghìn tấn) </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-1"></div>
+        <label class="col-md-2 col-form-label"> Sinh khối </label>
+        <div class="col-md-9">
+          <div class="row ml-4">
+            <div class="col-md-4 bg-secondary col-form-label rounded">
+              {{ fieldReport?.biomass | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-3">
               <label class="col-form-label"> (Nghìn tấn) </label>
