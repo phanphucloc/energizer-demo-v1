@@ -33,18 +33,19 @@ export class Emission {
   public n2O: number;
 }
 
-export class ReportComsumption {
-  public id: number;
-  public year: number;
-  public fieldName: string;
-  public employees: number;
-  public antraxitCoal: number;
-  public bitumCoal: number;
-  public lignite: number;
-  public coke: number;
-  public peat: number;
-  public fuel: number;
-  public dooil: number;
-  public fooil: number;
-  public lpg: number;
+export interface ReportComsumption {
+  id: number;
+  year: number;
+  fieldName: string;
+  employees: number;
+  antraxitCoal: number;
+  bitumCoal: number;
+  lignite: number;
+  coke: number;
+  peat: number;
+  fuel: number;
+  dooil: number;
+  fooil: number;
+  lpg: number;
+  electric: number;
 }

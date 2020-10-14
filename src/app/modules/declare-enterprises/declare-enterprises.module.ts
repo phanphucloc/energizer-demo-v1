@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { DeclareMiningIndustryRoutingModule } from './declare-enterprises-routing.module';
 
@@ -32,5 +32,8 @@ import { FormCustomModule } from 'src/app/common/module/form-custom/form-custom.
     LoadingModule,
     FormCustomModule,
   ],
+  providers: [
+    DecimalPipe
+  ]
 })
 export class DeclareMiningIndustryModule {}

@@ -4,7 +4,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { RouterModule } from '@angular/router';
 import { DashBoardComponent } from './pages/dash-board/dash-board.component';
 import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { ChartsModule } from 'ng2-charts';
     RouterModule,
     CommonModule,
     DashboardRoutingModule,
-    ChartsModule
+    CarouselModule.forRoot(),
   ]
 })
 export class DashboardModule { }

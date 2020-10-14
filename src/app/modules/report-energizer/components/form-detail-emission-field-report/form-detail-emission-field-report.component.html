@@ -17,7 +17,11 @@
               {{ emissionFieldReport?.year }}
             </a>
             <div class="dropdown-menu" role="menu" *dropdownMenu>
-              <a *ngFor="let year of listYears" class="dropdown-item" style="cursor: pointer" (click)="getEmissionReportByFieldId(year)">
+              <a 
+                *ngFor="let year of listYears" 
+                class="dropdown-item" 
+                style="cursor: pointer"
+                (click)="getEmissionReportByFieldId(year)">
                 {{ year }}
               </a>
             </div>
@@ -56,7 +60,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.electricCO2.toFixed(3) }}"
+                value="{{ emissionFieldReport?.electricCO2 | number:'1.2-2' : 'it' }}"
               />
             </div>
             <div class="col-md-2">
@@ -85,7 +89,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.co2.toFixed(3) }}"
+                        value="{{ emissionFieldReport?.energyProcess.co2 | number: '1.2-2': 'it' }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -103,7 +107,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.ch4.toFixed(3) }}"
+                        value="{{ emissionFieldReport?.energyProcess.ch4 | number: '1.2-2': 'it' }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -121,7 +125,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.energyProcess.n2O.toFixed(3) }}"
+                        value="{{ emissionFieldReport?.energyProcess.n2O | number: '1.2-2' : 'it' }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -154,7 +158,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.productionProcess.co2.toFixed(3) }}"
+                        value="{{ emissionFieldReport?.productionProcess.co2 | number: '1.2-2' : 'it' }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -172,7 +176,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.productionProcess.ch4.toFixed(3) }}"
+                        value="{{ emissionFieldReport?.productionProcess.ch4 | number: '1.2-2' : 'it' }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -190,7 +194,7 @@
                         type="text"
                         class="form-control"
                         readonly="readonly"
-                        value="{{ emissionFieldReport?.productionProcess.n2O.toFixed(3) }}"
+                        value="{{ emissionFieldReport?.productionProcess.n2O | number: '1.2-2' : 'it' }}"
                       />
                     </div>
                     <div class="col-md-2">
@@ -213,7 +217,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.co2inEnergyProcess.toFixed(3) }}"
+                value="{{ emissionFieldReport?.co2inEnergyProcess | number: '1.2-2' : 'it' }}"
               />
             </div>
             <div class="col-md-2">
@@ -231,7 +235,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.co2inProductionProcess.toFixed(3) }}"
+                value="{{ emissionFieldReport?.co2inProductionProcess | number: '1.2-2' : 'it' }}"
               />
             </div>
             <div class="col-md-2">
@@ -249,7 +253,7 @@
                 type="text"
                 class="form-control"
                 readonly="readonly"
-                value="{{ emissionFieldReport?.totalCO2.toFixed(3) }}"
+                value="{{ emissionFieldReport?.totalCO2 | number: '1.2-2' : 'it' }}"
               />
             </div>
             <div class="col-md-2">

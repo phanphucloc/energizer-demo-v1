@@ -23,6 +23,7 @@ import { forkJoin } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MESSAGE } from 'src/app/common/data/message';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-detail-enterprises',
@@ -58,7 +59,8 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
 
   constructor(
     private enterprisesService: EnterprisesService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private decimalPipe: DecimalPipe
   ) {
     super();
   }
@@ -210,7 +212,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
             });
 
             const productControl = new FormControl(
-              { value: production.volume, disabled: true },
+              { value: this.decimalPipe.transform(production.volume, '1.2-2', 'it' ), disabled: true },
               Validators.required
             );
 
@@ -242,7 +244,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
         let energyConsumptionControl: FormControl;
         if (energyConsumptionItem){
            energyConsumptionControl = new FormControl(
-            { value: energyConsumptionItem.volume, disabled: true },
+            { value: this.decimalPipe.transform(energyConsumptionItem.volume, '1.2-2', 'it' ), disabled: true },
             Validators.required
           );
         }

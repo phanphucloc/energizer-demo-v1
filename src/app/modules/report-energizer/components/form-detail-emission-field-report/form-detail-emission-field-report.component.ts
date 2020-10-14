@@ -52,7 +52,10 @@ export class FormDetailEmissionFieldReportComponent
 
   public loadData(): void {
     this.elementFormDetail.showLoadingCenter();
-    forkJoin([this.reportService.getEmissionReportByFieldId(this.fieldId, ''), this.reportService.getListYears()])
+    forkJoin([
+      this.reportService.getEmissionReportByFieldId(this.fieldId, ''),
+      this.reportService.getListYears()
+    ])
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result) => {

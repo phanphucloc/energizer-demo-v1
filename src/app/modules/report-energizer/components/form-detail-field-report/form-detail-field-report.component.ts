@@ -51,7 +51,10 @@ export class FormDetailFieldReportComponent extends BaseDestroyableDirective imp
 
   public loadData(): void {
     this.elementFormDetail.showLoadingCenter();
-    forkJoin([this.reportService.getFieldReportByFieldId(this.fieldId, ''), this.reportService.getListYears()])
+    forkJoin([
+      this.reportService.getFieldReportByFieldId(this.fieldId, ''),
+      this.reportService.getListYears()
+    ])
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result) => {
