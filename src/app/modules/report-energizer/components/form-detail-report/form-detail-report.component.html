@@ -57,7 +57,7 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-md-4 bg-secondary col-form-label rounded">
-              {{ detailEmissionReport?.employees }}
+              {{ detailEmissionReport?.employees | number: '1.0-0' : 'it' }}
             </div>
           </div>
         </div>
