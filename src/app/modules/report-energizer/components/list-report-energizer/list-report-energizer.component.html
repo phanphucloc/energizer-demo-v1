@@ -3,9 +3,9 @@
     <tr>
       <th>Năm khai báo</th>
       <th>Tên doanh nghiệp</th>
-      <th>Mã số thuế</th>
+      <th class="text-right">Mã số thuế</th>
       <th>Địa chỉ</th>
-      <th>Số lao động</th>
+      <th class="text-right">Số lao động</th>
       <th></th>
     </tr>
   </thead>
@@ -13,15 +13,16 @@
     <tr *ngFor="let report of listReportEnergizer; trackBy: trackByFn">
       <td>{{ report.year }}</td>
       <td>{{ report.enterpriseName }}</td>
-      <td>{{ report.taxCode }}</td>
+      <td class="text-right">{{ report.taxCode }}</td>
       <td>{{ report.province }}</td>
-      <td>{{ report.employees }}</td>
+      <td class="text-right">{{ report.employees }}</td>
       <td class="very-small-width text-center">
         <i
           (click)="redirectToEditPage(report.id)"
-          class="button-icon fa fa-file-text-o"
+          class="button-icon fa fa-file-text-o mr-2 text-primary"
           aria-hidden="true"
         >
+          Chi tiết
         </i>
       </td>
     </tr>

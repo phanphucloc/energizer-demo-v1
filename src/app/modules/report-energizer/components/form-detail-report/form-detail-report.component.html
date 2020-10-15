@@ -3,16 +3,6 @@
     <div class="col-md-2"></div>
     <div class="col-md-10">
       <div class="form-group row">
-        <label class="col-md-3 col-form-label"> Năm khai báo </label>
-        <div class="col-md-9">
-          <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
-              {{ detailEmissionReport?.year }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
         <label class="col-md-3 col-form-label"> Tên doanh nghiệp </label>
         <div class="col-md-9">
           <div class="row ml-4">
@@ -22,26 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label"> Mã số thuế </label>
-        <div class="col-md-9">
-          <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
-              {{ detailEmissionReport?.taxCode }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label"> Địa chỉ theo tỉnh </label>
-        <div class="col-md-9">
-          <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
-              {{ detailEmissionReport?.province }}
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div class="form-group row">
         <label class="col-md-3 col-form-label"> Tên ngành sản xuất kinh doanh </label>
         <div class="col-md-9">
@@ -52,21 +23,56 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Địa chỉ theo tỉnh </label>
+        <div class="col-md-9">
+          <div class="row ml-4">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded">
+              {{ detailEmissionReport?.province }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Năm khai báo </label>
+        <div class="col-md-9">
+          <div class="row ml-4">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+              {{ detailEmissionReport?.year }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label"> Mã số thuế </label>
+        <div class="col-md-9">
+          <div class="row ml-4">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+              {{ detailEmissionReport?.taxCode }}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group row">
         <label class="col-md-3 col-form-label"> Số lao động hoạt động trong năm </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.employees | number: '1.0-0' : 'it' }}
             </div>
           </div>
         </div>
       </div>
+
       <div class="form-group row">
         <label class="col-md-3 col-form-label"> Phát thải CO2 do tiêu thụ điện </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.electricCO2 | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -87,7 +93,7 @@
         <label class="col-md-2 col-form-label"> CO2 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.energyProcess.co2 | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -102,7 +108,7 @@
         <label class="col-md-2 col-form-label"> CH4 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.energyProcess.ch4 | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -117,7 +123,7 @@
         <label class="col-md-2 col-form-label"> N2O </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.energyProcess.n2O | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -138,7 +144,7 @@
         <label class="col-md-2 col-form-label"> CO2 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.productionProcess.co2 | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -153,7 +159,7 @@
         <label class="col-md-2 col-form-label"> CH4 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.productionProcess.ch4 | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -168,7 +174,7 @@
         <label class="col-md-2 col-form-label"> N2O </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.productionProcess.n2O | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -182,7 +188,7 @@
         <label class="col-md-3 col-form-label"> Tổng CO2 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
               {{ detailEmissionReport?.totalCO2 | number: '1.2-2' : 'it' }}
             </div>
             <div class="col-md-2">
@@ -195,6 +201,6 @@
   </div>
 
   <div class="form-actions text-center">
-    <button class="btn btn-secondary" (click)="cancel()" type="button">Quay lại</button>
+    <button class="btn btn-primary" (click)="cancel()" type="button">Quay lại</button>
   </div>
 </div>
