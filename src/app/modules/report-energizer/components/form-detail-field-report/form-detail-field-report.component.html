@@ -29,7 +29,7 @@
         <label class="col-md-3 col-form-label"> Tên Lĩnh vực </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-md-4 bg-secondary col-form-label rounded mr-3">
               {{ fieldReport?.fieldName }}
             </div>
           </div>
@@ -40,7 +40,7 @@
         <label class="col-md-3 col-form-label"> Số lao động hoạt động trong năm </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.employees | number: '1.0-0' : 'it' }}
             </div>
           </div>
@@ -51,10 +51,10 @@
         <label class="col-md-3 col-form-label"> Tiêu thụ điện </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.electric | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (MWh) </label>
             </div>
           </div>
@@ -72,10 +72,10 @@
         <label class="col-md-2 col-form-label"> Than antraxit </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.antraxitCoal | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -87,10 +87,10 @@
         <label class="col-md-2 col-form-label"> Than bitum </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.bitumCoal | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -102,10 +102,10 @@
         <label class="col-md-2 col-form-label"> Than non </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.bitumCoal | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -117,10 +117,10 @@
         <label class="col-md-2 col-form-label"> Than cốc </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.lignite | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -132,10 +132,10 @@
         <label class="col-md-2 col-form-label"> Than bùn </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.coke | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -147,10 +147,10 @@
         <label class="col-md-2 col-form-label"> Dầu hỏa </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.fuel | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -162,10 +162,10 @@
         <label class="col-md-2 col-form-label"> Dầu DO </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.dooil | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -177,10 +177,10 @@
         <label class="col-md-2 col-form-label"> Dầu FO </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.fooil | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -192,10 +192,10 @@
         <label class="col-md-2 col-form-label"> LPG </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.lpg | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -207,10 +207,10 @@
         <label class="col-md-2 col-form-label"> Khí sinh học </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.bioGas | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>
@@ -222,10 +222,10 @@
         <label class="col-md-2 col-form-label"> Sinh khối </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ fieldReport?.biomass | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 pl-0">
               <label class="col-form-label"> (Nghìn tấn) </label>
             </div>
           </div>

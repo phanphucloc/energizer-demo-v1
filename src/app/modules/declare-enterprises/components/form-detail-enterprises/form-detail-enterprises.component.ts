@@ -164,7 +164,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
           town: this.enterprises.town,
           xCoordinate: this.enterprises.xcoordinate,
           yCoordinate: this.enterprises.ycoordinate,
-          productionValue: this.decimalPipe.transform(this.enterprises.productionValue, '1.0-0', 'it'),
+          productionValue: this.decimalPipe.transform(this.enterprises.productionValue, '1.0-2', 'it'),
           employees: this.decimalPipe.transform(this.enterprises.employees, '1.0-0', 'it' ),
           branchesId: this.enterprises.branches,
         },

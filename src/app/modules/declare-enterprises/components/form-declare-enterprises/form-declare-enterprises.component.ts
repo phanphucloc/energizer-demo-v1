@@ -75,7 +75,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           town: new FormControl('', Validators.required),
           xCoordinate: new FormControl('', Validators.required),
           yCoordinate: new FormControl('', Validators.required),
-          productionValue: new FormControl('', Validators.required),
+          productionValue: new FormControl('', [Validators.required, Validators.min(0)]),
           employees: new FormControl('', Validators.required),
           branchesId: new FormControl([]),
         }),
@@ -236,7 +236,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
             const productControl = new FormControl(
               production.volume,
-              Validators.required
+              [Validators.required, Validators.min(0)]
             );
 
             productionGroup.addControl(
@@ -260,7 +260,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     if (branch) {
       const productionGroup: FormGroup = new FormGroup({});
       branch.listProduct.forEach((production) => {
-        const productControl = new FormControl(0, [Validators.required]);
+        const productControl = new FormControl(0, [Validators.required, Validators.min(0)]);
         productionGroup.addControl(production.id.toString(), productControl);
       });
       this.formAddEnterprises.addControl('production' + branch.id, productionGroup);
@@ -280,10 +280,10 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
         let energyConsumptionControl: FormControl;
         if (energyConsumptionItem){
-           energyConsumptionControl = new FormControl(energyConsumptionItem.volume, Validators.required);
+           energyConsumptionControl = new FormControl(energyConsumptionItem.volume, [Validators.required, Validators.min(0)]);
         }
         else{
-            energyConsumptionControl = new FormControl(0, Validators.required);
+            energyConsumptionControl = new FormControl(0, [Validators.required, Validators.min(0)]);
         }
 
         energyConsumptionGroup.addControl(

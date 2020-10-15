@@ -32,7 +32,7 @@
         <label class="col-md-3 col-form-label"> Tên Lĩnh vực </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-md-4 bg-secondary col-form-label rounded">
+            <div class="col-md-4 bg-secondary col-form-label rounded mr-3">
               {{ emissionFieldReport?.fieldName }}
             </div>
           </div>
@@ -42,11 +42,8 @@
         <label class="col-md-3 col-form-label"> Số lao động hoạt động trong năm </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right text-right mr-3">
               {{ emissionFieldReport?.employees | number: '1.0-0' : 'it' }}
-            </div>
-            <div class="col-md-2">
-              <label class="col-form-label"> (Người) </label>
             </div>
           </div>
         </div>
@@ -56,10 +53,10 @@
         <label class="col-md-3 col-form-label"> Phát thải CO2 do tiêu thụ điện </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.electricCO2 | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -77,10 +74,10 @@
         <label class="col-md-2 col-form-label"> CO2 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.energyProcess.co2 | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -92,10 +89,10 @@
         <label class="col-md-2 col-form-label"> CH4 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.energyProcess.ch4 | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -107,10 +104,10 @@
         <label class="col-md-2 col-form-label"> N2O </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.energyProcess.n2O | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -128,10 +125,10 @@
         <label class="col-md-2 col-form-label"> CO2 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.productionProcess.co2 | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -143,10 +140,10 @@
         <label class="col-md-2 col-form-label"> CH4 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.productionProcess.ch4 | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -158,10 +155,10 @@
         <label class="col-md-2 col-form-label"> N2O </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.productionProcess.n2O | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -172,10 +169,10 @@
         <label class="col-md-3 col-form-label"> Tổng C02 tương đương QTNL</label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.co2inEnergyProcess | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -186,10 +183,10 @@
         <label class="col-md-3 col-form-label"> Tổng CO2 tương đương QTSX</label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.co2inProductionProcess | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>
@@ -200,10 +197,10 @@
         <label class="col-md-3 col-form-label"> Tổng CO2 </label>
         <div class="col-md-9">
           <div class="row ml-4">
-            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right">
+            <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
               {{ emissionFieldReport?.totalCO2 | number: '1.2-2' : 'it' }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pl-0">
               <label class="col-form-label"> (Kg) </label>
             </div>
           </div>

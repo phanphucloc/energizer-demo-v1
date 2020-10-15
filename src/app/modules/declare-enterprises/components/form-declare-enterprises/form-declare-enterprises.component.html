@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-md-12 col-form-label">
             <label>
-              <strong>
+              <strong class="text-primary">
                 <i class="fa fa-square" aria-hidden="true"></i>
                 Thông tin chung doanh nghiệp
               </strong>
@@ -133,7 +133,7 @@
                             <input type="text"
                               id="coordinates-x-input"
                               name="coordinates-x-input"
-                              class="form-control"
+                              class="form-control text-right"
                               placeholder="Tọa độ X..."
                               formControlName="xCoordinate"/>
                             <div class="invalid-feedback"
@@ -158,7 +158,7 @@
                             <input type="text"
                               id="coordinates-y-input"
                               name="coordinates-y-input"
-                              class="form-control"
+                              class="form-control text-right"
                               placeholder="Tọa độ Y..."
                               formControlName="yCoordinate"/>
                             <div class="invalid-feedback"
@@ -175,48 +175,54 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label"
-                        for="average-labor-input">
-                        Số lao động trung bình năm
-                      </label>
-                      <div class="col-md-9">
-                        <input type="text"
-                          id="average-labor-input"
-                          name="average-labor-input"
-                          class="form-control"
-                          placeholder="Số lao động trung bình năm..."
-                          formControlName="employees"
-                          appInputOnlyNumberForm/>
-                        <div class="invalid-feedback"
-                          *ngIf="!formAddEnterprises.get(
-                          'baseInfo.address.employees'
-                          ).valid &&
-                          formAddEnterprises.get('baseInfo.address.employees')
-                          .touched">
-                          <div>Vui lòng nhập số lao động trung bình năm</div>
+                      <div class="col-6">
+                        <div class="row">
+                          <label class="col-md-6 col-form-label"
+                            for="average-labor-input">
+                            Số lao động trung bình năm
+                          </label>
+                          <div class="col-md-6">
+                            <input type="text"
+                              id="average-labor-input"
+                              name="average-labor-input"
+                              class="form-control text-right"
+                              placeholder="Số lao động trung bình năm..."
+                              formControlName="employees"
+                              appInputOnlyNumberForm/>
+                            <div class="invalid-feedback"
+                              *ngIf="!formAddEnterprises.get(
+                              'baseInfo.address.employees'
+                              ).valid &&
+                              formAddEnterprises.get('baseInfo.address.employees')
+                              .touched">
+                              <div>Vui lòng nhập số lao động trung bình năm</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-md-3 col-form-label"
-                        for="production-value-input">
-                        Giá trị sản xuất của doanh nghiệp
-                      </label>
-                      <div class="col-md-9">
-                        <input type="number"
-                          id="production-value-input"
-                          name="production-value-input"
-                          class="form-control"
-                          placeholder="Giá trị sản xuất của doanh nghiệp"
-                          formControlName="productionValue" />
-                        <div class="invalid-feedback"
-                          *ngIf="!formAddEnterprises.get(
-                          'baseInfo.address.productionValue'
-                          ).valid &&
-                          formAddEnterprises.get(
-                          'baseInfo.address.productionValue'
-                          ).touched">
-                          <div>Vui lòng nhập giá trị sản xuất</div>
+                      <div class="col-6">
+                        <div class="row">
+                          <label class="col-md-6 col-form-label"
+                            for="production-value-input">
+                            Giá trị sản xuất của doanh nghiệp
+                          </label>
+                          <div class="col-md-6">
+                            <input type="number"
+                              id="production-value-input"
+                              name="production-value-input"
+                              class="form-control text-right"
+                              placeholder="Giá trị sản xuất..."
+                              formControlName="productionValue" />
+                            <div class="invalid-feedback"
+                              *ngIf="!formAddEnterprises.get(
+                              'baseInfo.address.productionValue'
+                              ).valid &&
+                              formAddEnterprises.get(
+                              'baseInfo.address.productionValue'
+                              ).touched">
+                              <div>Vui lòng nhập giá trị sản xuất</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -265,7 +271,7 @@
         <div class="row">
           <div class="col-md-12 col-form-label">
             <label>
-              <strong>
+              <strong class="text-primary">
                 <i class="fa fa-square" aria-hidden="true"></i>
                 Tiêu thụ năng lượng cho sản xuất
               </strong>
@@ -273,8 +279,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-11">
+          <div class="col-md-2"></div>
+          <div class="col-md-10">
             <ng-container *ngFor="let itemEnergyConsumption of
               listEnergyConsumption">
               <div class="form-group row">
@@ -284,12 +290,12 @@
                 </label>
                 <div class="col-md-9">
                   <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                       <input [formControlName]="itemEnergyConsumption.id"
                         type="number"
                         id="energy-consumption-{{itemEnergyConsumption.id}}"
                         name="coal-from-pit"
-                        class="form-control"
+                        class="form-control text-right"
                         placeholder="{{itemEnergyConsumption.name }}..." />
                       <div class="invalid-feedback"
                         *ngIf="!formAddEnterprises.get(
@@ -331,7 +337,7 @@
           <div class="row">
             <div class="col-md-12 col-form-label">
               <label>
-                <strong>
+                <strong class="text-primary">
                   <i class="fa fa-square" aria-hidden="true"></i>
                   Khai báo sản lượng sản phẩm {{ branchSelected.name }}
                 </strong>
@@ -339,8 +345,8 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-11">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
               <ng-container *ngFor="let itemProduction of branchSelected.listProduct">
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="product-{{itemProduction.productionId }}">
@@ -348,10 +354,10 @@
                   </label>
                   <div class="col-md-9">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-4">
                         <input type="number" id="product-{{ itemProduction.id }}"
                           name="coal-from-pit"
-                          class="form-control"
+                          class="form-control text-right"
                           placeholder="{{ itemProduction.name }}..."
                           [formControlName]="itemProduction.id"/>
                         <div class="invalid-feedback"
@@ -413,7 +419,7 @@
         #buttonSubmit="drLoadingOnElement">
         {{ enterprisesId ? 'Chỉnh sửa' : 'Thêm'}}
       </button>
-      <button class="btn btn-secondary" (click)="cancel()" type="button">
+      <button class="btn btn-primary" (click)="cancel()" type="button">
         Quay lại
       </button>
     </div>
