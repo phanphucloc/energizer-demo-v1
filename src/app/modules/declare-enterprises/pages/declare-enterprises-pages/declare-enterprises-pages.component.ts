@@ -51,12 +51,8 @@ export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective i
   }
 
   public submit(status: string): void{
-    if (status === 'ADD_SUCCESS'){
-      this.toastr.success(MESSAGE.ADD_SUCCESS, MESSAGE.NOTIFICATION);
-      this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
-    }
-    else if (status === 'EDIT_SUCCESS'){
-      this.toastr.success(MESSAGE.EDIT_SUCCESS, MESSAGE.NOTIFICATION);
+    if (status === 'ADD_SUCCESS' || status === 'EDIT_SUCCESS'){
+      this.toastr.success(MESSAGE[status], MESSAGE.NOTIFICATION);
       this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
     }
     else{

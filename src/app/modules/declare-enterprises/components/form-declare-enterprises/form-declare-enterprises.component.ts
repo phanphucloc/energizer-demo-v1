@@ -1,14 +1,14 @@
-import { IProductionData, IDropdown, IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
+import { IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
-import { IBranches, IEnergyData, IEnterprisesToServer, IFields } from '../../abstract/enterprises.interface';
+import { IBranches, IEnterprisesToServer, IFields } from '../../abstract/enterprises.interface';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
-import { EnergyData, EnterprisesToServer, ProductionData, Branches, Dropdown } from '../../models/enterprises.model';
+import { EnergyData, EnterprisesToServer, ProductionData } from '../../models/enterprises.model';
 import { MESSAGE } from 'src/app/common/data/message';
 
 @Component({

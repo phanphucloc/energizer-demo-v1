@@ -13,11 +13,7 @@ import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyab
 import {
   IEnterprisesToServer,
   IBranches,
-  IEnergyData,
-  IProductionData,
-  IBranchesValue,
   IEnergy,
-  IProduction,
 } from '../../abstract/enterprises.interface';
 import { forkJoin } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -33,8 +29,6 @@ import { DecimalPipe } from '@angular/common';
 export class FormDetailEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
   @ViewChild('formDetail', { static: true })
   private elementFormDetail: LoadingOnElementDirective;
-  @ViewChild('loadingFormProduction')
-  private elementLoadingFormProduction: LoadingOnElementDirective;
 
   @Input() public enterprisesId: number;
   @Input() public fieldsId: number;
@@ -170,29 +164,6 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
         },
       },
     });
-  }
-
-  private getFieldsProductionForForm(branchesIds: number[]): void {
-    this.elementLoadingFormProduction.showLoadingCenter();
-    this.enterprisesService
-      .getListProductBranchesIds(branchesIds)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (resultListProduct: IProduction[]) => {
-          this.branchesSelected.forEach((branch) => {
-            const listProduct = resultListProduct.filter((resultProduct) => {
-              return resultProduct.branchId === branch.id;
-            });
-            branch.listProduct = listProduct;
-          });
-          this.addFieldsProductionForForm(this.branchesSelected);
-          this.elementLoadingFormProduction.hideLoadingCenter();
-        },
-        () => {
-          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
-          this.elementLoadingFormProduction.hideLoadingCenter();
-        }
-      );
   }
 
   private addFieldsProductionForForm(listBranches: IBranches[]): void {
