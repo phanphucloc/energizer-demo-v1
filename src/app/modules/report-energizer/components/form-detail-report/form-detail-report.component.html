@@ -73,10 +73,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.electricCO2 | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.electricCO2 / 1000 | number: '1.3-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tCO2) </label>
             </div>
           </div>
         </div>
@@ -94,10 +94,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.energyProcess.co2 | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.energyProcess.co2 / 1000 | number: '1.3-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tCO2) </label>
             </div>
           </div>
         </div>
@@ -109,10 +109,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.energyProcess.ch4 | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.energyProcess.ch4 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (kgCH4) </label>
             </div>
           </div>
         </div>
@@ -124,10 +124,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.energyProcess.n2O | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.energyProcess.n2O | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (kgN2O) </label>
             </div>
           </div>
         </div>
@@ -145,10 +145,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.productionProcess.co2 | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.productionProcess.co2 / 1000 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tCO2) </label>
             </div>
           </div>
         </div>
@@ -160,10 +160,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.productionProcess.ch4 | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.productionProcess.ch4 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (kgCH4) </label>
             </div>
           </div>
         </div>
@@ -175,24 +175,24 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.productionProcess.n2O | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.productionProcess.n2O | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (kgN2O) </label>
             </div>
           </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 col-form-label"> Tổng CO2 </label>
+        <label class="col-md-3 col-form-label"> Tổng CO2 tương đương </label>
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ detailEmissionReport?.totalCO2 | number: '1.2-2' : 'it' }}
+              {{ detailEmissionReport?.totalCO2 / 1000 | number: '1.3-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tCO2tđ) </label>
             </div>
           </div>
         </div>

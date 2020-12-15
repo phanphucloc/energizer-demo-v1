@@ -52,10 +52,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ fieldReport?.electric | number: '1.2-2' : 'it' }}
+              {{ fieldReport?.electric / 1000 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-3 pl-0">
-              <label class="col-form-label"> (MWh) </label>
+              <label class="col-form-label"> (GWh) </label>
             </div>
           </div>
         </div>

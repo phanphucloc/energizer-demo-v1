@@ -54,10 +54,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.electricCO2 | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.electricCO2 / 1000000 | number: '1.3-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (ktCO2) </label>
             </div>
           </div>
         </div>
@@ -75,10 +75,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.energyProcess.co2 | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.energyProcess.co2 / 1000000 | number: '1.3-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (ktCO2) </label>
             </div>
           </div>
         </div>
@@ -90,10 +90,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.energyProcess.ch4 | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.energyProcess.ch4 / 1000| number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tCH4) </label>
             </div>
           </div>
         </div>
@@ -105,10 +105,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.energyProcess.n2O | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.energyProcess.n2O / 1000| number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tN2O) </label>
             </div>
           </div>
         </div>
@@ -126,10 +126,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.productionProcess.co2 | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.productionProcess.co2 / 1000000 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (ktCO2) </label>
             </div>
           </div>
         </div>
@@ -141,10 +141,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.productionProcess.ch4 | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.productionProcess.ch4 / 1000 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tCH4) </label>
             </div>
           </div>
         </div>
@@ -156,10 +156,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.productionProcess.n2O | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.productionProcess.n2O / 1000| number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (tN2O) </label>
             </div>
           </div>
         </div>
@@ -170,10 +170,10 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.co2inEnergyProcess | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.co2inEnergyProcess / 1000000 | number: '1.3-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (ktCO2) </label>
             </div>
           </div>
         </div>
@@ -184,24 +184,24 @@
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.co2inProductionProcess | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.co2inProductionProcess / 1000000 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (ktCO2) </label>
             </div>
           </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-md-3 col-form-label"> Tổng CO2 </label>
+        <label class="col-md-3 col-form-label"> Tổng CO2 tương đương</label>
         <div class="col-md-9">
           <div class="row ml-4">
             <div class="col-xl-3 col-md-4 bg-secondary col-form-label rounded text-right mr-3">
-              {{ emissionFieldReport?.totalCO2 | number: '1.2-2' : 'it' }}
+              {{ emissionFieldReport?.totalCO2 / 1000000 | number: '1.2-3' : 'it' }}
             </div>
             <div class="col-md-2 pl-0">
-              <label class="col-form-label"> (Kg) </label>
+              <label class="col-form-label"> (ktCO2tđ) </label>
             </div>
           </div>
         </div>
