@@ -169,6 +169,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
   public onProvinceChange(code: string): void {
     this.listDistricts = this.locationService.getListDistrictsByProvince(code);
+    this.onDistrictChange(this.listDistricts[0].code);
   }
 
   public onDistrictChange(code: string): void {
