@@ -16,6 +16,8 @@ export class Enterprises implements IEnterprises {
   fieldId: number;
   name: string;
   foundedYear: number;
+  taxCode: string;
+  phoneNumber: string;
   province: string;
   district: string;
   town: string;
@@ -30,6 +32,8 @@ export class EnterprisesToServer implements IEnterprisesToServer {
   id: number;
   name: string;
   foundedYear: number;
+  taxCode: string;
+  phoneNumber: string;
   province: string;
   district: string;
   town: string;

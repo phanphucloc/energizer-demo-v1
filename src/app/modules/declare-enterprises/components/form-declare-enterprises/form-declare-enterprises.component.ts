@@ -1,22 +1,44 @@
-import { IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import {
+  IBranchesValue,
+  IEnergy,
+  IProduction,
+} from '../../abstract/enterprises.interface';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
-import { IBranches, IEnterprisesToServer, IFields } from '../../abstract/enterprises.interface';
+import {
+  IBranches,
+  IEnterprisesToServer,
+  IFields,
+} from '../../abstract/enterprises.interface';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
-import { EnergyData, EnterprisesToServer, ProductionData } from '../../models/enterprises.model';
+import {
+  EnergyData,
+  EnterprisesToServer,
+  ProductionData,
+} from '../../models/enterprises.model';
 import { MESSAGE } from 'src/app/common/data/message';
+import { LocationService } from 'src/app/common/services/location.service';
 
 @Component({
   selector: 'app-form-declare-enterprises',
   templateUrl: './form-declare-enterprises.component.html',
   styleUrls: ['./form-declare-enterprises.component.scss'],
 })
-export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
+export class FormDeclareEnterprisesComponent
+  extends BaseDestroyableDirective
+  implements OnInit {
   @ViewChild('loadingFormAdd', { static: true })
   private elementLoadingFormAdd: LoadingOnElementDirective;
   @ViewChild('buttonSubmit')
@@ -39,7 +61,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     unSelectAllText: 'UnSelect All',
     itemsShowLimit: 3,
     allowSearchFilter: false,
-    defaultOpen: false
+    defaultOpen: false,
   };
   public enterprises: IEnterprisesToServer;
   public formAddEnterprises: FormGroup;
@@ -52,6 +74,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   constructor(
     private enterprisesService: EnterprisesService,
     private toastr: ToastrService,
+    private locationService: LocationService
   ) {
     super();
   }
@@ -65,17 +88,19 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     this.formAddEnterprises = new FormGroup({
       baseInfo: new FormGroup({
         name: new FormControl('', Validators.required),
-        foundedYear: new FormControl(
-          2020,
-          Validators.required
-        ),
+        foundedYear: new FormControl(2020, Validators.required),
+        taxCode: new FormControl('', Validators.required),
+        phoneNumber: new FormControl('', Validators.required),
         address: new FormGroup({
           province: new FormControl('', Validators.required),
           district: new FormControl('', Validators.required),
           town: new FormControl('', Validators.required),
           xCoordinate: new FormControl('', Validators.required),
           yCoordinate: new FormControl('', Validators.required),
-          productionValue: new FormControl('', [Validators.required, Validators.min(0)]),
+          productionValue: new FormControl('', [
+            Validators.required,
+            Validators.min(0),
+          ]),
           employees: new FormControl('', Validators.required),
           branchesId: new FormControl([]),
         }),
@@ -84,13 +109,19 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   }
 
   public loadData(): void {
-    const groupForkJoin: (Observable<IBranches[]> | Observable<IEnergy[]> | Observable<IEnterprisesToServer>)[] = [
+    const groupForkJoin: (
+      | Observable<IBranches[]>
+      | Observable<IEnergy[]>
+      | Observable<IEnterprisesToServer>
+    )[] = [
       this.enterprisesService.getListBranchesByFieldsId(this.fieldsId),
       this.enterprisesService.getListEnergyConsumption(),
     ];
 
-    if (this.enterprisesId){
-      groupForkJoin.push( this.enterprisesService.getEnterprisesById(this.enterprisesId));
+    if (this.enterprisesId) {
+      groupForkJoin.push(
+        this.enterprisesService.getEnterprisesById(this.enterprisesId)
+      );
     }
 
     this.elementLoadingFormAdd.showLoadingCenter();
@@ -104,7 +135,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           const listEnergyConsumption = result[1] as IEnergy[];
           this.listEnergyConsumption = listEnergyConsumption;
 
-          if (result[2]){
+          if (result[2]) {
             this.enterprises = result[2] as IEnterprisesToServer;
             this.fetchBaseData();
             this.branchesSelected = this.enterprises.branches as IBranches[];
@@ -126,6 +157,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
       baseInfo: {
         name: this.enterprises.name,
         foundedYear: this.enterprises.foundedYear,
+        taxCode: this.enterprises.taxCode,
+        phoneNumber: this.enterprises.phoneNumber,
         address: {
           province: this.enterprises.province,
           district: this.enterprises.district,
@@ -141,8 +174,10 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   }
 
   public dropDownClose(): void {
-    if (this.isOpenedDropDown){
-      this.formAddEnterprises.get('baseInfo.address.branchesId').markAsTouched();
+    if (this.isOpenedDropDown) {
+      this.formAddEnterprises
+        .get('baseInfo.address.branchesId')
+        .markAsTouched();
     }
     this.isOpenedDropDown = false;
   }
@@ -178,7 +213,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   }
 
   public submit(): void {
-    if (this.validateForm()){
+    if (this.validateForm()) {
       const valueFormatted = this.formatDataSendSever();
       this.elementButtonSubmit.showLoadingCenter('16px', 'auto');
       if (this.enterprisesId) {
@@ -194,9 +229,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
               this.elementButtonSubmit.hideLoadingCenter();
               this.submitEmitter.emit('ERROR');
             }
-        );
-      }
-      else {
+          );
+      } else {
         this.enterprisesService
           .addEnterprises(valueFormatted)
           .pipe(takeUntil(this.destroy$))
@@ -209,7 +243,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
               this.elementButtonSubmit.hideLoadingCenter();
               this.submitEmitter.emit('ERROR');
             }
-        );
+          );
       }
     }
   }
@@ -226,7 +260,6 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
         this.enterprises.productions.forEach((production) => {
           if (production.branchId === branch.id) {
-
             branch.listProduct.push({
               branchId: branch.id,
               id: production.productionId,
@@ -234,16 +267,15 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
               unit: production.unit,
             });
 
-            const productControl = new FormControl(
-              production.volume,
-              [Validators.required, Validators.min(0)]
-            );
+            const productControl = new FormControl(production.volume, [
+              Validators.required,
+              Validators.min(0),
+            ]);
 
             productionGroup.addControl(
               production.productionId.toString(),
               productControl
             );
-
           }
         });
         this.formAddEnterprises.addControl(
@@ -255,35 +287,47 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     }
   }
 
-
   private addFieldsProductionForForm(branch: IBranches): void {
     if (branch) {
       const productionGroup: FormGroup = new FormGroup({});
       branch.listProduct.forEach((production) => {
-        const productControl = new FormControl(0, [Validators.required, Validators.min(0)]);
+        const productControl = new FormControl(0, [
+          Validators.required,
+          Validators.min(0),
+        ]);
         productionGroup.addControl(production.id.toString(), productControl);
       });
-      this.formAddEnterprises.addControl('production' + branch.id, productionGroup);
+      this.formAddEnterprises.addControl(
+        'production' + branch.id,
+        productionGroup
+      );
       this.formAddEnterprises.updateValueAndValidity();
     }
   }
 
-  private addFieldsEnergyConsumptionForForm(listEnergyConsumption: IEnergy[]): void {
+  private addFieldsEnergyConsumptionForForm(
+    listEnergyConsumption: IEnergy[]
+  ): void {
     if (listEnergyConsumption) {
       const energyConsumptionGroup: FormGroup = new FormGroup({});
       listEnergyConsumption.forEach((energyConsumption) => {
-
-        const energyConsumptionItem = this.enterprises?.energies.find((energyConsumptionData) => {
+        const energyConsumptionItem = this.enterprises?.energies.find(
+          (energyConsumptionData) => {
             return energyConsumptionData.energyId === energyConsumption.id;
           }
         );
 
         let energyConsumptionControl: FormControl;
-        if (energyConsumptionItem){
-           energyConsumptionControl = new FormControl(energyConsumptionItem.volume, [Validators.required, Validators.min(0)]);
-        }
-        else{
-            energyConsumptionControl = new FormControl(0, [Validators.required, Validators.min(0)]);
+        if (energyConsumptionItem) {
+          energyConsumptionControl = new FormControl(
+            energyConsumptionItem.volume,
+            [Validators.required, Validators.min(0)]
+          );
+        } else {
+          energyConsumptionControl = new FormControl(0, [
+            Validators.required,
+            Validators.min(0),
+          ]);
         }
 
         energyConsumptionGroup.addControl(
@@ -291,7 +335,10 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           energyConsumptionControl
         );
       });
-      this.formAddEnterprises.setControl('energyConsumption', energyConsumptionGroup);
+      this.formAddEnterprises.setControl(
+        'energyConsumption',
+        energyConsumptionGroup
+      );
       this.formAddEnterprises.updateValueAndValidity();
     }
   }
@@ -305,21 +352,24 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     let countEnergyEmpty = 0;
     let countEnergy = 0;
     if (this.formAddEnterprises?.value?.energyConsumption != null) {
-      for (const field of Object.keys(this.formAddEnterprises?.value?.energyConsumption)) {
-        const energyConsumptionVolume = this.formAddEnterprises?.value?.energyConsumption[field];
-        if (! energyConsumptionVolume || Number(energyConsumptionVolume) === 0){
+      for (const field of Object.keys(
+        this.formAddEnterprises?.value?.energyConsumption
+      )) {
+        const energyConsumptionVolume = this.formAddEnterprises?.value
+          ?.energyConsumption[field];
+        if (!energyConsumptionVolume || Number(energyConsumptionVolume) === 0) {
           countEnergyEmpty++;
         }
         countEnergy++;
       }
     }
-    if (countEnergyEmpty === countEnergy){
-      this.formAddEnterprises
-        .get('energyConsumption')
-        ?.setErrors({ energyIncorrect: true, message : MESSAGE.ENERGY_INCORRECT });
+    if (countEnergyEmpty === countEnergy) {
+      this.formAddEnterprises.get('energyConsumption')?.setErrors({
+        energyIncorrect: true,
+        message: MESSAGE.ENERGY_INCORRECT,
+      });
       return false;
-    }
-    else{
+    } else {
       return true;
     }
   }
@@ -330,7 +380,9 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
       for (const branch of this.branchesSelected) {
         let countProductionEmpty = 0;
         let countProduction = 0;
-        const productionControl = this.formAddEnterprises.get('production' + branch.id);
+        const productionControl = this.formAddEnterprises.get(
+          'production' + branch.id
+        );
         if (productionControl?.value != null) {
           for (const field of Object.keys(productionControl?.value)) {
             const productionVolume = productionControl?.value[field.toString()];
@@ -341,15 +393,18 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           }
         }
         if (countProductionEmpty === countProduction && countProduction) {
-          this.formAddEnterprises
-            .get('production' + branch.id)
-            ?.setErrors({ productIncorrect: true, message : MESSAGE.PRODUCT_INCORRECT + ' ' +  branch.name});
-          statusValidateBranch =  false;
+          this.formAddEnterprises.get('production' + branch.id)?.setErrors({
+            productIncorrect: true,
+            message: MESSAGE.PRODUCT_INCORRECT + ' ' + branch.name,
+          });
+          statusValidateBranch = false;
         }
       }
-    }
-    else {
-      this.formAddEnterprises.setErrors({ productNoSelect: true, message : MESSAGE.BRANCHES_NO_SELECT });
+    } else {
+      this.formAddEnterprises.setErrors({
+        productNoSelect: true,
+        message: MESSAGE.BRANCHES_NO_SELECT,
+      });
       statusValidateBranch = false;
     }
     return statusValidateBranch;
@@ -367,6 +422,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     const enterprises: EnterprisesToServer = new EnterprisesToServer();
     enterprises.name = this.formAddEnterprises?.value?.baseInfo?.name;
     enterprises.foundedYear = this.formAddEnterprises?.value?.baseInfo?.foundedYear;
+    enterprises.taxCode = this.formAddEnterprises?.value?.baseInfo?.taxCode;
+    enterprises.phoneNumber = this.formAddEnterprises?.value?.baseInfo?.phoneNumber;
     enterprises.province = this.formAddEnterprises?.value?.baseInfo?.address?.province;
     enterprises.district = this.formAddEnterprises?.value?.baseInfo?.address?.district;
     enterprises.town = this.formAddEnterprises?.value?.baseInfo?.address?.town;
@@ -383,8 +440,11 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private formatEnergyConsumptionData(): EnergyData[] {
     const listEnergyConsumption: EnergyData[] = [];
     if (this.formAddEnterprises?.value?.energyConsumption != null) {
-      for (const field of Object.keys(this.formAddEnterprises?.value?.energyConsumption)) {
-        const energyConsumptionVolume = this.formAddEnterprises?.value?.energyConsumption[field];
+      for (const field of Object.keys(
+        this.formAddEnterprises?.value?.energyConsumption
+      )) {
+        const energyConsumptionVolume = this.formAddEnterprises?.value
+          ?.energyConsumption[field];
         const energyConsumption: EnergyData = new EnergyData();
         energyConsumption.energyId = Number(field);
         energyConsumption.volume = energyConsumptionVolume || 0;
@@ -396,9 +456,11 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
   private formatProductionData(): ProductionData[] {
     const listProduction: ProductionData[] = [];
-    if (this.branchesSelected){
-      this.branchesSelected.forEach(branch => {
-        const productionControl = this.formAddEnterprises.get('production' + branch.id);
+    if (this.branchesSelected) {
+      this.branchesSelected.forEach((branch) => {
+        const productionControl = this.formAddEnterprises.get(
+          'production' + branch.id
+        );
         if (productionControl?.value != null) {
           for (const field of Object.keys(productionControl?.value)) {
             const productionVolume = productionControl?.value[field.toString()];
@@ -416,11 +478,10 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private formatBranchesData(branches: IBranches[]): IBranchesValue[] {
     let branchesFormate: IBranchesValue[] = [];
     if (branches) {
-      branchesFormate = branches.map(branch => {
-        return {id : branch.id, name : branch.name };
+      branchesFormate = branches.map((branch) => {
+        return { id: branch.id, name: branch.name };
       });
     }
     return branchesFormate;
   }
 }
-

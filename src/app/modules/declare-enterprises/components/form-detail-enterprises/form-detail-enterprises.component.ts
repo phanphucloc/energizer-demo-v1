@@ -20,13 +20,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MESSAGE } from 'src/app/common/data/message';
 import { DecimalPipe } from '@angular/common';
+import { LocationService } from 'src/app/common/services/location.service';
 
 @Component({
   selector: 'app-form-detail-enterprises',
   templateUrl: './form-detail-enterprises.component.html',
   styleUrls: ['./form-detail-enterprises.component.scss'],
 })
-export class FormDetailEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
+export class FormDetailEnterprisesComponent
+  extends BaseDestroyableDirective
+  implements OnInit {
   @ViewChild('formDetail', { static: true })
   private elementFormDetail: LoadingOnElementDirective;
 
@@ -54,7 +57,8 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
   constructor(
     private enterprisesService: EnterprisesService,
     private toastr: ToastrService,
-    private decimalPipe: DecimalPipe
+    private decimalPipe: DecimalPipe,
+    private locationService: LocationService
   ) {
     super();
   }
@@ -73,6 +77,14 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
         ),
         foundedYear: new FormControl(
           { value: '2020', disabled: true },
+          Validators.required
+        ),
+        taxCode: new FormControl(
+          { value: '', disabled: true },
+          Validators.required
+        ),
+        phoneNumber: new FormControl(
+          { value: '', disabled: true },
           Validators.required
         ),
         address: new FormGroup({
@@ -104,9 +116,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
             { value: '', disabled: true },
             Validators.required
           ),
-          branchesId: new FormControl(
-            { value: null, disabled: true }
-          ),
+          branchesId: new FormControl({ value: null, disabled: true }),
         }),
       }),
     });
@@ -148,18 +158,35 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
   }
 
   private fetchBaseData(): void {
+    const province = this.locationService.getProvince(
+      this.enterprises.province
+    );
+    const district = this.locationService.getDistrict(
+      this.enterprises.district
+    );
+    const town = this.locationService.getCommune(this.enterprises.town);
     this.formDetailEnterprises.patchValue({
       baseInfo: {
         name: this.enterprises.name,
         foundedYear: this.enterprises.foundedYear,
+        taxCode: this.enterprises.taxCode,
+        phoneNumber: this.enterprises.phoneNumber,
         address: {
-          province: this.enterprises.province,
-          district: this.enterprises.district,
-          town: this.enterprises.town,
+          province: province ? province.name : this.enterprises.province,
+          district: district ? district.name : this.enterprises.district,
+          town: town ? town.name : this.enterprises.town,
           xCoordinate: this.enterprises.xcoordinate,
           yCoordinate: this.enterprises.ycoordinate,
-          productionValue: this.decimalPipe.transform(this.enterprises.productionValue, '1.0-2', 'it'),
-          employees: this.decimalPipe.transform(this.enterprises.employees, '1.0-0', 'it' ),
+          productionValue: this.decimalPipe.transform(
+            this.enterprises.productionValue,
+            '1.0-2',
+            'it'
+          ),
+          employees: this.decimalPipe.transform(
+            this.enterprises.employees,
+            '1.0-0',
+            'it'
+          ),
           branchesId: this.enterprises.branches,
         },
       },
@@ -174,7 +201,6 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
 
         this.enterprises.productions.forEach((production) => {
           if (production.branchId === branch.id) {
-
             branch.listProduct.push({
               branchId: branch.id,
               id: production.productionId,
@@ -183,7 +209,14 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
             });
 
             const productControl = new FormControl(
-              { value: this.decimalPipe.transform(production.volume, '1.2-2', 'it' ), disabled: true },
+              {
+                value: this.decimalPipe.transform(
+                  production.volume,
+                  '1.2-2',
+                  'it'
+                ),
+                disabled: true,
+              },
               Validators.required
             );
 
@@ -191,7 +224,6 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
               production.productionId.toString(),
               productControl
             );
-
           }
         });
         this.formDetailEnterprises.addControl(
@@ -202,25 +234,33 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
     }
   }
 
-  private addFieldsEnergyConsumptionForForm(listEnergyConsumption: IEnergy[]): void {
+  private addFieldsEnergyConsumptionForForm(
+    listEnergyConsumption: IEnergy[]
+  ): void {
     if (listEnergyConsumption) {
       const energyConsumptionGroup: FormGroup = new FormGroup({});
       listEnergyConsumption.forEach((energyConsumption) => {
-
-        const energyConsumptionItem = this.enterprises.energies.find((energyConsumptionData) => {
+        const energyConsumptionItem = this.enterprises.energies.find(
+          (energyConsumptionData) => {
             return energyConsumptionData.energyId === energyConsumption.id;
           }
         );
 
         let energyConsumptionControl: FormControl;
-        if (energyConsumptionItem){
-           energyConsumptionControl = new FormControl(
-            { value: this.decimalPipe.transform(energyConsumptionItem.volume, '1.2-2', 'it' ), disabled: true },
+        if (energyConsumptionItem) {
+          energyConsumptionControl = new FormControl(
+            {
+              value: this.decimalPipe.transform(
+                energyConsumptionItem.volume,
+                '1.2-2',
+                'it'
+              ),
+              disabled: true,
+            },
             Validators.required
           );
-        }
-        else{
-            energyConsumptionControl = new FormControl(
+        } else {
+          energyConsumptionControl = new FormControl(
             { value: 0, disabled: true },
             Validators.required
           );
