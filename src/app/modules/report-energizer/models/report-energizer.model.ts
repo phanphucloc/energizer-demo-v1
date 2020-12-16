@@ -51,3 +51,23 @@ export interface ReportComsumption {
   bioGas: number;
   biomass: number;
 }
+
+export interface IndicatorReport {
+  year: number;
+  greenhouseGas: number;
+  indirect: number;
+  energyProcess: number;
+  productionProcess: number;
+  scatter: number;
+  greenhouseGasCpmToProductionValue: number;
+  emissionPerCapita: number;
+  electric: number;
+  energy: number;
+  electricCpmToProductionValue: number;
+  energyCpmToProductionValue: number;
+  water: number;
+  waterPerProductionValue: number;
+  capacityOfRenewableElec: number;
+  renewableElectric: number;
+  proportionOfEnterpriseCertified: number;
+}

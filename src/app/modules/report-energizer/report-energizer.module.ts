@@ -16,6 +16,8 @@ import { DetailReportEmissionFieldPageComponent } from './pages/detail-report-em
 import { ListEmissionFieldReportComponent } from './components/list-emission-field-report/list-emission-field-report.component';
 import { FormDetailEmissionFieldReportComponent } from './components/form-detail-emission-field-report/form-detail-emission-field-report.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { IndicatorReportPageComponent } from './pages/indicator-report-page/indicator-report-page.component';
+import { FormDetailIndicatorReportComponent } from './components/form-detail-indicator-report/form-detail-indicator-report.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     DetailReportEmissionFieldPageComponent,
     ListEmissionFieldReportComponent,
     FormDetailEmissionFieldReportComponent,
+    IndicatorReportPageComponent,
+    FormDetailIndicatorReportComponent,
   ],
   imports: [
     CommonModule,

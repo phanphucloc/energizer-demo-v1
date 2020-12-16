@@ -20,4 +20,9 @@ export const listMenuReport: INavData[] = [
     url: '/reports/emission-by-fields/list-reports',
     icon: 'icon-chart',
   },
+  {
+    name: 'Các chỉ tiêu tổng hợp',
+    url: '/reports/indicators/detail',
+    icon: 'icon-chart',
+  },
 ];
