@@ -1,21 +1,32 @@
 import { IEnterprises } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { MESSAGE } from 'src/app/common/data/message';
 import { ToastrService } from 'ngx-toastr';
+import { LocationService } from 'src/app/common/services/location.service';
 
 @Component({
   selector: 'app-list-enterprises',
   templateUrl: './list-enterprises.component.html',
   styleUrls: ['./list-enterprises.component.scss'],
 })
-export class ListEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
-  @ViewChild('table', { static: true }) private elementTable: LoadingOnElementDirective;
+export class ListEnterprisesComponent
+  extends BaseDestroyableDirective
+  implements OnInit {
+  @ViewChild('table', { static: true })
+  private elementTable: LoadingOnElementDirective;
 
-  @Input() public set fieldsId(value: number){
+  @Input() public set fieldsId(value: number) {
     this.listEnterprises = [];
     this.fieldsIdValue = value;
     this.getListMiningIndustry();
@@ -30,12 +41,12 @@ export class ListEnterprisesComponent extends BaseDestroyableDirective implement
   constructor(
     private enterprisesService: EnterprisesService,
     private toastr: ToastrService,
-    ) {
+    public locationService: LocationService
+  ) {
     super();
   }
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void {}
 
   public getListMiningIndustry() {
     this.elementTable.showLoadingCenter();
@@ -66,10 +77,10 @@ export class ListEnterprisesComponent extends BaseDestroyableDirective implement
     return item.id;
   }
 
-  private joinAllBranchName(listEnterprises: IEnterprises[]): IEnterprises[]{
+  private joinAllBranchName(listEnterprises: IEnterprises[]): IEnterprises[] {
     const listEnterprisesFormatted: IEnterprises[] = [];
-    listEnterprises.forEach(enterprise => {
-      const listBranchName = enterprise.branches.map(branch => {
+    listEnterprises.forEach((enterprise) => {
+      const listBranchName = enterprise.branches.map((branch) => {
         return branch.name;
       });
       enterprise.branchNameAll = listBranchName.join(' - ');

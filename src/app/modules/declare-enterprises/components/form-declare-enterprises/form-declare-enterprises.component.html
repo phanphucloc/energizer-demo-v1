@@ -85,63 +85,49 @@
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label"
                         for="province-input">
-                        Tỉnh
+                        Tỉnh/Thành phố
                       </label>
                       <div class="col-md-9">
-                        <input type="text"
+                        <select
                           id="province-input"
                           formControlName="province"
                           name="province-input"
-                          class="form-control"
-                          placeholder="Tỉnh..." />
-                        <div class="invalid-feedback"
-                          *ngIf="!formAddEnterprises.get('baseInfo.address.province')
-                          .valid &&
-                          formAddEnterprises.get('baseInfo.address.province')
-                          .touched">
-                          <div>Vui lòng nhập tỉnh</div>
-                        </div>
+                          (change)="onProvinceChange($event.target.value)"
+                          class="form-control pointer">
+                          <option *ngFor="let province of listProvinces" value="{{province.code}}"> {{province.name}}</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label"
                         for="district-input">
-                        Huyện
+                        Quận/Huyện
                       </label>
                       <div class="col-md-9">
-                        <input type="text"
+                        <select
                           id="district-input"
                           name="district-input"
-                          class="form-control"
+                          class="form-control pointer"
                           placeholder="Huyện..."
-                          formControlName="district"/>
-                        <div class="invalid-feedback"
-                          *ngIf="!formAddEnterprises.get('baseInfo.address.district')
-                          .valid &&
-                          formAddEnterprises.get('baseInfo.address.district')
-                          .touched">
-                          <div>Vui lòng nhập huyện</div>
-                        </div>
+                          (change)="onDistrictChange($event.target.value)"
+                          formControlName="district">
+                          <option *ngFor="let district of listDistricts" value="{{district.code}}"> {{district.name}}</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label" for="town-input">
-                        Xã
+                        Xã/Phường
                       </label>
                       <div class="col-md-9">
-                        <input type="text"
+                        <select
                           id="town-input"
                           name="town-input"
-                          class="form-control"
+                          class="form-control pointer"
                           placeholder="Xã..."
-                          formControlName="town"/>
-                        <div class="invalid-feedback"
-                          *ngIf="!formAddEnterprises.get('baseInfo.address.town')
-                          .valid &&
-                          formAddEnterprises.get('baseInfo.address.town')
-                          .touched">
-                          <div>Vui lòng nhập xã</div>
-                        </div>
+                          formControlName="town">
+                          <option *ngFor="let town of listTowns" value="{{town.code}}">{{town.name}}</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row">

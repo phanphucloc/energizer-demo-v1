@@ -14,7 +14,7 @@
       <td>{{ report.year }}</td>
       <td>{{ report.enterpriseName }}</td>
       <td class="text-right">{{ report.taxCode }}</td>
-      <td>{{ report.province }}</td>
+      <td>{{ locationService.getProvince(report.province).name}}</td>
       <td class="text-right">{{ report.employees | number: '1.0-0' : 'it' }}</td>
       <td class="very-small-width text-center">
         <i

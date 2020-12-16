@@ -14,7 +14,7 @@
       <td class="medium-width" title="{{enterprises.branchNameAll}}">{{enterprises.branchNameAll}}
       </td>
       <td>{{enterprises.name}}</td>
-      <td>{{enterprises.province}}</td>
+      <td>{{ locationService.getProvince(enterprises.province).name}}</td>
       <td class="text-right">{{enterprises.employees | number: '1.0-2' : 'it' }}</td>
       <td class="text-right">{{enterprises.productionValue | number: '1.0-2' : 'it' }}</td>
       <td class="text-center">

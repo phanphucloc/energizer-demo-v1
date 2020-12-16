@@ -2,7 +2,7 @@ import { BranchesValue } from './../../declare-enterprises/models/enterprises.mo
 export interface ReportEmission {
   id: number;
   year: number;
-  taxCode: number;
+  taxCode: string;
   enterpriseName: string;
   province: string;
   employees: number;
