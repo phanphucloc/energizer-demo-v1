@@ -1,5 +1,5 @@
 import { IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
@@ -28,6 +28,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private elementButtonSubmit: LoadingOnElementDirective;
   @ViewChild('loadingFormProduction')
   private elementLoadingFormProduction: LoadingOnElementDirective;
+  @ViewChild('dropdown')
+  private dropdownElement: ElementRef;
 
   @Input() public fieldsId: number;
   @Input() public enterprisesId: number;
@@ -70,8 +72,6 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public ngOnInit(): void {
     this.loadData();
     this.createForm();
-    // this.yearSelected = this.enterprises.yearOfSurvey;
-    console.log(this.yearSelected);
   }
 
   public createForm(): void {
@@ -163,6 +163,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
   public changeYearSelected(year): void {
     this.yearSelected = year;
+    this.dropdownElement.nativeElement.style.display = 'none';
   }
 
   public dropDownClose(): void {

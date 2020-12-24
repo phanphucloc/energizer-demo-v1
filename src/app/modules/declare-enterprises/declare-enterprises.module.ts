@@ -13,6 +13,7 @@ import { FormDetailEnterprisesComponent } from './components/form-detail-enterpr
 import { FormDeclareEnterprisesComponent } from './components/form-declare-enterprises/form-declare-enterprises.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FormCustomModule } from 'src/app/common/module/form-custom/form-custom.module';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FormCustomModule } from 'src/app/common/module/form-custom/form-custom.
     ReactiveFormsModule,
     LoadingModule,
     FormCustomModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     DecimalPipe
