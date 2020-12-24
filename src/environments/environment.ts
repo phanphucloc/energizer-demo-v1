@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   baseURlFake : 'http://localhost:4200:/',
   baseURl : 'https://energizer-project-1809.herokuapp.com/api/'
 };

@@ -4,8 +4,8 @@
       <th>Lĩnh vực</th>
       <th>Tên doanh nghiệp</th>
       <th>Tỉnh</th>
-      <th class="text-right">Số nhân viên</th>
-      <th class="text-right">Giá trị sản xuất</th>
+      <th class="text-right">Mã số thuế</th>
+      <th class="text-right">Sô điện thoại</th>
       <th class="w-25"></th>
     </tr>
   </thead>
@@ -15,8 +15,8 @@
       </td>
       <td>{{enterprises.name}}</td>
       <td>{{ locationService.getProvince(enterprises.province).name}}</td>
-      <td class="text-right">{{enterprises.employees | number: '1.0-2' : 'it' }}</td>
-      <td class="text-right">{{enterprises.productionValue | number: '1.0-2' : 'it' }}</td>
+      <td class="text-right">{{enterprises.taxCode }}</td>
+      <td class="text-right">{{enterprises.phoneNumber}}</td>
       <td class="text-center">
         <i 
           (click)="redirectToDetailPage(enterprises.id)"

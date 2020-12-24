@@ -21,23 +21,20 @@ export class ReportService {
     return this.httpClient.get<ReportEmission[]>(`${this.baseUrl}/reports/emissions/enterprises`);
   }
 
-  public getEmissionReportByEnterpriseId(enterpriseId: number): Observable<ReportEmission> {
+  public getEmissionReportByEnterpriseId(enterpriseId: number, year: number): Observable<ReportEmission> {
     return this.httpClient.get<ReportEmission>(
-      `${this.baseUrl}/reports/emissions/enterprises/${enterpriseId}`
+      `${this.baseUrl}/reports/emissions/enterprises/${enterpriseId}?year=${year}`
     );
   }
 
-  public getFieldReportByFieldId(fieldId: number, year: string): Observable<ReportComsumption> {
-    const params = new HttpParams().append('year', year);
+  public getFieldReportByFieldId(fieldId: number, year: number): Observable<ReportComsumption> {
     return this.httpClient.get<ReportComsumption>(
-      `${this.baseUrl}/reports/consumptions/fields/${fieldId}`, { params }
-    );
+      `${this.baseUrl}/reports/consumptions/fields/${fieldId}?year=${year}`);
   }
 
-  public getEmissionReportByFieldId(fieldId: number, year: string): Observable<ReportEmissionByField> {
-    const params = new HttpParams().append('year', year);
+  public getEmissionReportByFieldId(fieldId: number, year: number): Observable<ReportEmissionByField> {
     return this.httpClient.get<ReportEmissionByField>(
-      `${this.baseUrl}/reports/emissions/fields/${fieldId}`, { params }
+      `${this.baseUrl}/reports/emissions/fields/${fieldId}?year=${year}`
     );
   }
 

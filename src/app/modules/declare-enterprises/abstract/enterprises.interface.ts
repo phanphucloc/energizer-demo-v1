@@ -2,29 +2,31 @@ export interface IEnterprises {
   id: number;
   name: string;
   fieldId: number;
-  foundedYear: number;
+  // foundedYear: number;
   province: string;
   district: string;
   town: string;
-  xcoordinate: string;
-  ycoordinate: string;
-  productionValue: number;
-  employees: number;
+  x: string;
+  y: string;
+  taxCode: string;
+  phoneNumber: string;
+  // productionValue: number;
+  // employees: number;
   branches: IBranchesValue[];
   branchNameAll: string;
 }
 
-export interface IEnterprisesToServer {
+export class IEnterprisesToServer {
   id: number;
   name: string;
   phoneNumber: string;
   taxCode: string;
-  foundedYear: number;
+  yearOfSurvey: number;
   province: string;
   district: string;
   town: string;
-  xcoordinate: string;
-  ycoordinate: string;
+  x: string;
+  y: string;
   productionValue: number;
   employees: number;
   fieldId: number;

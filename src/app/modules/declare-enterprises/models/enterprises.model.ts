@@ -15,14 +15,14 @@ export class Enterprises implements IEnterprises {
   id: number;
   fieldId: number;
   name: string;
-  foundedYear: number;
+  yearOfSurvey: number;
   taxCode: string;
   phoneNumber: string;
   province: string;
   district: string;
   town: string;
-  xcoordinate: string;
-  ycoordinate: string;
+  x: string;
+  y: string;
   productionValue: number;
   employees: number;
   branches: BranchesValue[];
@@ -31,14 +31,14 @@ export class Enterprises implements IEnterprises {
 export class EnterprisesToServer implements IEnterprisesToServer {
   id: number;
   name: string;
-  foundedYear: number;
+  yearOfSurvey: number;
   taxCode: string;
   phoneNumber: string;
   province: string;
   district: string;
   town: string;
-  xcoordinate: string;
-  ycoordinate: string;
+  x: string;
+  y: string;
   productionValue: number;
   employees: number;
   fieldId: number;

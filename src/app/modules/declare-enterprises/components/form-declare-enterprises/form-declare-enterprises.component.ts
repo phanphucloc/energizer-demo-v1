@@ -1,5 +1,5 @@
 import { IBranchesValue, IEnergy, IProduction } from '../../abstract/enterprises.interface';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { takeUntil } from 'rxjs/operators';
@@ -56,6 +56,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public listEnergyConsumption: IEnergy[];
   public listFields: IFields[];
   private isOpenedDropDown = false;
+  public yearSelected = 2020 ;
+  public listYears = [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010];
 
   constructor(
     private enterprisesService: EnterprisesService,
@@ -81,8 +83,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           province: new FormControl('01', Validators.required),
           district: new FormControl('250', Validators.required),
           town: new FormControl('08974', Validators.required),
-          xCoordinate: new FormControl('', Validators.required),
-          yCoordinate: new FormControl('', Validators.required),
+          x: new FormControl('', Validators.required),
+          y: new FormControl('', Validators.required),
           productionValue: new FormControl('', [Validators.required, Validators.min(0)]),
           employees: new FormControl('', Validators.required),
           branchesId: new FormControl([]),
@@ -102,7 +104,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     ];
 
     if (this.enterprisesId) {
-      groupForkJoin.push(this.enterprisesService.getEnterprisesById(this.enterprisesId));
+      groupForkJoin.push(this.enterprisesService.getEnterprisesBeforeUpdateById(this.enterprisesId, this.yearSelected));
     }
 
     this.elementLoadingFormAdd.showLoadingCenter();
@@ -118,6 +120,17 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
           if (result[2]) {
             this.enterprises = result[2] as IEnterprisesToServer;
+            if (this.enterprises.yearOfSurvey !== this.yearSelected) {
+              this.enterprises.yearOfSurvey = this.yearSelected;
+              this.enterprises.employees = 0;
+              this.enterprises.productionValue = 0;
+              this.enterprises.energies.forEach((energy) => {
+                energy.volume = 0;
+              });
+              this.enterprises.productions.forEach((product) => {
+                product.volume = 0;
+              });
+            }
             this.fetchBaseData();
             this.branchesSelected = this.enterprises.branches as IBranches[];
             this.addFieldsProductionDetailForForm(this.branchesSelected);
@@ -139,21 +152,28 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     this.formAddEnterprises.patchValue({
       baseInfo: {
         name: this.enterprises.name,
-        foundedYear: this.enterprises.foundedYear,
+        foundedYear: this.enterprises.yearOfSurvey,
         taxCode: this.enterprises.taxCode,
         phoneNumber: this.enterprises.phoneNumber,
         address: {
           province: this.enterprises.province,
           district: this.enterprises.district,
           town: this.enterprises.town,
-          xCoordinate: this.enterprises.xcoordinate,
-          yCoordinate: this.enterprises.ycoordinate,
+          x: this.enterprises.x,
+          y: this.enterprises.y,
           productionValue: this.enterprises.productionValue,
           employees: this.enterprises.employees,
           branchesId: this.enterprises.branches,
         },
       },
     });
+  }
+
+  public changeYearSelected(year): void {
+    this.yearSelected = year;
+    if (this.enterprisesId) {
+      this.loadData();
+    }
   }
 
   public dropDownClose(): void {
@@ -265,7 +285,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
             productionGroup.addControl(production.productionId.toString(), productControl);
           }
         });
-        this.formAddEnterprises.addControl('production' + branch.id, productionGroup);
+        this.formAddEnterprises.setControl('production' + branch.id, productionGroup);
         this.formAddEnterprises.updateValueAndValidity();
       });
     }
@@ -384,14 +404,14 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private formatBaseData(): IEnterprisesToServer {
     const enterprises: EnterprisesToServer = new EnterprisesToServer();
     enterprises.name = this.formAddEnterprises?.value?.baseInfo?.name;
-    enterprises.foundedYear = this.formAddEnterprises?.value?.baseInfo?.foundedYear;
+    enterprises.yearOfSurvey = this.yearSelected;
     enterprises.taxCode = this.formAddEnterprises?.value?.baseInfo?.taxCode;
     enterprises.phoneNumber = this.formAddEnterprises?.value?.baseInfo?.phoneNumber;
     enterprises.province = this.formAddEnterprises?.value?.baseInfo?.address?.province;
     enterprises.district = this.formAddEnterprises?.value?.baseInfo?.address?.district;
     enterprises.town = this.formAddEnterprises?.value?.baseInfo?.address?.town;
-    enterprises.xcoordinate = this.formAddEnterprises?.value?.baseInfo?.address?.xCoordinate;
-    enterprises.ycoordinate = this.formAddEnterprises?.value?.baseInfo?.address?.yCoordinate;
+    enterprises.x = this.formAddEnterprises?.value?.baseInfo?.address?.x;
+    enterprises.y = this.formAddEnterprises?.value?.baseInfo?.address?.y;
     enterprises.productionValue = this.formAddEnterprises?.value?.baseInfo?.address?.productionValue;
     enterprises.employees = this.formAddEnterprises?.value?.baseInfo?.address?.employees;
     enterprises.fieldId = this.fieldsId;
