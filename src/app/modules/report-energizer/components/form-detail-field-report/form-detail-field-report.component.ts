@@ -20,7 +20,6 @@ export class FormDetailFieldReportComponent extends BaseDestroyableDirective imp
   @Input() public fieldId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 
-  // public listYears: string[];
   public fieldReport: ReportComsumption;
   public yearSelected = 2020 ;
   public listYears = [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010];
@@ -33,7 +32,6 @@ export class FormDetailFieldReportComponent extends BaseDestroyableDirective imp
   }
 
   public getComsumptionReportByFieldId() {
-    // if (year !== this.fieldReport.year) {
       this.elementFormDetail.showLoadingCenter();
       this.reportService
         .getFieldReportByFieldId(this.fieldId, this.yearSelected)
@@ -48,28 +46,7 @@ export class FormDetailFieldReportComponent extends BaseDestroyableDirective imp
             this.elementFormDetail.hideLoadingCenter();
           }
         );
-    // }
   }
-
-  // public loadData(): void {
-  //   this.elementFormDetail.showLoadingCenter();
-  //   forkJoin([
-  //     this.reportService.getFieldReportByFieldId(this.fieldId, 2020),
-  //     // this.reportService.getListYears()
-  //   ])
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe(
-  //       (result) => {
-  //         this.fieldReport = result[0];
-  //         // this.listYears = result[1];
-  //         this.elementFormDetail.hideLoadingCenter();
-  //       },
-  //       () => {
-  //         this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
-  //         this.elementFormDetail.hideLoadingCenter();
-  //       }
-  //     );
-  // }
 
   public cancel(): void {
     this.cancelEmitter.emit();

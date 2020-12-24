@@ -21,21 +21,21 @@ export class FormDetailEmissionFieldReportComponent
   @Input() public fieldId: number;
   @Output() public cancelEmitter = new EventEmitter<void>();
 
-  public listYears: string[];
   public emissionFieldReport: ReportEmissionByField;
+  public yearSelected = 2020 ;
+  public listYears = [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010];
   constructor(private reportService: ReportService, private toastr: ToastrService) {
     super();
   }
 
   ngOnInit(): void {
-    this.loadData();
+    this.getEmissionReportByFieldId();
   }
 
-  public getEmissionReportByFieldId(year: string) {
-    if (year !== this.emissionFieldReport.year.toString()) {
+  public getEmissionReportByFieldId() {
       this.elementFormDetail.showLoadingCenter();
       this.reportService
-        .getEmissionReportByFieldId(this.fieldId, year)
+        .getEmissionReportByFieldId(this.fieldId, this.yearSelected)
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           (res) => {
@@ -47,30 +47,15 @@ export class FormDetailEmissionFieldReportComponent
             this.elementFormDetail.hideLoadingCenter();
           }
         );
-    }
-  }
-
-  public loadData(): void {
-    this.elementFormDetail.showLoadingCenter();
-    forkJoin([
-      this.reportService.getEmissionReportByFieldId(this.fieldId, ''),
-      this.reportService.getListYears()
-    ])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (result) => {
-          this.emissionFieldReport = result[0];
-          this.listYears = result[1];
-          this.elementFormDetail.hideLoadingCenter();
-        },
-        () => {
-          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
-          this.elementFormDetail.hideLoadingCenter();
-        }
-      );
   }
 
   public cancel(): void {
     this.cancelEmitter.emit();
   }
+
+  public changeYearSelected(year): void {
+    this.yearSelected = year;
+    this.getEmissionReportByFieldId();
+  }
+
 }

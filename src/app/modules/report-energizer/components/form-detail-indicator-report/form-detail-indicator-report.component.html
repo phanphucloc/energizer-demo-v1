@@ -5,21 +5,10 @@
       <div class="form-group row">
         <label class="col-md-4 col-form-label"> Năm khai báo</label>
         <div class="col-md-8">
-          <div class="dropdown" dropdown>
-            <a 
-              class="btn btn-secondary dropdown-toggle ml-4" 
-              style="cursor: pointer;" 
-              role="button" 
-              data-toggle="dropdown" 
-              aria-haspopup="true" 
-              aria-expanded="false" 
-              dropdownToggle>
-              {{ selectedReport.year }}
-            </a>
-            <div class="dropdown-menu" role="menu" *dropdownMenu>
-              <a *ngFor="let year of listYears" class="dropdown-item" style="cursor: pointer" (click)="onSelectYear(year)">
-                {{ year }}
-              </a>
+          <div class="dropdown ml-4">
+            <button class="dropbtn"> {{selectedReport.year}} <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+            <div class="dropdown-content">
+              <a *ngFor="let year of listYears" (click)="onSelectYear(year)">{{year}}</a>
             </div>
           </div>
         </div>

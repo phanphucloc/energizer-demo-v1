@@ -32,10 +32,9 @@ export class ReportService {
       `${this.baseUrl}/reports/consumptions/fields/${fieldId}?year=${year}`);
   }
 
-  public getEmissionReportByFieldId(fieldId: number, year: string): Observable<ReportEmissionByField> {
-    const params = new HttpParams().append('year', year);
+  public getEmissionReportByFieldId(fieldId: number, year: number): Observable<ReportEmissionByField> {
     return this.httpClient.get<ReportEmissionByField>(
-      `${this.baseUrl}/reports/emissions/fields/${fieldId}`, { params }
+      `${this.baseUrl}/reports/emissions/fields/${fieldId}?year=${year}`
     );
   }
 
