@@ -11,7 +11,7 @@ export interface Province {
 export interface DistrictOrCommune {
   code: string;
   name: string;
-  parent_code: string;
+  parentCode: string;
 }
 
 @Injectable({
@@ -35,11 +35,11 @@ export class LocationService {
   }
 
   public getListDistrictsByProvince(code: string): DistrictOrCommune[] {
-    return this.districts.filter((d) => d.parent_code === code);
+    return this.districts.filter((d) => d.parentCode === code);
   }
 
   public getListCommunesByDistrict(code: string): DistrictOrCommune[] {
-    return this.communes.filter((c) => c.parent_code === code);
+    return this.communes.filter((c) => c.parentCode === code);
   }
 
   public getListProvinces(): Province[] {
