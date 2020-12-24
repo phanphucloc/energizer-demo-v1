@@ -56,6 +56,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public listEnergyConsumption: IEnergy[];
   public listFields: IFields[];
   private isOpenedDropDown = false;
+  public yearSelected = 2020 ;
+  public listYears = [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010];
 
   constructor(
     private enterprisesService: EnterprisesService,
@@ -68,6 +70,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   public ngOnInit(): void {
     this.loadData();
     this.createForm();
+    // this.yearSelected = this.enterprises.yearOfSurvey;
+    console.log(this.yearSelected);
   }
 
   public createForm(): void {
@@ -102,7 +106,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     ];
 
     if (this.enterprisesId) {
-      groupForkJoin.push(this.enterprisesService.getEnterprisesById(this.enterprisesId, 2020));
+      groupForkJoin.push(this.enterprisesService.getEnterprisesBeforeUpdateById(this.enterprisesId, 2020));
     }
 
     this.elementLoadingFormAdd.showLoadingCenter();
@@ -118,6 +122,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
           if (result[2]) {
             this.enterprises = result[2] as IEnterprisesToServer;
+            this.yearSelected = this.enterprises.yearOfSurvey;
             this.fetchBaseData();
             this.branchesSelected = this.enterprises.branches as IBranches[];
             this.addFieldsProductionDetailForForm(this.branchesSelected);
@@ -154,6 +159,10 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
         },
       },
     });
+  }
+
+  public changeYearSelected(year): void {
+    this.yearSelected = year;
   }
 
   public dropDownClose(): void {
@@ -384,7 +393,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private formatBaseData(): IEnterprisesToServer {
     const enterprises: EnterprisesToServer = new EnterprisesToServer();
     enterprises.name = this.formAddEnterprises?.value?.baseInfo?.name;
-    enterprises.yearOfSurvey = this.formAddEnterprises?.value?.baseInfo?.foundedYear;
+    enterprises.yearOfSurvey = this.yearSelected;
     enterprises.taxCode = this.formAddEnterprises?.value?.baseInfo?.taxCode;
     enterprises.phoneNumber = this.formAddEnterprises?.value?.baseInfo?.phoneNumber;
     enterprises.province = this.formAddEnterprises?.value?.baseInfo?.address?.province;

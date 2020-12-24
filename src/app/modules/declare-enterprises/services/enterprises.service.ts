@@ -54,8 +54,15 @@ export class EnterprisesService {
   }
 
   public getEnterprisesById(id: number, year: number): Observable<IEnterprisesToServer> {
-    //this.baseUrl + 'enterprises/' + id + '?year=' + year
     return this.httpClient.get(`${this.baseUrl}enterprises/${id}?year=${year}`).pipe(
+      map((result: IEnterprisesToServer) => {
+        return result || new EnterprisesToServer();
+      })
+    );
+  }
+
+  public getEnterprisesBeforeUpdateById(id: number, year: number): Observable<IEnterprisesToServer> {
+    return this.httpClient.get(`${this.baseUrl}enterprises/before_update/${id}?year=${year}`).pipe(
       map((result: IEnterprisesToServer) => {
         return result || new EnterprisesToServer();
       })
