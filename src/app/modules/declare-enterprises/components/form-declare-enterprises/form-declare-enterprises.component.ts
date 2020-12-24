@@ -28,8 +28,6 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private elementButtonSubmit: LoadingOnElementDirective;
   @ViewChild('loadingFormProduction')
   private elementLoadingFormProduction: LoadingOnElementDirective;
-  @ViewChild('dropdown')
-  private dropdownElement: ElementRef;
 
   @Input() public fieldsId: number;
   @Input() public enterprisesId: number;
@@ -106,7 +104,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     ];
 
     if (this.enterprisesId) {
-      groupForkJoin.push(this.enterprisesService.getEnterprisesBeforeUpdateById(this.enterprisesId, 2020));
+      groupForkJoin.push(this.enterprisesService.getEnterprisesBeforeUpdateById(this.enterprisesId, this.yearSelected));
     }
 
     this.elementLoadingFormAdd.showLoadingCenter();
@@ -122,7 +120,17 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
           if (result[2]) {
             this.enterprises = result[2] as IEnterprisesToServer;
-            this.yearSelected = this.enterprises.yearOfSurvey;
+            if (this.enterprises.yearOfSurvey !== this.yearSelected) {
+              this.enterprises.yearOfSurvey = this.yearSelected;
+              this.enterprises.employees = 0;
+              this.enterprises.productionValue = 0;
+              this.enterprises.energies.forEach((energy) => {
+                energy.volume = 0;
+              });
+              this.enterprises.productions.forEach((product) => {
+                product.volume = 0;
+              });
+            }
             this.fetchBaseData();
             this.branchesSelected = this.enterprises.branches as IBranches[];
             this.addFieldsProductionDetailForForm(this.branchesSelected);
@@ -163,7 +171,9 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
 
   public changeYearSelected(year): void {
     this.yearSelected = year;
-    this.dropdownElement.nativeElement.style.display = 'none';
+    if (this.enterprisesId) {
+      this.loadData();
+    }
   }
 
   public dropDownClose(): void {
@@ -275,7 +285,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
             productionGroup.addControl(production.productionId.toString(), productControl);
           }
         });
-        this.formAddEnterprises.addControl('production' + branch.id, productionGroup);
+        this.formAddEnterprises.setControl('production' + branch.id, productionGroup);
         this.formAddEnterprises.updateValueAndValidity();
       });
     }
