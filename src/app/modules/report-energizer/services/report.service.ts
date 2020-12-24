@@ -21,9 +21,9 @@ export class ReportService {
     return this.httpClient.get<ReportEmission[]>(`${this.baseUrl}/reports/emissions/enterprises`);
   }
 
-  public getEmissionReportByEnterpriseId(enterpriseId: number): Observable<ReportEmission> {
+  public getEmissionReportByEnterpriseId(enterpriseId: number, year: number): Observable<ReportEmission> {
     return this.httpClient.get<ReportEmission>(
-      `${this.baseUrl}/reports/emissions/enterprises/${enterpriseId}`
+      `${this.baseUrl}/reports/emissions/enterprises/${enterpriseId}?year=${year}`
     );
   }
 
