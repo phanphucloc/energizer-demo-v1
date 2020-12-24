@@ -12,7 +12,7 @@
             </a>
             <div class="dropdown-menu" role="menu" *dropdownMenu>
               <a *ngFor="let year of listYears" class="dropdown-item" style="cursor: pointer"
-                (click)="changeYearSelected(year)">
+                (click)="onSelectYear(year)">
                 {{ year }}
               </a>
             </div>
