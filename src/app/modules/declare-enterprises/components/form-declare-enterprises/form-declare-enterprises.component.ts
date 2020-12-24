@@ -81,8 +81,8 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
           province: new FormControl('01', Validators.required),
           district: new FormControl('250', Validators.required),
           town: new FormControl('08974', Validators.required),
-          xCoordinate: new FormControl('', Validators.required),
-          yCoordinate: new FormControl('', Validators.required),
+          x: new FormControl('', Validators.required),
+          y: new FormControl('', Validators.required),
           productionValue: new FormControl('', [Validators.required, Validators.min(0)]),
           employees: new FormControl('', Validators.required),
           branchesId: new FormControl([]),
@@ -102,7 +102,7 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     ];
 
     if (this.enterprisesId) {
-      groupForkJoin.push(this.enterprisesService.getEnterprisesById(this.enterprisesId));
+      groupForkJoin.push(this.enterprisesService.getEnterprisesById(this.enterprisesId, 2020));
     }
 
     this.elementLoadingFormAdd.showLoadingCenter();
@@ -139,15 +139,15 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
     this.formAddEnterprises.patchValue({
       baseInfo: {
         name: this.enterprises.name,
-        foundedYear: this.enterprises.foundedYear,
+        foundedYear: this.enterprises.yearOfSurvey,
         taxCode: this.enterprises.taxCode,
         phoneNumber: this.enterprises.phoneNumber,
         address: {
           province: this.enterprises.province,
           district: this.enterprises.district,
           town: this.enterprises.town,
-          xCoordinate: this.enterprises.xcoordinate,
-          yCoordinate: this.enterprises.ycoordinate,
+          x: this.enterprises.x,
+          y: this.enterprises.y,
           productionValue: this.enterprises.productionValue,
           employees: this.enterprises.employees,
           branchesId: this.enterprises.branches,
@@ -384,14 +384,14 @@ export class FormDeclareEnterprisesComponent extends BaseDestroyableDirective im
   private formatBaseData(): IEnterprisesToServer {
     const enterprises: EnterprisesToServer = new EnterprisesToServer();
     enterprises.name = this.formAddEnterprises?.value?.baseInfo?.name;
-    enterprises.foundedYear = this.formAddEnterprises?.value?.baseInfo?.foundedYear;
+    enterprises.yearOfSurvey = this.formAddEnterprises?.value?.baseInfo?.foundedYear;
     enterprises.taxCode = this.formAddEnterprises?.value?.baseInfo?.taxCode;
     enterprises.phoneNumber = this.formAddEnterprises?.value?.baseInfo?.phoneNumber;
     enterprises.province = this.formAddEnterprises?.value?.baseInfo?.address?.province;
     enterprises.district = this.formAddEnterprises?.value?.baseInfo?.address?.district;
     enterprises.town = this.formAddEnterprises?.value?.baseInfo?.address?.town;
-    enterprises.xcoordinate = this.formAddEnterprises?.value?.baseInfo?.address?.xCoordinate;
-    enterprises.ycoordinate = this.formAddEnterprises?.value?.baseInfo?.address?.yCoordinate;
+    enterprises.x = this.formAddEnterprises?.value?.baseInfo?.address?.x;
+    enterprises.y = this.formAddEnterprises?.value?.baseInfo?.address?.y;
     enterprises.productionValue = this.formAddEnterprises?.value?.baseInfo?.address?.productionValue;
     enterprises.employees = this.formAddEnterprises?.value?.baseInfo?.address?.employees;
     enterprises.fieldId = this.fieldsId;

@@ -16,17 +16,17 @@ export interface IEnterprises {
   branchNameAll: string;
 }
 
-export interface IEnterprisesToServer {
+export class IEnterprisesToServer {
   id: number;
   name: string;
   phoneNumber: string;
   taxCode: string;
-  foundedYear: number;
+  yearOfSurvey: number;
   province: string;
   district: string;
   town: string;
-  xcoordinate: string;
-  ycoordinate: string;
+  x: string;
+  y: string;
   productionValue: number;
   employees: number;
   fieldId: number;
