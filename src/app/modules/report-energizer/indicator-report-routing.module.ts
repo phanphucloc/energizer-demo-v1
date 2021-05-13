@@ -1,3 +1,4 @@
+import { ChartIndicatorReportPageComponent } from './pages/chart-indicator-report-page/chart-indicator-report-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/common/guard/auth.guard';
@@ -15,6 +16,14 @@ const routes: Routes = [
         component: IndicatorReportPageComponent,
         data: {
           title: 'Chi tiết báo cáo',
+        },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'chart',
+        component: ChartIndicatorReportPageComponent,
+        data: {
+          title: 'Biểu đồ',
         },
         canActivate: [AuthGuard],
       },

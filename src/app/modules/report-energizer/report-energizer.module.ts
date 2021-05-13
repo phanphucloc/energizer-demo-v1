@@ -1,3 +1,5 @@
+import { ChartIndicatorReportPageComponent } from './pages/chart-indicator-report-page/chart-indicator-report-page.component';
+import { ChartIndicatorComponent } from './components/chart-indicator-report/chart-indicator-report.component';
 import { FormCustomModule } from './../../common/module/form-custom/form-custom.module';
 import { LoadingModule } from 'src/app/common/module/loading/loading.module';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -18,6 +20,7 @@ import { FormDetailEmissionFieldReportComponent } from './components/form-detail
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { IndicatorReportPageComponent } from './pages/indicator-report-page/indicator-report-page.component';
 import { FormDetailIndicatorReportComponent } from './components/form-detail-indicator-report/form-detail-indicator-report.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,11 +38,14 @@ import { FormDetailIndicatorReportComponent } from './components/form-detail-ind
     FormDetailEmissionFieldReportComponent,
     IndicatorReportPageComponent,
     FormDetailIndicatorReportComponent,
+    ChartIndicatorComponent,
+    ChartIndicatorReportPageComponent
   ],
   imports: [
     CommonModule,
     LoadingModule,
     FormCustomModule,
+    ChartsModule,
     BsDropdownModule.forRoot()
   ]
 })
