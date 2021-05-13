@@ -53,6 +53,9 @@ export class FormDetailEnterprisesComponent
   public listBranches: IBranches[];
   public branchesSelected: IBranches[];
   public listEnergyConsumption: IEnergy[];
+  public yearSelected = 2020 ;
+  public listYears = [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010];
+  public hasEnterprise = false;
 
   constructor(
     private enterprisesService: EnterprisesService,
@@ -100,11 +103,11 @@ export class FormDetailEnterprisesComponent
             { value: '', disabled: true },
             Validators.required
           ),
-          xCoordinate: new FormControl(
+          x: new FormControl(
             { value: '', disabled: true },
             Validators.required
           ),
-          yCoordinate: new FormControl(
+          y: new FormControl(
             { value: '', disabled: true },
             Validators.required
           ),
@@ -125,13 +128,14 @@ export class FormDetailEnterprisesComponent
   public loadData() {
     this.elementFormDetail.showLoadingCenter();
     forkJoin([
-      this.enterprisesService.getEnterprisesById(this.enterprisesId),
+      this.enterprisesService.getEnterprisesById(this.enterprisesId, this.yearSelected),
       this.enterprisesService.getListBranchesByFieldsId(this.fieldsId),
       this.enterprisesService.getListEnergyConsumption(),
     ])
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result) => {
+          this.hasEnterprise = true;
           this.enterprises = result[0];
           this.fetchBaseData();
 
@@ -147,7 +151,9 @@ export class FormDetailEnterprisesComponent
           this.elementFormDetail.hideLoadingCenter();
         },
         () => {
-          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
+          this.fetchBaseDataIfEnterpriseNotFound();
+          this.hasEnterprise = false;
+          this.toastr.warning(MESSAGE.NOT_FOUND + this.yearSelected, MESSAGE.NOTIFICATION);
           this.elementFormDetail.hideLoadingCenter();
         }
       );
@@ -155,6 +161,11 @@ export class FormDetailEnterprisesComponent
 
   public cancel(): void {
     this.cancelEmitter.emit();
+  }
+
+  public changeYearSelected(year: number): void {
+    this.yearSelected = year;
+    this.loadData();
   }
 
   private fetchBaseData(): void {
@@ -168,15 +179,15 @@ export class FormDetailEnterprisesComponent
     this.formDetailEnterprises.patchValue({
       baseInfo: {
         name: this.enterprises.name,
-        foundedYear: this.enterprises.foundedYear,
+        foundedYear: this.enterprises.yearOfSurvey,
         taxCode: this.enterprises.taxCode,
         phoneNumber: this.enterprises.phoneNumber,
         address: {
           province: province ? province.name : this.enterprises.province,
           district: district ? district.name : this.enterprises.district,
           town: town ? town.name : this.enterprises.town,
-          xCoordinate: this.enterprises.xcoordinate,
-          yCoordinate: this.enterprises.ycoordinate,
+          x: this.enterprises.x,
+          y: this.enterprises.y,
           productionValue: this.decimalPipe.transform(
             this.enterprises.productionValue,
             '1.0-2',
@@ -188,6 +199,18 @@ export class FormDetailEnterprisesComponent
             'it'
           ),
           branchesId: this.enterprises.branches,
+        },
+      },
+    });
+  }
+
+  private fetchBaseDataIfEnterpriseNotFound() {
+    // this.hasEnterprise = false;
+    this.formDetailEnterprises.patchValue({
+      baseInfo: {
+        address: {
+          productionValue: '',
+          employees: '',
         },
       },
     });

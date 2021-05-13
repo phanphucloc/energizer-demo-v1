@@ -22,13 +22,12 @@
                 Năm khai báo
               </label>
               <div class="col-md-9">
-                <input [readonly]="true"
-                  type="text"
-                  id="year-declare-input"
-                  name="year-declare-input"
-                  class="form-control"
-                  formControlName="foundedYear"
-                  />
+                <div class="dropdown">
+                  <button class="dropbtn"> {{yearSelected}} <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                  <div class="dropdown-content">
+                    <a *ngFor="let year of listYears" (click)="changeYearSelected(year)">{{year}}</a>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
@@ -125,7 +124,7 @@
                               id="coordinates-x-input"
                               name="coordinates-x-input"
                               class="form-control text-right"
-                              formControlName="xCoordinate"/>
+                              formControlName="x"/>
                           </div>
                         </div>
                       </div>
@@ -140,7 +139,7 @@
                               id="coordinates-y-input"
                               name="coordinates-y-input"
                               class="form-control text-right"
-                              formControlName="yCoordinate" />
+                              formControlName="y" />
                           </div>
                         </div>
                       </div>
@@ -204,7 +203,7 @@
     <hr style="width: 80%" />
 
     <div class="form-group row"
-      *ngIf="formDetailEnterprises.get('energyConsumption')"
+      *ngIf="formDetailEnterprises.get('energyConsumption') && hasEnterprise"
       [formGroupName]="'energyConsumption'">
       <div class="col-12">
         <div class="row">
@@ -247,7 +246,7 @@
               </div>
             </ng-container>
           </div>
-        </div>
+          </div>
       </div>
     </div>
 
@@ -255,7 +254,7 @@
       <hr style="width: 80%" />
 
       <div class="form-group row"
-         *ngIf="formDetailEnterprises.get('production'+ branchSelected.id)"
+         *ngIf="formDetailEnterprises.get('production'+ branchSelected.id) && hasEnterprise"
         [formGroupName]="'production' + branchSelected.id">
         <div class="col-12">
           <div class="row">
