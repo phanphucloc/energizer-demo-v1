@@ -28,6 +28,7 @@
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.4",
     "express": "^4.17.1",
+    "file-saver": "^2.0.5",
     "flag-icon-css": "^3.5.0",
     "font-awesome": "^4.7.0",
     "ng-multiselect-dropdown": "^0.2.10",
@@ -39,6 +40,7 @@
     "simple-line-icons": "^2.5.2",
     "tslib": "^1.10.0",
     "typescript": "~3.8.3",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

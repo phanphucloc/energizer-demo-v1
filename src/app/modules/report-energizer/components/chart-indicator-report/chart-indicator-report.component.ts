@@ -1,3 +1,4 @@
+import { ExportService } from './../../../../common/services/export.service';
 import { IndicatorReport } from './../../models/report-energizer.model';
 import { Component, OnInit } from '@angular/core';
 import { listIndictorReports } from 'src/app/common/data/indicator-report-data';
@@ -11,9 +12,7 @@ import {Label} from 'ng2-charts';
 })
 export class ChartIndicatorComponent{
 
-    public listYears = [2019, 2018, 2017];
     public reports: IndicatorReport[] = listIndictorReports;
-    public selectedReport = this.reports.find((report) => report.year === 2019);
 
     barChartOptions: ChartOptions = {
         responsive: true,
@@ -47,4 +46,5 @@ export class ChartIndicatorComponent{
           this.reports[1].energy + this.reports[1].energyCpmToProductionValue,
           this.reports[2].energy + this.reports[2].electricCpmToProductionValue], label: 'kJ/tr.đồng'}
       ];
+
 }
