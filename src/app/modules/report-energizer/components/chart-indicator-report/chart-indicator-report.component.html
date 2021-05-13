@@ -1,0 +1,73 @@
+<div>
+  <div class="row chart-row">
+    <div class="col-md-5 chart-col">
+      <div class="row chart-wrapper">
+        <canvas baseChart 
+        [datasets]="greenhouseGasData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+        </canvas>
+      </div>
+      <h4 class="chart-title">Lượng phát thải khí nhà kính</h4>
+    </div>
+    <div class="col-md-5 chart-col">
+      <div class="row chart-wrapper">
+        <canvas baseChart 
+        [datasets]="renewableElectricData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+        </canvas>
+      </div>
+      <h4 class="chart-title">Sản lượng điện năng lương tái tạo</h4>
+    </div>
+  </div>
+  <div class="row chart-row">
+    <div class="col-md-5 chart-col">
+      <div class="row chart-wrapper">
+        <canvas baseChart 
+        [datasets]="capacityOfRenewableElecData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+        </canvas>
+      </div>
+      <h4 class="chart-title">Công sức lắp đặt điện năng lượng tái tạo</h4>
+    </div>
+    <div class="col-md-5 chart-col">
+      <div class="row chart-wrapper">
+        <canvas baseChart 
+        [datasets]="electricData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+        </canvas>
+      </div>
+      <h4 class="chart-title">Tiêu thụ điện</h4>
+    </div>
+  </div>
+  <div class="row chart-row">
+    <div class="col-md-5 chart-col">
+      <div class="row chart-wrapper">
+        <canvas baseChart 
+        [datasets]="energyData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+        </canvas>
+      </div>
+      <h4 class="chart-title">Tiêu thụ năng lượng</h4>
+    </div>
+  </div>
+</div>

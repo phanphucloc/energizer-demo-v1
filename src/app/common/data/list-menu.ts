@@ -25,4 +25,9 @@ export const listMenuReport: INavData[] = [
     url: '/reports/indicators/detail',
     icon: 'icon-chart',
   },
+  {
+    name: 'Biểu đồ',
+    url: '/reports/indicators/chart',
+    icon: 'icon-chart',
+  },
 ];
