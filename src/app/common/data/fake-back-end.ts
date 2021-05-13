@@ -4,13 +4,23 @@ export const usersData = [
     password: '123456',
     uid: '0001',
     name: 'test',
+    type: 'Admin',
     accessToken: 'TEST-TOKEN',
   },
   {
-    email: 'test@gmail.com',
+    email: 'admin@gmail.com',
     password: '123456',
     uid: '0001',
     name: 'test',
+    type: 'Admin',
+    accessToken: 'TEST-TOKEN',
+  },
+  {
+    email: 'doanhnghiep@gmail.com',
+    password: '123456',
+    uid: '0001',
+    name: 'test',
+    type: 'Enterprise',
     accessToken: 'TEST-TOKEN',
   },
 ];
@@ -311,47 +321,138 @@ export let listFields = [
       },
     ],
   },
+  {
+    id: 3,
+    name: 'Khai khoáng',
+    listBranches: [
+      {
+        id: 1,
+        name: 'Khai thác than',
+        listProduct: [
+          {
+            productionId: 1,
+            name: 'Than khai thác hầm lò',
+            unit: 'Nghìn tấn',
+          },
+          {
+            productionId: 2,
+            name: 'Than khai thác lộ thiên',
+            unit: 'Nghìn tấn',
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: 'Khai thác dầu khí',
+        listProduct: [
+          {
+            productionId: 4,
+            name: 'Dầu thô',
+            unit: 'Nghìn tấn',
+          },
+          {
+            productionId: 5,
+            name: 'Khí đồng hành',
+            unit: 'Nghìn tấn',
+          },
+          {
+            productionId: 6,
+            name: 'Khí không đồng hành',
+            unit: 'Tr.m3',
+          },
+          {
+            productionId: 7,
+            name: 'Khí không thành phẩm',
+            unit: 'Tr.m3',
+          },
+        ],
+      },
+    ],
+  }
 ];
 
 export let energyConsumption = [
   {
-    energyId: 1,
+    id: 1,
     name: 'Than antraxit',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 2,
+    id: 2,
     name: 'Than bitum',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 3,
+    id: 3,
     name: 'Dầu hỏa',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 4,
+    id: 4,
     name: 'Dầu DO',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 5,
+    id: 5,
     name: 'Dầu FO',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 6,
+    id: 6,
     name: 'LPG',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 7,
+    id: 7,
     name: 'Khí sinh học',
     unit: 'Nghìn tấn',
   },
   {
-    energyId: 8,
+    id: 8,
     name: 'Khí sinh khối',
     unit: 'Nghìn tấn',
+  },
+];
+
+export let listReportEnergizer = [
+  {
+    yearDeclare: 2020,
+    enterpriseName: 'DHBK',
+    taxCode: 34324234324,
+    address: 'abc',
+    productMajor: 'aslfsakfs',
+    employeesPerYear: 123,
+    co2Electric: 343,
+    energyProcess: {
+      co2: 33,
+      ch4: 12,
+      n2o: 30,
+    },
+    productionProcess: {
+      co2: 33,
+      ch4: 12,
+      n2o: 30,
+    },
+    co2Total: 235,
+  },
+  {
+    yearDeclare: 2020,
+    enterpriseName: 'ABC',
+    taxCode: 34324234324,
+    address: 'abc',
+    productMajor: 'aslfsakfs',
+    employeesPerYear: 123,
+    co2Electric: 343,
+    energyProcess: {
+      co2: 33,
+      ch4: 12,
+      n2o: 30,
+    },
+    productionProcess: {
+      co2: 33,
+      ch4: 12,
+      n2o: 30,
+    },
+    co2Total: 235,
   },
 ];

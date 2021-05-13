@@ -22,6 +22,11 @@ import {
   AppSidebarModule,
 } from '@coreui/angular';
 import { LayoutService } from './common/services/layout.service';
+import { LoadingModule } from './common/module/loading/loading.module';
+import { ReportEnergizerModule } from './modules/report-energizer/report-energizer.module';
+import localeIt from '@angular/common/locales/it';
+import { registerLocaleData } from '@angular/common/';
+registerLocaleData(localeIt);
 
 @NgModule({
   declarations: [
@@ -30,8 +35,10 @@ import { LayoutService } from './common/services/layout.service';
     NotFoundComponent,
   ],
   imports: [
+    ReportEnergizerModule,
     RouterModule,
     BrowserModule,
+    LoadingModule,
     AppAsideModule,
     AppHeaderModule,
     AppFooterModule,

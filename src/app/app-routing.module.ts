@@ -27,6 +27,34 @@ export const routes: Routes = [
             './modules/declare-enterprises/declare-enterprises.module'
           ).then((m) => m.DeclareMiningIndustryModule),
       },
+      {
+        path: 'reports',
+        loadChildren: () =>
+          import(
+            './modules/report-energizer/report-energizer-routing.module'
+          ).then((m) => m.ReportEnergizerRoutingModule),
+      },
+      {
+        path: 'reports/emission-by-fields',
+        loadChildren: () =>
+          import(
+            './modules/report-energizer/report-emission-routing.module'
+          ).then((m) => m.ReportEmissionRoutingModule),
+      },
+      {
+        path: 'reports/fields',
+        loadChildren: () =>
+          import('./modules/report-energizer/report-field-routing.module').then(
+            (m) => m.ReportFieldRoutingModule
+          ),
+      },
+      {
+        path: 'reports/indicators',
+        loadChildren: () =>
+          import(
+            './modules/report-energizer/indicator-report-routing.module'
+          ).then((m) => m.IndicatorReportRoutingModule),
+      },
     ],
   },
   {

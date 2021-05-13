@@ -14,15 +14,14 @@ export class LayoutService {
   private baseUrlFake = environment.baseURlFake;
   private baseUrl = environment.baseURl;
 
-  constructor(public router: Router, private httpClient: HttpClient) {
-  }
+  constructor(public router: Router, private httpClient: HttpClient) {}
 
   public getListFields(): Observable<IFields[]> {
-    return this.httpClient.get(this.baseUrlFake + 'get-list-fields').pipe(
+    return this.httpClient.get(this.baseUrl + 'fields').pipe(
       map((result: IFields[]) => {
+        result.sort((a, b) => a.id - b.id);
         return result;
       })
     );
   }
-
 }

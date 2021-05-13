@@ -7,6 +7,7 @@ import { StyleElement } from '../models/loading-on-element.model';
   exportAs: 'drLoadingOnElement'
 })
 export class LoadingOnElementDirective {
+  private isLoading: boolean;
   private listStyleElBackground = listStyleElementBackground;
   private listStyleElIcon = listStyleElementIcon;
   private elBackground: HTMLDivElement;
@@ -18,6 +19,10 @@ export class LoadingOnElementDirective {
 
 
   public showLoadingCenter(sizeIcon: string = '40px', minHeightElement: string = '100px', enableBackGround: boolean = false ): void {
+
+    if (this.isLoading){
+      return;
+    }
 
     this.elBackground = this.render.createElement('div');
     this.setStyleMulti(this.elBackground, this.listStyleElBackground);
@@ -37,8 +42,9 @@ export class LoadingOnElementDirective {
     this.render.setStyle(this.eleRef.nativeElement, 'position', 'relative');
     this.render.setStyle(this.eleRef.nativeElement, 'min-height', minHeightElement);
     this.render.appendChild(this.eleRef.nativeElement, this.elBackground);
-
     this.render.setAttribute(this.eleRef.nativeElement, 'disabled', 'true');
+
+    this.isLoading = true;
 
   }
 
@@ -46,6 +52,8 @@ export class LoadingOnElementDirective {
     this.render.removeChild(this.eleRef.nativeElement, this.elBackground);
     this.render.removeStyle(this.eleRef.nativeElement, 'position');
     this.render.removeStyle(this.eleRef.nativeElement, 'min-height');
+    this.render.removeAttribute(this.eleRef.nativeElement, 'disabled');
+    this.isLoading = false;
   }
 
   private setStyleMulti(element: any, arrayStyle: StyleElement[]): void {

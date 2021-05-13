@@ -15,6 +15,7 @@ import { MESSAGE } from 'src/app/common/data/message';
 })
 export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective implements OnInit {
   public fieldsCurrent: Fields;
+  public enterprisesId: number;
 
   constructor(
     private router: Router,
@@ -28,6 +29,7 @@ export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective i
 
   public ngOnInit(): void {
     this.fieldsCurrent.id = Number(this.activatedRoute.snapshot.paramMap.get('fieldsId'));
+    this.enterprisesId = Number(this.activatedRoute.snapshot.paramMap.get('enterprisesId'));
     this.getFieldsCurrent();
   }
 
@@ -49,8 +51,8 @@ export class DeclareEnterprisesPagesComponent extends BaseDestroyableDirective i
   }
 
   public submit(status: string): void{
-    if (status === 'SUCCESS'){
-      this.toastr.success(MESSAGE.ADD_SUCCESS, MESSAGE.NOTIFICATION);
+    if (status === 'ADD_SUCCESS' || status === 'EDIT_SUCCESS'){
+      this.toastr.success(MESSAGE[status], MESSAGE.NOTIFICATION);
       this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/list-enterprises']);
     }
     else{

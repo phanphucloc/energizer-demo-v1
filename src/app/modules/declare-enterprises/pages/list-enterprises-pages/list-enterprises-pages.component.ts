@@ -38,7 +38,7 @@ export class ListEnterprisesPagesComponent extends BaseDestroyableDirective impl
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result: IFields) => {
-          this.fieldsCurrent.name = result.name.toLocaleLowerCase();
+          this.fieldsCurrent.name = result.name?.toLocaleLowerCase();
         },
         () => {
           this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
@@ -50,7 +50,11 @@ export class ListEnterprisesPagesComponent extends BaseDestroyableDirective impl
     this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/add-enterprises']);
   }
 
-  public redirectToEditPage(enterprisesId: number): void {
+  public redirectToDetailPage(enterprisesId: number): void {
     this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/detail-enterprises/' + enterprisesId]);
+  }
+
+  public redirectToEditPage(enterprisesId: number): void {
+    this.router.navigate(['/enterprises/' + this.fieldsCurrent.id + '/edit-enterprises/' + enterprisesId]);
   }
 }

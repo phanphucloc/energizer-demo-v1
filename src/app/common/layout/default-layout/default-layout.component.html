@@ -1,8 +1,8 @@
 <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 89, height: 25, alt: 'Energizer Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'Energizer Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 155, height: 40, alt: 'Energizer Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.jpg', width: 30, height: 30, alt: 'Energizer Logo'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="false">
   <ul class="nav navbar-nav ml-auto">
@@ -20,7 +20,7 @@
 </app-header>
 <div class="app-body">
     <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
-      <app-sidebar-nav [navItems]="this.listMenu" [perfectScrollbar] [disabled]="appSidebar.minimized">
+      <app-sidebar-nav appLoadingOnElement #loadingMenu="drLoadingOnElement" [navItems]="listMenu" [perfectScrollbar] [disabled]="appSidebar.minimized">
       </app-sidebar-nav>
       <app-sidebar-minimizer></app-sidebar-minimizer>
     </app-sidebar>

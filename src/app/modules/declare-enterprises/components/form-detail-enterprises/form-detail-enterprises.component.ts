@@ -1,22 +1,37 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { EnterprisesService } from '../../services/enterprises.service';
 import { LoadingOnElementDirective } from 'src/app/common/directive/loading-on-element.directive';
 import { takeUntil } from 'rxjs/operators';
 import { BaseDestroyableDirective } from 'src/app/common/abstract/base-destroyable';
-import { IEnterprisesToServer, IBranches, IEnergyConsumption, IProduction, IBranchesValue } from '../../abstract/enterprises.interface';
+import {
+  IEnterprisesToServer,
+  IBranches,
+  IEnergy,
+} from '../../abstract/enterprises.interface';
 import { forkJoin } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MESSAGE } from 'src/app/common/data/message';
+import { DecimalPipe } from '@angular/common';
+import { LocationService } from 'src/app/common/services/location.service';
 
 @Component({
   selector: 'app-form-detail-enterprises',
   templateUrl: './form-detail-enterprises.component.html',
-  styleUrls: ['./form-detail-enterprises.component.scss']
+  styleUrls: ['./form-detail-enterprises.component.scss'],
 })
-export class FormDetailEnterprisesComponent extends BaseDestroyableDirective implements OnInit {
-  @ViewChild('formDetail', { static: true }) private elementFormDetail: LoadingOnElementDirective;
-  @ViewChild('loadingFormProduction') private elementLoadingFormProduction: LoadingOnElementDirective;
+export class FormDetailEnterprisesComponent
+  extends BaseDestroyableDirective
+  implements OnInit {
+  @ViewChild('formDetail', { static: true })
+  private elementFormDetail: LoadingOnElementDirective;
 
   @Input() public enterprisesId: number;
   @Input() public fieldsId: number;
@@ -31,17 +46,19 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
     itemsShowLimit: 3,
-    allowSearchFilter: false
+    allowSearchFilter: false,
   };
   public formDetailEnterprises: FormGroup;
   public enterprises: IEnterprisesToServer;
   public listBranches: IBranches[];
   public branchesSelected: IBranches[];
-  public listEnergyConsumption: IEnergyConsumption[];
+  public listEnergyConsumption: IEnergy[];
 
   constructor(
     private enterprisesService: EnterprisesService,
     private toastr: ToastrService,
+    private decimalPipe: DecimalPipe,
+    private locationService: LocationService
   ) {
     super();
   }
@@ -60,6 +77,14 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
         ),
         foundedYear: new FormControl(
           { value: '2020', disabled: true },
+          Validators.required
+        ),
+        taxCode: new FormControl(
+          { value: '', disabled: true },
+          Validators.required
+        ),
+        phoneNumber: new FormControl(
+          { value: '', disabled: true },
           Validators.required
         ),
         address: new FormGroup({
@@ -91,10 +116,7 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
             { value: '', disabled: true },
             Validators.required
           ),
-          branchesId: new FormControl(
-            { value: null, disabled: true },
-            Validators.required
-          ),
+          branchesId: new FormControl({ value: null, disabled: true }),
         }),
       }),
     });
@@ -110,23 +132,18 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (result) => {
-
           this.enterprises = result[0];
           this.fetchBaseData();
 
           const listBranches: IBranches[] = result[1];
           this.listBranches = listBranches;
 
-          const listEnergyConsumption: IEnergyConsumption[] = result[2];
+          const listEnergyConsumption: IEnergy[] = result[2];
           this.listEnergyConsumption = listEnergyConsumption;
           this.addFieldsEnergyConsumptionForForm(listEnergyConsumption);
 
           this.branchesSelected = this.enterprises.branches as IBranches[];
-          const listBranchesSelectedId = this.branchesSelected.map(branchSelected => {
-            return branchSelected.id;
-          });
-          this.getFieldsProductionForForm(listBranchesSelectedId);
-
+          this.addFieldsProductionForForm(this.branchesSelected);
           this.elementFormDetail.hideLoadingCenter();
         },
         () => {
@@ -141,90 +158,124 @@ export class FormDetailEnterprisesComponent extends BaseDestroyableDirective imp
   }
 
   private fetchBaseData(): void {
+    const province = this.locationService.getProvince(
+      this.enterprises.province
+    );
+    const district = this.locationService.getDistrict(
+      this.enterprises.district
+    );
+    const town = this.locationService.getCommune(this.enterprises.town);
     this.formDetailEnterprises.patchValue({
       baseInfo: {
         name: this.enterprises.name,
         foundedYear: this.enterprises.foundedYear,
+        taxCode: this.enterprises.taxCode,
+        phoneNumber: this.enterprises.phoneNumber,
         address: {
-          province: this.enterprises.province,
-          district: this.enterprises.district,
-          town: this.enterprises.town,
-          xCoordinate: this.enterprises.xCoordinate,
-          yCoordinate: this.enterprises.yCoordinate,
-          productionValue: this.enterprises.productionValue,
-          employees: this.enterprises.employees,
-          branchesId: this.enterprises.branches
+          province: province ? province.name : this.enterprises.province,
+          district: district ? district.name : this.enterprises.district,
+          town: town ? town.name : this.enterprises.town,
+          xCoordinate: this.enterprises.xcoordinate,
+          yCoordinate: this.enterprises.ycoordinate,
+          productionValue: this.decimalPipe.transform(
+            this.enterprises.productionValue,
+            '1.0-2',
+            'it'
+          ),
+          employees: this.decimalPipe.transform(
+            this.enterprises.employees,
+            '1.0-0',
+            'it'
+          ),
+          branchesId: this.enterprises.branches,
         },
       },
     });
   }
 
-  private getFieldsProductionForForm(branchesIds: number[]): void {
-    this.elementLoadingFormProduction.showLoadingCenter();
-    this.enterprisesService
-      .getListProductBranchesIds(branchesIds)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (resultListProduct: IProduction[]) => {
-          this.branchesSelected.forEach(branch => {
-            const listProduct = resultListProduct.filter(resultProduct => {
-              return resultProduct.branchId === branch.id;
-            });
-            branch.listProduct = listProduct;
-          });
-          this.addFieldsProductionForForm(this.branchesSelected);
-          this.elementLoadingFormProduction.hideLoadingCenter();
-        },
-        () => {
-          this.toastr.error(MESSAGE.ERROR, MESSAGE.NOTIFICATION);
-          this.elementLoadingFormProduction.hideLoadingCenter();
-        }
-      );
-  }
-
   private addFieldsProductionForForm(listBranches: IBranches[]): void {
     if (listBranches) {
-      listBranches.forEach(branch => {
-        const listProduct = branch.listProduct;
-
+      listBranches.forEach((branch) => {
         const productionGroup: FormGroup = new FormGroup({});
-        listProduct.forEach((production) => {
+        branch.listProduct = [];
 
-          const productionItem = this.enterprises.productions.find((productionData) => {
-            return production.productionId === productionData.productionId;
-          });
+        this.enterprises.productions.forEach((production) => {
+          if (production.branchId === branch.id) {
+            branch.listProduct.push({
+              branchId: branch.id,
+              id: production.productionId,
+              name: production.production,
+              unit: production.unit,
+            });
 
-          const productControl = new FormControl(
-            { value : productionItem.volume, disabled: true },
-            Validators.required
-          );
+            const productControl = new FormControl(
+              {
+                value: this.decimalPipe.transform(
+                  production.volume,
+                  '1.2-2',
+                  'it'
+                ),
+                disabled: true,
+              },
+              Validators.required
+            );
 
-          productionGroup.addControl(production.productionId.toString(), productControl);
-
+            productionGroup.addControl(
+              production.productionId.toString(),
+              productControl
+            );
+          }
         });
-        this.formDetailEnterprises.addControl('production' + branch.id, productionGroup);
+        this.formDetailEnterprises.addControl(
+          'production' + branch.id,
+          productionGroup
+        );
       });
     }
   }
 
-  private addFieldsEnergyConsumptionForForm(listEnergyConsumption: IEnergyConsumption[]): void {
+  private addFieldsEnergyConsumptionForForm(
+    listEnergyConsumption: IEnergy[]
+  ): void {
     if (listEnergyConsumption) {
       const energyConsumptionGroup: FormGroup = new FormGroup({});
       listEnergyConsumption.forEach((energyConsumption) => {
-
-        const energyConsumptionItem = this.enterprises.energies.find((energyConsumptionData) => {
-            return energyConsumptionData.energyId === energyConsumption.energyId;
-        });
-
-        const energyConsumptionControl = new FormControl(
-          { value: energyConsumptionItem.volume, disabled: true },
-          Validators.required
+        const energyConsumptionItem = this.enterprises.energies.find(
+          (energyConsumptionData) => {
+            return energyConsumptionData.energyId === energyConsumption.id;
+          }
         );
 
-        energyConsumptionGroup.addControl(energyConsumption.name, energyConsumptionControl);
+        let energyConsumptionControl: FormControl;
+        if (energyConsumptionItem) {
+          energyConsumptionControl = new FormControl(
+            {
+              value: this.decimalPipe.transform(
+                energyConsumptionItem.volume,
+                '1.2-2',
+                'it'
+              ),
+              disabled: true,
+            },
+            Validators.required
+          );
+        } else {
+          energyConsumptionControl = new FormControl(
+            { value: 0, disabled: true },
+            Validators.required
+          );
+        }
 
+        energyConsumptionGroup.addControl(
+          energyConsumption.id.toString(),
+          energyConsumptionControl
+        );
       });
-      this.formDetailEnterprises.addControl('energyConsumption', energyConsumptionGroup);
+
+      this.formDetailEnterprises.addControl(
+        'energyConsumption',
+        energyConsumptionGroup
+      );
     }
   }
 }
