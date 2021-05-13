@@ -1,5 +1,5 @@
 import { IndicatorReport } from './../../models/report-energizer.model';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { listIndictorReports } from 'src/app/common/data/indicator-report-data';
 import {ChartOptions, ChartType, ChartDataSets} from 'chart.js';
 import {Label} from 'ng2-charts';
@@ -18,16 +18,33 @@ export class ChartIndicatorComponent{
     barChartOptions: ChartOptions = {
         responsive: true,
       };
-      barChartLabels: Label[];
+      barChartLabels: Label[] = ['2017', '2018', '2019'];
       barChartType: ChartType = 'bar';
       barChartLegend = true;
       barChartPlugins = [];
 
-      barChartData: ChartDataSets[] = [
-        { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
+      greenhouseGasData: ChartDataSets[] = [
+        { data: [this.reports[0].greenhouseGas, this.reports[1].greenhouseGas, this.reports[2].greenhouseGas], label: 'ktCO2' }
       ];
-  public onSelectYear(year: number): void {
-    this.selectedReport = this.reports.find((report) => report.year === year);
-    this.barChartLabels = []
-  }
+
+      renewableElectricData: ChartDataSets[] = [
+        { data: [this.reports[0].renewableElectric, this.reports[1].renewableElectric, this.reports[2].renewableElectric], label: 'GWh' }
+      ];
+
+      capacityOfRenewableElecData: ChartDataSets[] = [
+        { data: [this.reports[0].capacityOfRenewableElec, this.reports[1].capacityOfRenewableElec,
+                 this.reports[2].capacityOfRenewableElec], label: 'MW' }
+      ];
+
+      electricData: ChartDataSets[] = [
+        {data: [this.reports[0].electric + this.reports[0].electricCpmToProductionValue,
+                this.reports[1].electric + this.reports[1].electricCpmToProductionValue,
+                this.reports[2].electric + this.reports[2].electricCpmToProductionValue], label: 'kWh/tr.đồng'}
+      ];
+
+      energyData: ChartDataSets[] = [
+        {data: [this.reports[0].energy + this.reports[0].energyCpmToProductionValue,
+          this.reports[1].energy + this.reports[1].energyCpmToProductionValue,
+          this.reports[2].energy + this.reports[2].electricCpmToProductionValue], label: 'kJ/tr.đồng'}
+      ];
 }
