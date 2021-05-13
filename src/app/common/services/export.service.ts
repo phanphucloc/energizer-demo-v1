@@ -16,10 +16,14 @@ public exportExcel(jsonData: any[], fileName: string): void {
 
   const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
   ws.A1.v = 'Tên chỉ tiêu';
-  ws.B1.v = 'Giá trị';
-  ws.C1.v = 'Đơn vị';
+  ws.B1.v = 'Năm 2017';
+  ws.C1.v = 'Năm 2018';
+  ws.D1.v = 'Năm 2019';
+  ws.E1.v = 'Đơn vị';
   ws['!cols'] = [];
   ws['!cols'].push({ width: 80 });
+  ws['!cols'].push({ width: 20 });
+  ws['!cols'].push({ width: 20 });
   ws['!cols'].push({ width: 20 });
   ws['!cols'].push({ width: 20 });
   const wb: XLSX.WorkBook = { Sheets: { 'data': ws }, SheetNames: ['data'] };
