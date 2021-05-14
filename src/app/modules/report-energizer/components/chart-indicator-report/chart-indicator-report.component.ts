@@ -38,13 +38,13 @@ export class ChartIndicatorComponent{
       electricData: ChartDataSets[] = [
         {data: [this.reports[0].electric + this.reports[0].electricCpmToProductionValue,
                 this.reports[1].electric + this.reports[1].electricCpmToProductionValue,
-                this.reports[2].electric + this.reports[2].electricCpmToProductionValue], label: 'kWh/tr.đồng'}
+                this.reports[2].electric + this.reports[2].electricCpmToProductionValue], label: 'kWh'}
       ];
 
       energyData: ChartDataSets[] = [
         {data: [this.reports[0].energy + this.reports[0].energyCpmToProductionValue,
           this.reports[1].energy + this.reports[1].energyCpmToProductionValue,
-          this.reports[2].energy + this.reports[2].electricCpmToProductionValue], label: 'kJ/tr.đồng'}
+          this.reports[2].energy + this.reports[2].electricCpmToProductionValue], label: 'kJ'}
       ];
 
 }
